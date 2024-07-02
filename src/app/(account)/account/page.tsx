@@ -3,18 +3,13 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
-import { getSession } from '@/features/account/controllers/get-session';
 import { getSubscription } from '@/features/account/controllers/get-subscription';
 import { PricingCard } from '@/features/pricing/components/price-card';
 import { getProducts } from '@/features/pricing/controllers/get-products';
 import { Price, ProductWithPrices } from '@/features/pricing/types';
 
 export default async function AccountPage() {
-  const [session, subscription, products] = await Promise.all([getSession(), getSubscription(), getProducts()]);
-
-  if (!session) {
-    redirect('/login');
-  }
+  const [subscription, products] = await Promise.all([getSubscription(), getProducts()]);
 
   let userProduct: ProductWithPrices | undefined;
   let userPrice: Price | undefined;

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { IoPersonCircleOutline } from 'react-icons/io5';
+import { User } from 'lucide-react';
 
 import {
   DropdownMenu,
@@ -14,6 +15,7 @@ import {
 import { ActionResponse } from '@/types/action-response';
 
 import { useToast } from './ui/use-toast';
+import { routes } from '@/utils/route';
 
 export function AccountMenu({ signOut }: { signOut: () => Promise<ActionResponse> }) {
   const router = useRouter();
@@ -39,9 +41,12 @@ export function AccountMenu({ signOut }: { signOut: () => Promise<ActionResponse
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className='rounded-full'>
-        <IoPersonCircleOutline size={24} />
+        <User size={24} color='#000' />
       </DropdownMenuTrigger>
       <DropdownMenuContent className='me-4'>
+        <DropdownMenuItem asChild>
+          <Link href={routes.dashboard}>Dashboard</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href='/account'>Account</Link>
         </DropdownMenuItem>

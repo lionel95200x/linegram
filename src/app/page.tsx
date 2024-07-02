@@ -4,14 +4,17 @@ import Link from 'next/link';
 import { Container } from '@/components/container';
 import { Button } from '@/components/ui/button';
 import { PricingSection } from '@/features/pricing/components/pricing-section';
+import PublicLayout from '@/components/layout/publicLayout';
 
 export default async function HomePage() {
   return (
-    <div className='flex flex-col gap-8 lg:gap-32'>
-      <HeroSection />
-      <ExamplesSection />
-      <PricingSection />
-    </div>
+    <PublicLayout>
+      <div className='flex flex-col gap-8 lg:gap-32'>
+        <HeroSection />
+        <ExamplesSection />
+        <PricingSection />
+      </div>
+    </PublicLayout>
   );
 }
 
