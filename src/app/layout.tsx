@@ -1,12 +1,12 @@
+import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 import { Montserrat, Montserrat_Alternates } from 'next/font/google';
-import { PropsWithChildren } from 'react';
 
+import Footer from '@/components/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/utils/cn';
 import { Analytics } from '@vercel/analytics/react';
 
-import Footer from '@/components/footer';
 import '@/styles/globals.css';
 
 export const dynamic = 'force-dynamic';
@@ -31,7 +31,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang='en'>
       <body className={cn('font-sans antialiased', montserrat.variable, montserratAlternates.variable)}>
-        <div className='m-auto flex h-full max-w-[1440px] flex-col px-4'>
+        <div className='m-auto flex h-full max-w-[1440px] flex-col'>
           <main className='relative flex-1'>
             <div className='relative h-full'>{children}</div>
           </main>

@@ -1,8 +1,10 @@
-import Link from 'next/link';
 import React from 'react';
+import Link from 'next/link';
 import { IoLogoFacebook, IoLogoInstagram, IoLogoTwitter } from 'react-icons/io5';
-import { Logo } from './logo';
+
 import { APP_NAME } from '@/utils/constant';
+
+import { Logo } from './logo';
 
 const Footer = () => {
   return (

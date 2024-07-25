@@ -1,6 +1,7 @@
-import { APP_NAME } from '@/utils/constant';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { APP_NAME } from '@/utils/constant';
 
 export function Logo() {
   return (

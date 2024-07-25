@@ -11,3 +11,17 @@ export async function getUser() {
 
   return data;
 }
+
+export async function getAuthUser() {
+  const supabase = createSupabaseServerClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  return user;
+}

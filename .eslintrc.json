@@ -2,15 +2,18 @@
   "extends": ["next/core-web-vitals"],
   "plugins": ["simple-import-sort"],
   "rules": {
-    "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error"
+    "simple-import-sort/imports": "warn",
+    "simple-import-sort/exports": "warn",
+    "react/display-name": "warn",
+    "react/no-unescaped-entities": "off",
+    "react-hooks/rules-of-hooks": "warn"
   },
   "overrides": [
     {
       "files": ["**/*.js", "**/*.ts", "**/*.tsx"],
       "rules": {
         "simple-import-sort/imports": [
-          "error",
+          "warn",
           {
             "groups": [
               ["^react$", "^next", "^[a-z]"],

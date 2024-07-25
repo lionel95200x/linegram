@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { IoPersonCircleOutline } from 'react-icons/io5';
 import { User } from 'lucide-react';
+import { IoPersonCircleOutline } from 'react-icons/io5';
 
 import {
   DropdownMenu,
@@ -13,9 +13,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { ActionResponse } from '@/types/action-response';
+import { routes } from '@/utils/route';
 
 import { useToast } from './ui/use-toast';
-import { routes } from '@/utils/route';
 
 export function AccountMenu({ signOut }: { signOut: () => Promise<ActionResponse> }) {
   const router = useRouter();

@@ -13,7 +13,8 @@ export type Database = {
         Row: {
           created: string
           first_sentence: string | null
-          id: string | null
+          id: string
+          isActive: boolean
           metadata: Json | null
           name: string | null
           prompt: string | null
@@ -22,7 +23,8 @@ export type Database = {
         Insert: {
           created?: string
           first_sentence?: string | null
-          id?: string | null
+          id?: string
+          isActive?: boolean
           metadata?: Json | null
           name?: string | null
           prompt?: string | null
@@ -31,7 +33,8 @@ export type Database = {
         Update: {
           created?: string
           first_sentence?: string | null
-          id?: string | null
+          id?: string
+          isActive?: boolean
           metadata?: Json | null
           name?: string | null
           prompt?: string | null
@@ -40,6 +43,51 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "agents_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      calls: {
+        Row: {
+          active: boolean
+          agent_id: string
+          conversation: string | null
+          created: string
+          id: string
+          metadata: Json | null
+          user_id: string
+        }
+        Insert: {
+          active?: boolean
+          agent_id?: string
+          conversation?: string | null
+          created?: string
+          id?: string
+          metadata?: Json | null
+          user_id: string
+        }
+        Update: {
+          active?: boolean
+          agent_id?: string
+          conversation?: string | null
+          created?: string
+          id?: string
+          metadata?: Json | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "calls_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "agents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "calls_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"

@@ -122,13 +122,13 @@ export function AuthUI({
       </div>
       {mode === 'signup' && (
         <span className='text-neutral5 m-auto max-w-sm text-sm'>
-          By clicking continue, you agree to our{' '}
+          En cliquant sur continue, vous acceptez nos{' '}
           <Link href='/terms' className='underline'>
-            Terms of Service
+            Conditions d'utilisation
           </Link>{' '}
-          and{' '}
+          et notre{' '}
           <Link href='/privacy' className='underline'>
-            Privacy Policy
+            Politique de confidentialité
           </Link>
           .
         </span>

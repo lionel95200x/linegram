@@ -1,5 +1,6 @@
+import { Bookmark, LayoutGrid, Settings, SquarePen, Tag, Users } from 'lucide-react';
+
 import { routes } from '@/utils/route';
-import { Tag, Users, Settings, Bookmark, SquarePen, LayoutGrid } from 'lucide-react';
 
 type Submenu = {
   href: string;
@@ -62,29 +63,29 @@ export function getMenuList(pathname: string): Group[] {
           icon: Bookmark,
           submenus: [],
         },
-        {
-          href: '/tags',
-          label: 'Tags',
-          active: pathname.includes('/tags'),
-          icon: Tag,
-          submenus: [],
-        },
       ],
     },
     {
-      groupLabel: 'Settings',
+      groupLabel: 'Réglages',
       menus: [
         {
           href: '/users',
-          label: 'Users',
+          label: 'Profil',
           active: pathname.includes('/users'),
           icon: Users,
           submenus: [],
         },
         {
           href: '/account',
-          label: 'Account',
+          label: 'Mon compte',
           active: pathname.includes('/account'),
+          icon: Settings,
+          submenus: [],
+        },
+        {
+          href: '/billing',
+          label: 'Facturation',
+          active: pathname.includes('/billing'),
           icon: Settings,
           submenus: [],
         },

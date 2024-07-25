@@ -1,17 +1,19 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
-import { Container } from '@/components/container';
-import { Button } from '@/components/ui/button';
-import { PricingSection } from '@/features/pricing/components/pricing-section';
+import imgBackgroundDashboard from '@/assets/img/banner-dashboard.webp';
+import { Features } from '@/components/bento-grid/bento-grid';
+import FeatureCard from '@/components/home/FeatureCard';
+import TopBadge from '@/components/home/topBadge';
 import PublicLayout from '@/components/layout/publicLayout';
+import { PricingSection } from '@/features/pricing/components/pricing-section';
 
 export default async function HomePage() {
   return (
     <PublicLayout>
-      <div className='flex flex-col gap-8 lg:gap-32'>
+      <div className='flex flex-col gap-8 '>
         <HeroSection />
-        <ExamplesSection />
+        <Features />
+        <FeatureCard />
         <PricingSection />
       </div>
     </PublicLayout>
@@ -20,113 +22,49 @@ export default async function HomePage() {
 
 function HeroSection() {
   return (
-    <section className='relative overflow-hidden lg:overflow-visible'>
-      <Container className='relative rounded-lg bg-black py-20 lg:py-[140px]'>
-        <div className='relative z-10 flex flex-col gap-5 lg:max-w-xl lg:pl-8'>
-          <div className='w-fit rounded-full bg-gradient-to-r from-[#616571] via-[#7782A9] to-[#826674] px-4 py-1 '>
-            <span className='font-alt text-sm font-semibold text-black mix-blend-soft-light'>
-              Generate banners with DALL·E
-            </span>
+    <section className='relative overflow-hidden pt-20 lg:overflow-visible'>
+      <div className='container-default p-20 text-center'>
+        {/* Hero Area */}
+        {/* Hero Content Block */}
+        <TopBadge />
+        <h1 className='font-ClashDisplay text-ColorOil xxl:text-[90px] my-6 font-medium leading-[1.06] lg:text-[60px] xl:text-7xl'>
+          Votre agent d'appel personnalisé
+        </h1>
+        <p className='text-ColorOil mb-8 lg:mb-[50px]'>
+          Notre robot d'appel personnalisé utilise l'intelligence artificielle pour offrir une expérience de
+          communication fluide et efficace. Il est conçu pour répondre à vos besoins spécifiques et améliorer la
+          productivité de votre entreprise.
+        </p>
+        <div className='flex flex-wrap justify-center gap-6 xl:justify-start'>
+          <div className='group relative  inline-flex'>
+            <div className='transitiona-all animate-tilt absolute -inset-px rounded-xl bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200'></div>
+            <a
+              href='#'
+              title='Get quote now'
+              className='font-pj relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2'
+              role='button'
+            >
+              Demarrez maintenant
+            </a>
           </div>
-          <h1>Instantly craft stunning Twitter banners.</h1>
-          <Button asChild variant='sexy'>
-            <Link href='/signup'>Get started for free</Link>
-          </Button>
         </div>
-      </Container>
-      <Image
-        src='/hero-shape.png'
-        width={867}
-        height={790}
-        alt=''
-        className='absolute right-0 top-0 rounded-tr-lg'
-        priority
-        quality={100}
-      />
-    </section>
-  );
-}
+        <div className='relative mt-20 rounded-[32px] border border-neutral-200 bg-neutral-100 p-4 dark:border-neutral-700 dark:bg-neutral-800'>
+          <div className='rounded-[24px] border border-neutral-200 bg-white p-2 dark:border-neutral-700 dark:bg-black'>
+            <Image
+              alt='header'
+              loading='lazy'
+              width={1920}
+              height={1080}
+              decoding='async'
+              data-nimg={1}
+              className='rounded-[20px]'
+              style={{ color: 'transparent' }}
+              src={imgBackgroundDashboard}
+            />
+          </div>
+        </div>
 
-function ExamplesSection() {
-  return (
-    <section className='flex flex-col gap-4 overflow-hidden rounded-lg bg-black py-8'>
-      <div className='flex justify-center gap-4'>
-        <Image
-          className='flex-shrink-0'
-          src='/example1.png'
-          width={600}
-          height={200}
-          alt='Example of a generated banner'
-          quality={100}
-        />
-        <Image
-          className='flex-shrink-0'
-          src='/example2.png'
-          width={600}
-          height={200}
-          alt='Example of a generated banner'
-          quality={100}
-        />
-        <Image
-          className='flex-shrink-0'
-          src='/example3.png'
-          width={600}
-          height={200}
-          alt='Example of a generated banner'
-          quality={100}
-        />
-      </div>
-      <div className='flex gap-4'>
-        <Image
-          className='flex-shrink-0'
-          src='/example4.png'
-          width={600}
-          height={200}
-          alt='Example of a generated banner'
-          quality={100}
-        />
-        <Image
-          className='flex-shrink-0'
-          src='/example5.png'
-          width={600}
-          height={200}
-          alt='Example of a generated banner'
-          quality={100}
-        />
-        <Image
-          className='flex-shrink-0'
-          src='/example6.png'
-          width={600}
-          height={200}
-          alt='Example of a generated banner'
-          quality={100}
-        />
-      </div>
-      <div className='flex justify-center gap-4'>
-        <Image
-          className='flex-shrink-0'
-          src='/example7.png'
-          width={600}
-          height={200}
-          alt='Example of a generated banner'
-          quality={100}
-        />
-        <Image
-          className='flex-shrink-0'
-          src='/example8.png'
-          width={600}
-          height={200}
-          alt='Example of a generated banner'
-          quality={100}
-        />
-        <Image
-          className='flex-shrink-0'
-          src='/example9.png'
-          width={600}
-          height={200}
-          alt='Example of a generated banner'
-          quality={100}
-        />
+        {/* Hero Area */}
       </div>
     </section>
   );
