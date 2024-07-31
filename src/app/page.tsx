@@ -35,8 +35,8 @@ function HeroSection() {
           communication fluide et efficace. Il est conçu pour répondre à vos besoins spécifiques et améliorer la
           productivité de votre entreprise.
         </p>
-        <div className='flex flex-wrap justify-center gap-6 xl:justify-start'>
-          <div className='group relative  inline-flex'>
+        <div className='flex flex-wrap justify-center gap-6'>
+          <div className='group relative inline-flex'>
             <div className='transitiona-all animate-tilt absolute -inset-px rounded-xl bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200'></div>
             <a
               href='#'

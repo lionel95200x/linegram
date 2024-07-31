@@ -164,11 +164,7 @@ function Main() {
                               key={fakerKey}
                               className='image-fit zoom-in relative mb-5 mr-5 h-24 w-24 cursor-pointer'
                             >
-                              <Image
-                                className='rounded-md'
-                                alt='Midone Tailwind HTML Admin Template'
-                                src={faker.images[0]}
-                              />
+                              <Image className='rounded-md' alt='Linegram - Agent appel IA' src={faker.images[0]} />
                               <Tippy
                                 as='div'
                                 content='Remove this image?'
@@ -206,7 +202,7 @@ function Main() {
                   role='button'
                 >
                   <div className='image-fit mr-3 h-6 w-6'>
-                    <img className='rounded' alt='Midone Tailwind HTML Admin Template' src={fakerData[0].photos[0]} />
+                    <img className='rounded' alt='Linegram - Agent appel IA' src={fakerData[0].photos[0]} />
                   </div>
                   <div className='truncate'>{fakerData[0].users[0].name}</div>
                   <Lucide icon='ChevronDown' className='ml-auto h-4 w-4' />
@@ -215,7 +211,7 @@ function Main() {
                   {_.take(fakerData, 5).map((faker, fakerKey) => (
                     <Menu.Item key={fakerKey}>
                       <div className='image-fit absolute mr-3 h-6 w-6'>
-                        <Image className='rounded' alt='Midone Tailwind HTML Admin Template' src={faker.photos[0]} />
+                        <Image className='rounded' alt='Linegram - Agent appel IA' src={faker.photos[0]} />
                       </div>
                       <div className='ml-8 pl-1'>{faker.users[0].name}</div>
                     </Menu.Item>

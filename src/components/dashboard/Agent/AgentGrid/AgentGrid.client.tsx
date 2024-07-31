@@ -14,7 +14,7 @@ import { Agents } from '@/features/pricing/types';
 
 import CreateAgentModal from '../CreateAgentModal';
 
-function AgentGridClient({ agents }: { agents: Agents[] }) {
+function AgentGridClient({ agents, createAgent }: { agents: Agents[]; createAgent: (name: string) => any }) {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [deleteConfirmationModal, setDeleteConfirmationModal] = useState(false);
   const deleteButtonRef = useRef(null);
@@ -27,7 +27,11 @@ function AgentGridClient({ agents }: { agents: Agents[] }) {
           <Button variant='primary' className='mr-2 shadow-md' onClick={() => setIsCreateModalOpen(true)}>
             Créer un nouvel agent
           </Button>
-          <CreateAgentModal open={isCreateModalOpen} onClose={() => setIsCreateModalOpen(false)} onSave={() => {}} />
+          <CreateAgentModal
+            open={isCreateModalOpen}
+            onClose={() => setIsCreateModalOpen(false)}
+            onSave={(name) => createAgent(name)}
+          />
           <Menu>
             <Menu.Button as={Button} className='!box px-2'>
               <span className='flex h-5 w-5 items-center justify-center'>
@@ -143,10 +147,9 @@ function AgentGridClient({ agents }: { agents: Agents[] }) {
         <Dialog.Panel>
           <div className='p-5 text-center'>
             <Lucide icon='XCircle' className='mx-auto mt-3 h-16 w-16 text-danger' />
-            <div className='mt-5 text-3xl'>Are you sure?</div>
+            <div className='mt-5 text-3xl'>Voulez vous supprimer cet agent?</div>
             <div className='mt-2 text-slate-500'>
-              Do you really want to delete these records? <br />
-              This process cannot be undone.
+              Cette action est irréversible, toutes les informations ainsi que les historiques d'appel seront effacé .
             </div>
           </div>
           <div className='px-5 pb-8 text-center'>
@@ -158,10 +161,10 @@ function AgentGridClient({ agents }: { agents: Agents[] }) {
               }}
               className='mr-1 w-24'
             >
-              Cancel
+              Annulez
             </Button>
             <Button variant='danger' type='button' className='w-24' ref={deleteButtonRef}>
-              Delete
+              Supprimez
             </Button>
           </div>
         </Dialog.Panel>

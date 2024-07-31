@@ -26,7 +26,7 @@ export async function getAgents(): Promise<Agents[]> {
   return data ?? [];
 }
 
-export async function createAgent(agent: { name: string; prompt: string; first_sentence: string }) {
+export async function createAgent(agent: { name: string; prompt?: string; first_sentence?: string }) {
   const supabase = createSupabaseServerClient();
 
   const user = await getAuthUser();
@@ -35,14 +35,17 @@ export async function createAgent(agent: { name: string; prompt: string; first_s
     throw new Error('User not found');
   }
 
-  const { data, error } = await supabase.from('agents').upsert({
-    ...agent,
-    metadata: {
+  const { data, error } = await supabase
+    .from('agents')
+    .upsert({
+      ...agent,
+      metadata: {
+        user_id: user?.id,
+      },
       user_id: user?.id,
-    },
-    user_id: user?.id,
-    created: new Date(),
-  });
+      created: new Date(),
+    })
+    .select();
 
   if (error) {
     console.error(error.message);

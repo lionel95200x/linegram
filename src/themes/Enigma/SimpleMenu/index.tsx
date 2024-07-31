@@ -1,17 +1,17 @@
-import clsx from 'clsx';
-import { redirect, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { redirect, usePathname } from 'next/navigation';
+import clsx from 'clsx';
 import { Transition } from 'react-transition-group';
 
 import Lucide from '@/components/dashboard/Base/Lucide';
 import Tippy from '@/components/dashboard/Base/Tippy';
 import MobileMenu from '@/components/dashboard/MobileMenu';
 import TopBar from '@/components/dashboard/Themes/Enigma/TopBar';
+import menu from '@/main/menu';
 
 import { enter, FormattedMenu, leave, linkTo, nestedMenu } from './simple-menu';
 
 import '@/assets/css/themes/enigma/side-nav.css';
-import menu from '@/main/menu';
 
 function Main({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

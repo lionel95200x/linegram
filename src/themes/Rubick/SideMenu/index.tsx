@@ -43,7 +43,7 @@ function Main({ children }: { children: React.ReactNode }) {
         {/* BEGIN: Side Menu */}
         <nav className='side-nav hidden w-[80px] overflow-x-hidden pb-16 pr-5 md:block xl:w-[230px]'>
           <Link href='/' className='intro-x flex items-center pl-5 pt-4'>
-            <img alt='Midone Tailwind HTML Admin Template' className='w-6' src={logoUrl} />
+            <img alt='Linegram - Agent appel IA' className='w-6' src={logoUrl} />
             <span className='ml-3 hidden text-lg text-white xl:block'>Rubick</span>
           </Link>
           <div className='side-nav__divider my-6'></div>

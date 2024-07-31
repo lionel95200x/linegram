@@ -36,7 +36,7 @@ function Main({ children }: { children: React.ReactNode }) {
         {/* BEGIN: Simple Menu */}
         <nav className='side-nav side-nav--simple hidden w-[80px] overflow-x-hidden pb-16 pr-5 md:block'>
           <Link href='/' className='intro-x flex items-center pl-5 pt-4'>
-            <img alt='Midone Tailwind HTML Admin Template' className='w-6' src={logoUrl} />
+            <img alt='Linegram - Agent appel IA' className='w-6' src={logoUrl} />
           </Link>
           <div className='side-nav__divider my-6'></div>
           <ul>

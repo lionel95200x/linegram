@@ -1,6 +1,7 @@
 'use client';
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { User } from 'elevenlabs/api/resources/user/client/Client';
 import { Provider } from 'react-redux';
 
 import ThemeSwitcher from '@/components/dashboard/ThemeSwitcher';
@@ -10,15 +11,15 @@ import { getTheme, selectTheme, setTheme, Themes, themes } from '@/stores/themeS
 
 import '@/assets/css/app.css';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children, user }: { children: React.ReactNode; user: User }) {
   return (
     <Provider store={store}>
-      <AccountLayout>{children}</AccountLayout>
+      <AccountLayout user={user}>{children}</AccountLayout>
     </Provider>
   );
 }
 
-function AccountLayout({ children }: { children: React.ReactNode }) {
+function AccountLayout({ children, user }: { children: React.ReactNode; user: User }) {
   const dispatch = useAppDispatch();
   const theme = useAppSelector(selectTheme);
   const Component = getTheme(theme).component;
@@ -38,12 +39,12 @@ function AccountLayout({ children }: { children: React.ReactNode }) {
         switchTheme(selectedTheme.name);
       }
     }
-  }, []);
+  }, [queryParams]);
 
   return (
     <div>
       <ThemeSwitcher />
-      <Component>{children}</Component>
+      <Component user={user}>{children}</Component>
     </div>
   );
 }

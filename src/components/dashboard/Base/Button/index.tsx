@@ -28,7 +28,8 @@ type Variant =
   | 'facebook'
   | 'twitter'
   | 'instagram'
-  | 'linkedin';
+  | 'linkedin'
+  | 'google';
 
 type Elevated = boolean;
 type Size = 'sm' | 'lg';
@@ -108,6 +109,7 @@ const Button: ButtonComponent = forwardRef(
     const twitter = ['bg-[#4ab3f4] border-[#4ab3f4] text-white dark:border-[#4ab3f4]'];
     const instagram = ['bg-[#517fa4] border-[#517fa4] text-white dark:border-[#517fa4]'];
     const linkedin = ['bg-[#0077b5] border-[#0077b5] text-white dark:border-[#0077b5]'];
+    const google = ['bg-[#EA4335] border-[#EA4335] text-white dark:border-[#EA4335]'];
 
     // Outline
     const outlinePrimary = [

@@ -18,6 +18,7 @@ import { Transition } from '@headlessui/react';
 import { FormattedMenu, linkTo, nestedMenu } from './top-menu';
 
 import '@/assets/css/themes/tinker/top-nav.css';
+import AccountMenu from '@/components/dashboard/AccountMenu';
 
 function Main({ children }: { children: React.ReactNode }) {
   const [searchDropdown, setSearchDropdown] = useState(false);
@@ -49,7 +50,7 @@ function Main({ children }: { children: React.ReactNode }) {
         <div className='flex h-full items-center'>
           {/* BEGIN: Logo */}
           <Link href='/' className='-intro-x hidden md:flex'>
-            <Image alt='Midone Tailwind HTML Admin Template' className='w-6' src={logoUrl} />
+            <Image alt='Linegram - Agent appel IA' className='w-6' src={logoUrl} />
             <span className='ml-3 text-lg text-white'> Tinker </span>
           </Link>
           {/* END: Logo */}
@@ -117,11 +118,7 @@ function Main({ children }: { children: React.ReactNode }) {
                     {_.take(fakerData, 4).map((faker, fakerKey) => (
                       <a key={fakerKey} href='' className='mt-2 flex items-center'>
                         <div className='image-fit h-8 w-8'>
-                          <Image
-                            alt='Midone Tailwind HTML Admin Template'
-                            className='rounded-full'
-                            src={faker.photos[0]}
-                          />
+                          <Image alt='Linegram - Agent appel IA' className='rounded-full' src={faker.photos[0]} />
                         </div>
                         <div className='ml-3'>{faker.users[0].name}</div>
                         <div className='ml-auto w-48 truncate text-right text-xs text-slate-500'>
@@ -134,11 +131,7 @@ function Main({ children }: { children: React.ReactNode }) {
                   {_.take(fakerData, 4).map((faker, fakerKey) => (
                     <a key={fakerKey} href='' className='mt-2 flex items-center'>
                       <div className='image-fit h-8 w-8'>
-                        <Image
-                          alt='Midone Tailwind HTML Admin Template'
-                          className='rounded-full'
-                          src={faker.images[0]}
-                        />
+                        <Image alt='Linegram - Agent appel IA' className='rounded-full' src={faker.images[0]} />
                       </div>
                       <div className='ml-3'>{faker.products[0].name}</div>
                       <div className='ml-auto w-48 truncate text-right text-xs text-slate-500'>
@@ -169,7 +162,7 @@ function Main({ children }: { children: React.ReactNode }) {
                   className={clsx(['relative flex cursor-pointer items-center', { 'mt-5': fakerKey }])}
                 >
                   <div className='image-fit relative mr-1 h-12 w-12 flex-none'>
-                    <Image alt='Midone Tailwind HTML Admin Template' className='rounded-full' src={faker.photos[0]} />
+                    <Image alt='Linegram - Agent appel IA' className='rounded-full' src={faker.photos[0]} />
                     <div className='absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white bg-success dark:border-darkmode-600'></div>
                   </div>
                   <div className='ml-2 overflow-hidden'>
@@ -186,36 +179,7 @@ function Main({ children }: { children: React.ReactNode }) {
             </Popover.Panel>
           </Popover>
           {/* END: Notifications */}
-          {/* BEGIN: Account Menu */}
-          <Menu>
-            <Menu.Button className='image-fit intro-x zoom-in block h-8 w-8 scale-110 overflow-hidden rounded-full shadow-lg'>
-              <Image alt='Midone Tailwind HTML Admin Template' src={fakerData[9].photos[0]} />
-            </Menu.Button>
-            <Menu.Items className='relative mt-px w-56 bg-primary/70 text-white before:absolute before:inset-0 before:z-[-1] before:block before:rounded-md before:bg-black'>
-              <Menu.Header className='font-normal'>
-                <div className='font-medium'>{fakerData[0].users[0].name}</div>
-                <div className='mt-0.5 text-xs text-white/70 dark:text-slate-500'>{fakerData[0].jobs[0]}</div>
-              </Menu.Header>
-              <Menu.Divider className='bg-white/[0.08]' />
-              <Menu.Item className='hover:bg-white/5'>
-                <Lucide icon='User' className='mr-2 h-4 w-4' /> Profile
-              </Menu.Item>
-              <Menu.Item className='hover:bg-white/5'>
-                <Lucide icon='FilePenLine' className='mr-2 h-4 w-4' /> Add Account
-              </Menu.Item>
-              <Menu.Item className='hover:bg-white/5'>
-                <Lucide icon='Lock' className='mr-2 h-4 w-4' /> Reset Password
-              </Menu.Item>
-              <Menu.Item className='hover:bg-white/5'>
-                <Lucide icon='HelpCircle' className='mr-2 h-4 w-4' /> Help
-              </Menu.Item>
-              <Menu.Divider className='bg-white/[0.08]' />
-              <Menu.Item className='hover:bg-white/5'>
-                <Lucide icon='ToggleRight' className='mr-2 h-4 w-4' /> Logout
-              </Menu.Item>
-            </Menu.Items>
-          </Menu>
-          {/* END: Account Menu */}
+          <AccountMenu />
         </div>
       </div>
       {/* END: Top Bar */}

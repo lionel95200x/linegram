@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss';
-import plugin from 'tailwindcss/plugin';
 import colors from 'tailwindcss/colors';
+import plugin from 'tailwindcss/plugin';
 const { parseColor } = require('tailwindcss/lib/util/color');
 
 /** Converts HEX color to RGB */
@@ -123,7 +123,7 @@ const config: Config = {
         ':root': {
           '--color-theme-1': toRGB(colors.blue['800']),
           '--color-theme-2': toRGB(colors.blue['900']),
-          '--color-primary': toRGB(colors.blue['900']),
+          '--color-primary': toRGB(colors.blue['700']),
           '--color-secondary': toRGB(colors.slate['200']),
           '--color-success': toRGB(colors.lime['500']),
           '--color-info': toRGB(colors.cyan['500']),

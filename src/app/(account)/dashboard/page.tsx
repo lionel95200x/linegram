@@ -1,13 +1,13 @@
-import Image from 'next/image';
 import clsx from 'clsx';
 import _ from 'lodash';
+import Image from 'next/image';
 
 import AgentGrid from '@/components/dashboard/Agent/AgentGrid';
 import Button from '@/components/dashboard/Base/Button';
 import { FormInput, FormSelect } from '@/components/dashboard/Base/Form';
 import Lucide from '@/components/dashboard/Base/Lucide';
 import Pagination, { PaginationLink } from '@/components/dashboard/Base/Pagination';
-import Table, { TableTd, TableTh, TableThead, TableTr, TableBody } from '@/components/dashboard/Base/Table';
+import Table, { TableBody, TableTd, TableTh, TableThead, TableTr } from '@/components/dashboard/Base/Table';
 import Tippy from '@/components/dashboard/Base/Tippy';
 import ReportDonutChart from '@/components/dashboard/ReportDonutChart';
 import ReportDonutChart1 from '@/components/dashboard/ReportDonutChart1';
@@ -175,7 +175,7 @@ function Main() {
                 <div key={fakerKey} className='intro-y'>
                   <div className='box zoom-in mb-3 flex items-center px-4 py-4'>
                     <div className='image-fit h-10 w-10 flex-none overflow-hidden rounded-md'>
-                      <Image alt='Midone Tailwind HTML Admin Template' src={faker.photos[0]} />
+                      <Image alt='Linegram - Agent appel IA' src={faker.photos[0]} />
                     </div>
                     <div className='ml-4 mr-auto'>
                       <div className='font-medium'>{faker.users[0].name}</div>
@@ -292,7 +292,7 @@ function Main() {
                           <div className='image-fit zoom-in h-10 w-10'>
                             <Tippy
                               as='img'
-                              alt='Midone Tailwind HTML Admin Template'
+                              alt='Linegram - Agent appel IA'
                               className='rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]'
                               src={faker.images[0]}
                               content={`Uploaded at ${faker.dates[0]}`}
@@ -301,7 +301,7 @@ function Main() {
                           <div className='image-fit zoom-in -ml-5 h-10 w-10'>
                             <Tippy
                               as='img'
-                              alt='Midone Tailwind HTML Admin Template'
+                              alt='Linegram - Agent appel IA'
                               className='rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]'
                               src={faker.images[1]}
                               content={`Uploaded at ${faker.dates[1]}`}
@@ -310,7 +310,7 @@ function Main() {
                           <div className='image-fit zoom-in -ml-5 h-10 w-10'>
                             <Tippy
                               as='img'
-                              alt='Midone Tailwind HTML Admin Template'
+                              alt='Linegram - Agent appel IA'
                               className='rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]'
                               src={faker.images[2]}
                               content={`Uploaded at ${faker.dates[2]}`}
@@ -406,7 +406,7 @@ function Main() {
                   <div key={fakerKey} className='intro-x'>
                     <div className='box zoom-in mb-3 flex items-center px-5 py-3'>
                       <div className='image-fit h-10 w-10 flex-none overflow-hidden rounded-full'>
-                        <Image alt='Midone Tailwind HTML Admin Template' src={faker.photos[0]} />
+                        <Image alt='Linegram - Agent appel IA' src={faker.photos[0]} />
                       </div>
                       <div className='ml-4 mr-auto'>
                         <div className='font-medium'>{faker.users[0].name}</div>
@@ -444,7 +444,7 @@ function Main() {
                 <div className='intro-x relative mb-3 flex items-center'>
                   <div className='before:absolute before:ml-5 before:mt-5 before:block before:h-px before:w-20 before:bg-slate-200 before:dark:bg-darkmode-400'>
                     <div className='image-fit h-10 w-10 flex-none overflow-hidden rounded-full'>
-                      <Image alt='Midone Tailwind HTML Admin Template' src={fakerData[9].photos[0]} />
+                      <Image alt='Linegram - Agent appel IA' src={fakerData[9].photos[0]} />
                     </div>
                   </div>
                   <div className='box zoom-in ml-4 flex-1 px-5 py-3'>
@@ -458,7 +458,7 @@ function Main() {
                 <div className='intro-x relative mb-3 flex items-center'>
                   <div className='before:absolute before:ml-5 before:mt-5 before:block before:h-px before:w-20 before:bg-slate-200 before:dark:bg-darkmode-400'>
                     <div className='image-fit h-10 w-10 flex-none overflow-hidden rounded-full'>
-                      <Image alt='Midone Tailwind HTML Admin Template' src={fakerData[8].photos[0]} />
+                      <Image alt='Linegram - Agent appel IA' src={fakerData[8].photos[0]} />
                     </div>
                   </div>
                   <div className='box zoom-in ml-4 flex-1 px-5 py-3'>
@@ -475,7 +475,7 @@ function Main() {
                           content={fakerData[0].products[0].name}
                         >
                           <Image
-                            alt='Midone Tailwind HTML Admin Template'
+                            alt='Linegram - Agent appel IA'
                             className='rounded-md border border-white'
                             src={fakerData[8].images[0]}
                           />
@@ -486,7 +486,7 @@ function Main() {
                           content={fakerData[1].products[0].name}
                         >
                           <Image
-                            alt='Midone Tailwind HTML Admin Template'
+                            alt='Linegram - Agent appel IA'
                             className='rounded-md border border-white'
                             src={fakerData[8].images[1]}
                           />
@@ -497,7 +497,7 @@ function Main() {
                           content={fakerData[2].products[0].name}
                         >
                           <Image
-                            alt='Midone Tailwind HTML Admin Template'
+                            alt='Linegram - Agent appel IA'
                             className='rounded-md border border-white'
                             src={fakerData[8].images[2]}
                           />
@@ -510,7 +510,7 @@ function Main() {
                 <div className='intro-x relative mb-3 flex items-center'>
                   <div className='before:absolute before:ml-5 before:mt-5 before:block before:h-px before:w-20 before:bg-slate-200 before:dark:bg-darkmode-400'>
                     <div className='image-fit h-10 w-10 flex-none overflow-hidden rounded-full'>
-                      <Image alt='Midone Tailwind HTML Admin Template' src={fakerData[7].photos[0]} />
+                      <Image alt='Linegram - Agent appel IA' src={fakerData[7].photos[0]} />
                     </div>
                   </div>
                   <div className='box zoom-in ml-4 flex-1 px-5 py-3'>
@@ -530,7 +530,7 @@ function Main() {
                 <div className='intro-x relative mb-3 flex items-center'>
                   <div className='before:absolute before:ml-5 before:mt-5 before:block before:h-px before:w-20 before:bg-slate-200 before:dark:bg-darkmode-400'>
                     <div className='image-fit h-10 w-10 flex-none overflow-hidden rounded-full'>
-                      <Image alt='Midone Tailwind HTML Admin Template' src={fakerData[6].photos[0]} />
+                      <Image alt='Linegram - Agent appel IA' src={fakerData[6].photos[0]} />
                     </div>
                   </div>
                   <div className='box zoom-in ml-4 flex-1 px-5 py-3'>

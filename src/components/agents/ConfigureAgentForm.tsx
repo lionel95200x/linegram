@@ -13,13 +13,6 @@ import { Label } from '../ui/label';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Textarea } from '../ui/textarea';
 
-const schema = z.object({
-  name: z.string().min(1, { message: 'Required' }),
-  prompt: z.string().min(1, { message: 'Required' }),
-  firstSentence: z.string().min(1, { message: 'Required' }),
-  voiceId: z.string().min(1, { message: 'Required' }),
-});
-
 const ConfigureAgentForm = ({
   voices,
   prompt,

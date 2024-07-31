@@ -4,10 +4,6 @@ import Link from 'next/link';
 import LogoSvg from '@/assets/svg/logo';
 import { getSession } from '@/features/account/controllers/get-session';
 
-import { signOut } from '../app/(auth)/auth-actions';
-
-import { AccountMenu } from './account-menu';
-
 const Header = async () => {
   const session = await getSession();
 
@@ -30,16 +26,12 @@ const Header = async () => {
               Nos tarifs
             </span>
 
-            {session ? (
-              <AccountMenu signOut={signOut} />
-            ) : (
-              <button
-                className='
+            <button
+              className='
 undefined inline-flex items-center justify-center gap-2 rounded-xl bg-[#20B2AA] px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-[#168b86] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
-              >
-                <Link href='/signup'>S'inscrire</Link>
-              </button>
-            )}
+            >
+              <Link href={session ? '/dashboard' : '/signup'}>{session ? 'Dashboard' : "S'inscrire"}</Link>
+            </button>
           </div>
         </div>
       </div>

@@ -46,7 +46,7 @@ function Main() {
       >
         <div className='flex h-[70px] items-center px-3 sm:px-8'>
           <a href='' className='mr-auto flex'>
-            <Image alt='Midone Tailwind HTML Admin Template' className='w-6' src={logoUrl} />
+            <Image alt='Linegram - Agent appel IA' className='w-6' src={logoUrl} />
           </a>
           <a href='#' onClick={(e) => e.preventDefault()}>
             <Lucide
