@@ -5,6 +5,8 @@ import { getAuthUser } from '@/features/account/controllers/get-user';
 
 import Layout from './layout-client';
 
+import '@/assets/css/app.css';
+
 export default async function AccountLayout({ children }: { children: React.ReactNode }) {
   const [session, user] = await Promise.all([getSession(), getAuthUser()]);
 
@@ -12,7 +14,5 @@ export default async function AccountLayout({ children }: { children: React.Reac
     redirect('/login');
   }
 
-  console.log({ user });
-
-  return <Layout user={user}>{children}</Layout>;
+  return <Layout>{children}</Layout>;
 }

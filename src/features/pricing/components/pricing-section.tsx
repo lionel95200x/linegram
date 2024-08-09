@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 import { PricingCard } from '@/features/pricing/components/price-card';
 import { getProducts } from '@/features/pricing/controllers/get-products';
 
@@ -10,6 +8,7 @@ export async function PricingSection({ isPricingPage }: { isPricingPage?: boolea
 
   const HeadingLevel = isPricingPage ? 'h1' : 'h2';
 
+  console.log({ products });
   return (
     <section className='relative rounded-lg bg-black py-8'>
       <div className='bg-gray-900 pt-5' id='pricing'>
@@ -23,6 +22,9 @@ export async function PricingSection({ isPricingPage }: { isPricingPage?: boolea
           <p className='mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-gray-300'>
             Choisissez le modele de robot d'appel qui vous convient le mieux
           </p>
+          {products.map((product) => {
+            return <PricingCard key={product.id} product={product} createCheckoutAction={createCheckoutAction} />;
+          })}
           <div className='isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
             {/* First Product */}
             <div className='rounded-3xl p-8 ring-1 ring-white/10 xl:p-10'>
@@ -90,7 +92,7 @@ export async function PricingSection({ isPricingPage }: { isPricingPage?: boolea
                       clipRule='evenodd'
                     />
                   </svg>
-                  Fast delivery
+                  Agent configuré en 5 minutes
                 </li>
               </ul>
             </div>

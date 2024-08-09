@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { redirect, usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
@@ -14,11 +14,11 @@ import '@/assets/css/themes/enigma/top-nav.css';
 function Main({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [formattedMenu, setFormattedMenu] = useState<Array<FormattedMenu | 'divider'>>([]);
-  const topMenu = () => nestedMenu(menu, { pathname });
+  const topMenu = useCallback(() => nestedMenu(menu, { pathname }), [pathname]);
 
   useEffect(() => {
     setFormattedMenu(topMenu());
-  }, [menu, pathname]);
+  }, [pathname, topMenu]);
 
   return (
     <div

@@ -1,18 +1,10 @@
-import {
-  createContext,
-  Fragment,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { twMerge } from "tailwind-merge";
+'use client';
+import { createContext, Fragment, useContext, useEffect, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
-import {
-  Disclosure as HeadlessDisclosure,
-  Transition,
-} from "@headlessui/react";
+import { Disclosure as HeadlessDisclosure, Transition } from '@headlessui/react';
 
-type Variant = "default" | "boxed";
+type Variant = 'default' | 'boxed';
 
 const disclosureContext = createContext<{
   open: boolean;
@@ -31,7 +23,7 @@ const groupContext = createContext<{
 }>({
   selectedIndex: null,
   setSelectedIndex: () => {},
-  variant: "default",
+  variant: 'default',
 });
 
 function Disclosure({
@@ -46,13 +38,12 @@ function Disclosure({
 
   return (
     <HeadlessDisclosure
-      as="div"
+      as='div'
       defaultOpen={group.selectedIndex === key}
       className={twMerge([
-        "py-4 first:-mt-4 last:-mb-4",
-        "[&:not(:last-child)]:border-b [&:not(:last-child)]:border-slate-200/60 [&:not(:last-child)]:dark:border-darkmode-400",
-        group.variant == "boxed" &&
-          "p-4 first:mt-0 last:mb-0 border border-slate-200/60 mt-3 dark:border-darkmode-400",
+        'py-4 first:-mt-4 last:-mb-4',
+        '[&:not(:last-child)]:border-b [&:not(:last-child)]:border-slate-200/60 [&:not(:last-child)]:dark:border-darkmode-400',
+        group.variant == 'boxed' && 'mt-3 border border-slate-200/60 p-4 first:mt-0 last:mb-0 dark:border-darkmode-400',
         className,
       ])}
       {...props}
@@ -66,7 +57,7 @@ function Disclosure({
           }}
         >
           <>
-            {typeof children === "function"
+            {typeof children === 'function'
               ? children({
                   open: open,
                   close: close,
@@ -79,12 +70,12 @@ function Disclosure({
   );
 }
 
-Disclosure.Group = <C extends React.ElementType = "div">({
+Disclosure.Group = <C extends React.ElementType = 'div'>({
   children,
   className,
   as,
   selectedIndex = 0,
-  variant = "default",
+  variant = 'default',
   ...props
 }: {
   as?: C;
@@ -93,7 +84,7 @@ Disclosure.Group = <C extends React.ElementType = "div">({
 } & React.PropsWithChildren &
   React.ComponentPropsWithoutRef<C>) => {
   const [active, setActive] = useState(selectedIndex);
-  const Component = as || "div";
+  const Component = as || 'div';
 
   return (
     <groupContext.Provider
@@ -122,11 +113,7 @@ Disclosure.Group = <C extends React.ElementType = "div">({
   );
 };
 
-Disclosure.Button = ({
-  children,
-  className,
-  ...props
-}: ExtractProps<typeof HeadlessDisclosure.Button>) => {
+Disclosure.Button = ({ children, className, ...props }: ExtractProps<typeof HeadlessDisclosure.Button>) => {
   const disclosure = useContext(disclosureContext);
   const group = useContext(groupContext);
 
@@ -136,10 +123,10 @@ Disclosure.Button = ({
 
   return (
     <HeadlessDisclosure.Button
-      as="button"
+      as='button'
       className={twMerge([
-        "outline-none py-4 -my-4 font-medium w-full text-left dark:text-slate-400",
-        disclosure.open && "text-primary dark:text-slate-300",
+        '-my-4 w-full py-4 text-left font-medium outline-none dark:text-slate-400',
+        disclosure.open && 'text-primary dark:text-slate-300',
         className,
       ])}
       onClick={() => {
@@ -152,27 +139,20 @@ Disclosure.Button = ({
   );
 };
 
-Disclosure.Panel = ({
-  children,
-  className,
-  ...props
-}: ExtractProps<typeof HeadlessDisclosure.Panel>) => {
+Disclosure.Panel = ({ children, className, ...props }: ExtractProps<typeof HeadlessDisclosure.Panel>) => {
   return (
     <Transition
       as={Fragment}
-      enter="overflow-hidden transition-all linear duration-[400ms]"
-      enterFrom="mt-0 max-h-0 invisible opacity-0"
-      enterTo="mt-3 max-h-[2000px] visible opacity-100"
-      leave="overflow-hidden transition-all linear duration-500"
-      leaveFrom="mt-3 max-h-[2000px] visible opacity-100"
-      leaveTo="mt-0 max-h-0 invisible opacity-0"
+      enter='overflow-hidden transition-all linear duration-[400ms]'
+      enterFrom='mt-0 max-h-0 invisible opacity-0'
+      enterTo='mt-3 max-h-[2000px] visible opacity-100'
+      leave='overflow-hidden transition-all linear duration-500'
+      leaveFrom='mt-3 max-h-[2000px] visible opacity-100'
+      leaveTo='mt-0 max-h-0 invisible opacity-0'
     >
       <HeadlessDisclosure.Panel
-        as="div"
-        className={twMerge([
-          "mt-3 text-slate-700 leading-relaxed dark:text-slate-400",
-          className,
-        ])}
+        as='div'
+        className={twMerge(['mt-3 leading-relaxed text-slate-700 dark:text-slate-400', className])}
         {...props}
       >
         {children}

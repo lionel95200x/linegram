@@ -5,5 +5,8 @@ module.exports = {
     'tailwindcss/nesting': 'postcss-nesting',
     tailwindcss: {},
     autoprefixer: {},
+    'postcss-reporter': {
+      clearReportedMessages: true,
+    },
   },
 };

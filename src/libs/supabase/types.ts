@@ -195,6 +195,54 @@ export type Database = {
         }
         Relationships: []
       }
+      prospects: {
+        Row: {
+          agent_id: string | null
+          call_id: string | null
+          created_at: string
+          extraInfo: string | null
+          firstName: string | null
+          id: string
+          lastName: string | null
+          phone: string | null
+        }
+        Insert: {
+          agent_id?: string | null
+          call_id?: string | null
+          created_at?: string
+          extraInfo?: string | null
+          firstName?: string | null
+          id?: string
+          lastName?: string | null
+          phone?: string | null
+        }
+        Update: {
+          agent_id?: string | null
+          call_id?: string | null
+          created_at?: string
+          extraInfo?: string | null
+          firstName?: string | null
+          id?: string
+          lastName?: string | null
+          phone?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prospects_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "agents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "prospects_call_id_fkey"
+            columns: ["call_id"]
+            isOneToOne: false
+            referencedRelation: "calls"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       subscriptions: {
         Row: {
           cancel_at: string | null

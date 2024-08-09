@@ -247,7 +247,7 @@ export function Features() {
       </h2>
       <div className='grid grid-cols-1 gap-2 py-10 lg:grid-cols-3'>
         <div className='group rounded-xl border border-[rgba(255,255,255,0.10)] bg-[rgba(40,40,40,0.30)] p-8 shadow-[2px_4px_16px_0px_rgba(248,248,248,0.06)_inset] lg:col-span-2'>
-          <h3 className='py-2 text-lg font-semibold text-white'>Post to multiple platforms at once</h3>
+          <h3 className='py-2 text-lg font-semibold text-white'>Appelez tout vos prospects en 3 clics</h3>
           <p className='max-w-sm text-sm font-normal text-neutral-400'>
             With our AI-powered platform, you can post to multiple platforms at once, saving you time and effort.
           </p>
@@ -864,7 +864,7 @@ export function Features() {
             <div className='h-full overflow-hidden p-8'>
               <div className='relative flex h-full flex-col items-center justify-center gap-4'>
                 <div className='message absolute left-10 top-10 rounded-full px-4 py-2 shadow-[0px_0px_8px_0px_rgba(248,248,248,0.25)_inset,0px_32px_24px_-16px_rgba(0,0,0,0.40)_inset]'>
-                  <p className='text-xs'>+200 connections</p>
+                  <p className='text-xs'>+200 appels</p>
                 </div>
                 <svg
                   width={335}
@@ -1066,7 +1066,7 @@ export function Features() {
               </div>
             </div>
           </div>
-          <h3 className='py-2 text-lg font-semibold text-white'>Analytics for everything</h3>
+          <h3 className='py-2 text-lg font-semibold text-white'>Suivis de vos appel</h3>
           <p className='max-w-sm text-sm font-normal text-neutral-400'>
             Check analytics, track your posts, and get insights into your audience.
           </p>

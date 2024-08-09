@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import Button from '@/components/dashboard/Base/Button';
 import { FormInput, FormLabel, FormSwitch, FormTextarea } from '@/components/dashboard/Base/Form';
-import { Menu, Tab } from '@/components/dashboard/Base/Headless';
+import { Menu, Tab, TabButton, TabGroup, TabList, TabPanel, TabPanels } from '@/components/dashboard/Base/Headless';
 import Litepicker from '@/components/dashboard/Base/Litepicker';
 import Lucide from '@/components/dashboard/Base/Lucide';
 import MultiSelect from '@/components/dashboard/Base/MultiSelect';
@@ -66,11 +66,11 @@ function Main() {
         {/* BEGIN: Post Content */}
         <div className='intro-y col-span-12 lg:col-span-8'>
           <FormInput type='text' className='intro-y !box px-4 py-3 pr-10' placeholder='Title' />
-          <Tab.Group className='intro-y box mt-5 overflow-hidden'>
-            <Tab.List className='flex-col border-transparent bg-slate-200 dark:border-transparent dark:bg-darkmode-800 sm:flex-row'>
+          <TabGroup className='intro-y box mt-5 overflow-hidden'>
+            <TabList className='flex-col border-transparent bg-slate-200 dark:border-transparent dark:bg-darkmode-800 sm:flex-row'>
               <Tab fullWidth={false}>
                 {({ selected }: any) => (
-                  <Tab.Button
+                  <TabButton
                     className={clsx([
                       'flex w-full items-center justify-center px-0 py-0 text-slate-500 sm:w-40',
                       !selected &&
@@ -88,12 +88,12 @@ function Main() {
                     >
                       <Lucide icon='FileText' className='mr-2 h-4 w-4' /> Content
                     </Tippy>
-                  </Tab.Button>
+                  </TabButton>
                 )}
               </Tab>
               <Tab fullWidth={false}>
                 {({ selected }: any) => (
-                  <Tab.Button
+                  <TabButton
                     className={clsx([
                       'flex w-full items-center justify-center px-0 py-0 text-slate-500 sm:w-40',
                       !selected &&
@@ -110,12 +110,12 @@ function Main() {
                     >
                       <Lucide icon='Code' className='mr-2 h-4 w-4' /> Meta Title
                     </Tippy>
-                  </Tab.Button>
+                  </TabButton>
                 )}
               </Tab>
               <Tab fullWidth={false}>
                 {({ selected }: any) => (
-                  <Tab.Button
+                  <TabButton
                     className={clsx([
                       'flex w-full items-center justify-center px-0 py-0 text-slate-500 sm:w-40',
                       !selected &&
@@ -132,12 +132,12 @@ function Main() {
                     >
                       <Lucide icon='AlignLeft' className='mr-2 h-4 w-4' /> Keywords
                     </Tippy>
-                  </Tab.Button>
+                  </TabButton>
                 )}
               </Tab>
-            </Tab.List>
-            <Tab.Panels>
-              <Tab.Panel className='p-5'>
+            </TabList>
+            <TabPanels>
+              <TabPanel className='p-5'>
                 <div className='rounded-md border border-slate-200/60 p-5 dark:border-darkmode-400'>
                   <div className='flex items-center border-b border-slate-200/60 pb-5 font-medium dark:border-darkmode-400'>
                     <Lucide icon='ChevronDown' className='mr-2 h-4 w-4' /> Text Content
@@ -184,9 +184,9 @@ function Main() {
                     </div>
                   </div>
                 </div>
-              </Tab.Panel>
-            </Tab.Panels>
-          </Tab.Group>
+              </TabPanel>
+            </TabPanels>
+          </TabGroup>
         </div>
         {/* END: Post Content */}
         {/* BEGIN: Post Info */}
@@ -202,7 +202,7 @@ function Main() {
                   role='button'
                 >
                   <div className='image-fit mr-3 h-6 w-6'>
-                    <img className='rounded' alt='Linegram - Agent appel IA' src={fakerData[0].photos[0]} />
+                    <Image className='rounded' alt='Linegram - Agent appel IA' src={fakerData[0].photos[0]} />
                   </div>
                   <div className='truncate'>{fakerData[0].users[0].name}</div>
                   <Lucide icon='ChevronDown' className='ml-auto h-4 w-4' />

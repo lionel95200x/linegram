@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 
 import { Dialog } from '@/components/dashboard/Base/Headless';

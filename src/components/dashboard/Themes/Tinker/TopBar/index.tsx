@@ -3,13 +3,13 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import _ from 'lodash';
 
+import AccountMenu from '@/components/dashboard/AccountMenu';
 import Breadcrumb from '@/components/dashboard/Base/Breadcrumb';
 import { FormInput } from '@/components/dashboard/Base/Form';
-import { Menu, Popover } from '@/components/dashboard/Base/Headless';
+import { Popover } from '@/components/dashboard/Base/Headless';
 import Lucide from '@/components/dashboard/Base/Lucide';
 import fakerData from '@/utils/faker';
 import { Transition } from '@headlessui/react';
-import AccountMenu from '@/components/dashboard/AccountMenu';
 
 function Main() {
   const [searchDropdown, setSearchDropdown] = useState(false);

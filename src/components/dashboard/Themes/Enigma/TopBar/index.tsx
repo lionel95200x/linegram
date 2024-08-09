@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import _ from 'lodash';
 
@@ -11,10 +12,13 @@ import { FormInput } from '@/components/dashboard/Base/Form';
 import { Popover } from '@/components/dashboard/Base/Headless';
 import Lucide from '@/components/dashboard/Base/Lucide';
 import fakerData from '@/utils/faker';
+import { routes } from '@/utils/route';
 import { Transition } from '@headlessui/react';
 
 function Main(props: { layout?: 'side-menu' | 'simple-menu' | 'top-menu' }) {
   const [searchDropdown, setSearchDropdown] = useState(false);
+
+  const pathname = usePathname();
   const showSearchDropdown = () => {
     setSearchDropdown(true);
   };
@@ -22,6 +26,7 @@ function Main(props: { layout?: 'side-menu' | 'simple-menu' | 'top-menu' }) {
     setSearchDropdown(false);
   };
 
+  console.log(pathname);
   return (
     <>
       <div
@@ -66,7 +71,7 @@ function Main(props: { layout?: 'side-menu' | 'simple-menu' | 'top-menu' }) {
             ])}
           >
             <Breadcrumb.Link to='/'>Application</Breadcrumb.Link>
-            <Breadcrumb.Link to='/' active={true}>
+            <Breadcrumb.Link to={routes.dashboard} active={true}>
               Dashboard
             </Breadcrumb.Link>
           </Breadcrumb>
@@ -77,7 +82,7 @@ function Main(props: { layout?: 'side-menu' | 'simple-menu' | 'top-menu' }) {
               <FormInput
                 type='text'
                 className='w-56 rounded-full border-transparent bg-slate-200 pr-8 shadow-none transition-[width] duration-300 ease-in-out focus:w-72 focus:border-transparent dark:bg-darkmode-400'
-                placeholder='Search...'
+                placeholder='Rechercher...'
                 onFocus={showSearchDropdown}
                 onBlur={hideSearchDropdown}
               />

@@ -9,3 +9,4 @@ export type PriceWithProduct = Price & { products: Product | null };
 export type SubscriptionWithProduct = Subscription & { prices: PriceWithProduct | null };
 export type Agents = Database['public']['Tables']['agents']['Row'];
 export type Calls = Database['public']['Tables']['calls']['Row'];
+export type Prospects = Database['public']['Tables']['prospects']['Row'];

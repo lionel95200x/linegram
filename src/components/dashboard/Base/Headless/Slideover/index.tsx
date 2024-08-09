@@ -1,9 +1,10 @@
-import { createContext, Fragment, useContext, useRef, useState } from "react";
-import { twMerge } from "tailwind-merge";
+'use client';
+import { createContext, Fragment, useContext, useRef, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
-import { Dialog as HeadlessDialog, Transition } from "@headlessui/react";
+import { Dialog as HeadlessDialog, Transition } from '@headlessui/react';
 
-type Size = "sm" | "md" | "lg" | "xl";
+type Size = 'sm' | 'md' | 'lg' | 'xl';
 
 const slideoverContext = createContext<{
   open: boolean;
@@ -12,17 +13,17 @@ const slideoverContext = createContext<{
 }>({
   open: false,
   zoom: false,
-  size: "md",
+  size: 'md',
 });
 
 function Slideover({
   children,
   className,
-  as = "div",
+  as = 'div',
   open = false,
   onClose,
   staticBackdrop,
-  size = "md",
+  size = 'md',
   ...props
 }: ExtractProps<typeof HeadlessDialog> & {
   size?: Size;
@@ -53,7 +54,7 @@ function Slideover({
             }
           }}
           initialFocus={focusElement}
-          className={twMerge(["relative z-[60]", className])}
+          className={twMerge(['relative z-[60]', className])}
           {...props}
         >
           {children}
@@ -66,7 +67,7 @@ function Slideover({
 Slideover.Panel = ({
   children,
   className,
-  as = "div",
+  as = 'div',
   ...props
 }: ExtractProps<typeof HeadlessDialog.Panel> & {
   size?: Size;
@@ -75,35 +76,35 @@ Slideover.Panel = ({
   return (
     <>
       <Transition.Child
-        as="div"
-        enter="ease-in-out duration-500"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="ease-in-out duration-[400ms]"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-        className="fixed inset-0 bg-black/60"
-        aria-hidden="true"
+        as='div'
+        enter='ease-in-out duration-500'
+        enterFrom='opacity-0'
+        enterTo='opacity-100'
+        leave='ease-in-out duration-[400ms]'
+        leaveFrom='opacity-100'
+        leaveTo='opacity-0'
+        className='fixed inset-0 bg-black/60'
+        aria-hidden='true'
       />
       <Transition.Child
-        as="div"
-        enter="ease-in-out duration-500"
-        enterFrom="opacity-0 -mr-[100%]"
-        enterTo="opacity-100 mr-0"
-        leave="ease-in-out duration-[400ms]"
-        leaveFrom="opacity-100 mr-0"
-        leaveTo="opacity-0 -mr-[100%]"
-        className="fixed inset-y-0 right-0"
+        as='div'
+        enter='ease-in-out duration-500'
+        enterFrom='opacity-0 -mr-[100%]'
+        enterTo='opacity-100 mr-0'
+        leave='ease-in-out duration-[400ms]'
+        leaveFrom='opacity-100 mr-0'
+        leaveTo='opacity-0 -mr-[100%]'
+        className='fixed inset-y-0 right-0'
       >
         <HeadlessDialog.Panel
           as={as}
           className={twMerge([
-            "w-[90%] ml-auto h-screen flex flex-col bg-white relative shadow-md transition-transform dark:bg-darkmode-600",
-            slideover.size == "md" && "sm:w-[460px]",
-            slideover.size == "sm" && "sm:w-[300px]",
-            slideover.size == "lg" && "sm:w-[600px]",
-            slideover.size == "xl" && "sm:w-[600px] lg:w-[900px]",
-            slideover.zoom && "scale-105",
+            'relative ml-auto flex h-screen w-[90%] flex-col bg-white shadow-md transition-transform dark:bg-darkmode-600',
+            slideover.size == 'md' && 'sm:w-[460px]',
+            slideover.size == 'sm' && 'sm:w-[300px]',
+            slideover.size == 'lg' && 'sm:w-[600px]',
+            slideover.size == 'xl' && 'sm:w-[600px] lg:w-[900px]',
+            slideover.zoom && 'scale-105',
             className,
           ])}
           {...props}
@@ -115,17 +116,12 @@ Slideover.Panel = ({
   );
 };
 
-Slideover.Title = ({
-  children,
-  className,
-  as = "div",
-  ...props
-}: ExtractProps<typeof HeadlessDialog.Title>) => {
+Slideover.Title = ({ children, className, as = 'div', ...props }: ExtractProps<typeof HeadlessDialog.Title>) => {
   return (
     <HeadlessDialog.Title
       as={as}
       className={twMerge([
-        "flex items-center px-5 py-3 border-b border-slate-200/60 dark:border-darkmode-400",
+        'flex items-center border-b border-slate-200/60 px-5 py-3 dark:border-darkmode-400',
         className,
       ])}
       {...props}
@@ -138,21 +134,17 @@ Slideover.Title = ({
 Slideover.Description = ({
   children,
   className,
-  as = "div",
+  as = 'div',
   ...props
 }: ExtractProps<typeof HeadlessDialog.Description>) => {
   return (
-    <HeadlessDialog.Description
-      as={as}
-      className={twMerge(["p-5 overflow-y-auto flex-1", className])}
-      {...props}
-    >
+    <HeadlessDialog.Description as={as} className={twMerge(['flex-1 overflow-y-auto p-5', className])} {...props}>
       {children}
     </HeadlessDialog.Description>
   );
 };
 
-Slideover.Footer = <C extends React.ElementType = "div">({
+Slideover.Footer = <C extends React.ElementType = 'div'>({
   children,
   className,
   as,
@@ -161,14 +153,11 @@ Slideover.Footer = <C extends React.ElementType = "div">({
   as?: C;
 } & React.PropsWithChildren &
   React.ComponentPropsWithoutRef<C>) => {
-  const Component = as || "div";
+  const Component = as || 'div';
 
   return (
     <Component
-      className={twMerge([
-        "px-5 py-3 text-right border-t border-slate-200/60 dark:border-darkmode-400",
-        className,
-      ])}
+      className={twMerge(['border-t border-slate-200/60 px-5 py-3 text-right dark:border-darkmode-400', className])}
       {...props}
     >
       {children}

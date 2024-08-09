@@ -366,9 +366,13 @@ const getColor = (colorKey: DotNestedKeys<Colors>, opacity: number = 1) => {
     }
   >(colors);
 
+  console.log({ flattenColors });
   if (flattenColors[colorKey]?.search('var') === -1) {
+    console.log({ colorKey });
     return `rgb(${toRGB(flattenColors[colorKey])} / ${opacity})`;
   } else {
+    console.log('else case', { colorKey });
+    console.log('in window');
     if (typeof window !== 'undefined') {
       const cssVariableName = ''; // `--color-${flattenColors[colorKey].split('--color-')[1].split(')')[0]}`;
       return `rgb(${getComputedStyle(document.body).getPropertyValue(cssVariableName)} / ${opacity})`;

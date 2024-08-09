@@ -24,14 +24,8 @@ const config: Config = {
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
-        },
+        primary: 'rgb(var(--color-primary) / <alpha-value>)',
+        secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
@@ -123,7 +117,7 @@ const config: Config = {
         ':root': {
           '--color-theme-1': toRGB(colors.blue['800']),
           '--color-theme-2': toRGB(colors.blue['900']),
-          '--color-primary': toRGB(colors.blue['700']),
+          '--color-primary': toRGB(colors.emerald['900']),
           '--color-secondary': toRGB(colors.slate['200']),
           '--color-success': toRGB(colors.lime['500']),
           '--color-info': toRGB(colors.cyan['500']),
@@ -149,7 +143,7 @@ const config: Config = {
         },
         // Theme 1 colors
         '.theme-1': {
-          '--color-theme-1': toRGB(colors.emerald['800']),
+          '--color-theme-1': toRGB(colors.red['200']),
           '--color-theme-2': toRGB(colors.emerald['900']),
           '--color-primary': toRGB(colors.emerald['900']),
           '--color-secondary': toRGB(colors.slate['200']),

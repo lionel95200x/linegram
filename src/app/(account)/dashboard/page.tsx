@@ -1,13 +1,10 @@
+import Image from 'next/image';
 import clsx from 'clsx';
 import _ from 'lodash';
-import Image from 'next/image';
 
 import AgentGrid from '@/components/dashboard/Agent/AgentGrid';
-import Button from '@/components/dashboard/Base/Button';
-import { FormInput, FormSelect } from '@/components/dashboard/Base/Form';
+import { FormInput } from '@/components/dashboard/Base/Form';
 import Lucide from '@/components/dashboard/Base/Lucide';
-import Pagination, { PaginationLink } from '@/components/dashboard/Base/Pagination';
-import Table, { TableBody, TableTd, TableTh, TableThead, TableTr } from '@/components/dashboard/Base/Table';
 import Tippy from '@/components/dashboard/Base/Tippy';
 import ReportDonutChart from '@/components/dashboard/ReportDonutChart';
 import ReportDonutChart1 from '@/components/dashboard/ReportDonutChart1';
@@ -258,139 +255,6 @@ function Main() {
             </div>
           </div>
           {/* END: General Report */}
-          {/* BEGIN: Weekly Top Products */}
-          <div className='col-span-12 mt-6'>
-            <div className='intro-y block h-10 items-center sm:flex'>
-              <h2 className='mr-5 truncate text-lg font-medium'>Weekly Top Products</h2>
-              <div className='mt-3 flex items-center sm:ml-auto sm:mt-0'>
-                <Button className='!box flex items-center text-slate-600 dark:text-slate-300'>
-                  <Lucide icon='FileText' className='mr-2 hidden h-4 w-4 sm:block' />
-                  Export to Excel
-                </Button>
-                <Button className='!box ml-3 flex items-center text-slate-600 dark:text-slate-300'>
-                  <Lucide icon='FileText' className='mr-2 hidden h-4 w-4 sm:block' />
-                  Export to PDF
-                </Button>
-              </div>
-            </div>
-            <div className='intro-y mt-8 overflow-auto sm:mt-0 lg:overflow-visible'>
-              <Table className='border-separate border-spacing-y-[10px] sm:mt-2'>
-                <TableThead>
-                  <TableTr>
-                    <TableTh className='whitespace-nowrap border-b-0'>IMAGES</TableTh>
-                    <TableTh className='whitespace-nowrap border-b-0'>PRODUCT NAME</TableTh>
-                    <TableTh className='whitespace-nowrap border-b-0 text-center'>STOCK</TableTh>
-                    <TableTh className='whitespace-nowrap border-b-0 text-center'>STATUS</TableTh>
-                    <TableTh className='whitespace-nowrap border-b-0 text-center'>ACTIONS</TableTh>
-                  </TableTr>
-                </TableThead>
-                <TableBody>
-                  {_.take(fakerData, 4).map((faker, fakerKey) => (
-                    <TableTr key={fakerKey} className='intro-x'>
-                      <TableTd className='box w-40 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600'>
-                        <div className='flex'>
-                          <div className='image-fit zoom-in h-10 w-10'>
-                            <Tippy
-                              as='img'
-                              alt='Linegram - Agent appel IA'
-                              className='rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]'
-                              src={faker.images[0]}
-                              content={`Uploaded at ${faker.dates[0]}`}
-                            />
-                          </div>
-                          <div className='image-fit zoom-in -ml-5 h-10 w-10'>
-                            <Tippy
-                              as='img'
-                              alt='Linegram - Agent appel IA'
-                              className='rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]'
-                              src={faker.images[1]}
-                              content={`Uploaded at ${faker.dates[1]}`}
-                            />
-                          </div>
-                          <div className='image-fit zoom-in -ml-5 h-10 w-10'>
-                            <Tippy
-                              as='img'
-                              alt='Linegram - Agent appel IA'
-                              className='rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]'
-                              src={faker.images[2]}
-                              content={`Uploaded at ${faker.dates[2]}`}
-                            />
-                          </div>
-                        </div>
-                      </TableTd>
-                      <TableTd className='box rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600'>
-                        <a href='' className='whitespace-nowrap font-medium'>
-                          {faker.products[0].name}
-                        </a>
-                        <div className='mt-0.5 whitespace-nowrap text-xs text-slate-500'>
-                          {faker.products[0].category}
-                        </div>
-                      </TableTd>
-                      <TableTd className='box rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600'>
-                        {faker.stocks[0]}
-                      </TableTd>
-                      <TableTd className='box w-40 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600'>
-                        <div
-                          className={clsx([
-                            'flex items-center justify-center',
-                            { 'text-success': faker.trueFalse[0] },
-                            { 'text-danger': !faker.trueFalse[0] },
-                          ])}
-                        >
-                          <Lucide icon='CheckSquare' className='mr-2 h-4 w-4' />
-                          {faker.trueFalse[0] ? 'Active' : 'Inactive'}
-                        </div>
-                      </TableTd>
-                      <TableTd
-                        className={clsx([
-                          'box w-56 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600',
-                          'before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 before:dark:bg-darkmode-400',
-                        ])}
-                      >
-                        <div className='flex items-center justify-center'>
-                          <a className='mr-3 flex items-center' href=''>
-                            <Lucide icon='CheckSquare' className='mr-1 h-4 w-4' />
-                            Edit
-                          </a>
-                          <a className='flex items-center text-danger' href=''>
-                            <Lucide icon='Trash2' className='mr-1 h-4 w-4' /> Delete
-                          </a>
-                        </div>
-                      </TableTd>
-                    </TableTr>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-            <div className='intro-y mt-3 flex flex-wrap items-center sm:flex-row sm:flex-nowrap'>
-              <Pagination className='w-full sm:mr-auto sm:w-auto'>
-                <PaginationLink>
-                  <Lucide icon='ChevronsLeft' className='h-4 w-4' />
-                </PaginationLink>
-                <PaginationLink>
-                  <Lucide icon='ChevronLeft' className='h-4 w-4' />
-                </PaginationLink>
-                <PaginationLink>...</PaginationLink>
-                <PaginationLink>1</PaginationLink>
-                <PaginationLink active>2</PaginationLink>
-                <PaginationLink>3</PaginationLink>
-                <PaginationLink>...</PaginationLink>
-                <PaginationLink>
-                  <Lucide icon='ChevronRight' className='h-4 w-4' />
-                </PaginationLink>
-                <PaginationLink>
-                  <Lucide icon='ChevronsRight' className='h-4 w-4' />
-                </PaginationLink>
-              </Pagination>
-              <FormSelect className='!box mt-3 w-20 sm:mt-0'>
-                <option>10</option>
-                <option>25</option>
-                <option>35</option>
-                <option>50</option>
-              </FormSelect>
-            </div>
-          </div>
-          {/* END: Weekly Top Products */}
         </div>
       </div>
       <div className='col-span-12 2xl:col-span-3'>

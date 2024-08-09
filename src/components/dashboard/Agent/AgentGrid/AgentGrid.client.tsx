@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import _ from 'lodash';
@@ -7,17 +7,22 @@ import _ from 'lodash';
 import phoneAgent from '@/assets/images/dashboard/phone-agent.png';
 import Button from '@/components/dashboard/Base/Button';
 import { FormInput, FormSelect } from '@/components/dashboard/Base/Form';
-import { Dialog, Menu } from '@/components/dashboard/Base/Headless';
+import { Menu } from '@/components/dashboard/Base/Headless';
 import Lucide from '@/components/dashboard/Base/Lucide';
 import Pagination, { PaginationLink } from '@/components/dashboard/Base/Pagination';
 import { Agents } from '@/features/pricing/types';
 
 import CreateAgentModal from '../CreateAgentModal';
+import DeleteAgentModal from '../Modal/DeleteAgentModal';
 
 function AgentGridClient({ agents, createAgent }: { agents: Agents[]; createAgent: (name: string) => any }) {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [deleteConfirmationModal, setDeleteConfirmationModal] = useState(false);
-  const deleteButtonRef = useRef(null);
+
+  const onSave = (name: string) => {
+    createAgent(name);
+    setIsCreateModalOpen(false);
+  };
 
   return (
     <>
@@ -27,29 +32,7 @@ function AgentGridClient({ agents, createAgent }: { agents: Agents[]; createAgen
           <Button variant='primary' className='mr-2 shadow-md' onClick={() => setIsCreateModalOpen(true)}>
             Créer un nouvel agent
           </Button>
-          <CreateAgentModal
-            open={isCreateModalOpen}
-            onClose={() => setIsCreateModalOpen(false)}
-            onSave={(name) => createAgent(name)}
-          />
-          <Menu>
-            <Menu.Button as={Button} className='!box px-2'>
-              <span className='flex h-5 w-5 items-center justify-center'>
-                <Lucide icon='Plus' className='h-4 w-4' />
-              </span>
-            </Menu.Button>
-            <Menu.Items className='w-40'>
-              <Menu.Item>
-                <Lucide icon='Printer' className='mr-2 h-4 w-4' /> Print
-              </Menu.Item>
-              <Menu.Item>
-                <Lucide icon='FileText' className='mr-2 h-4 w-4' /> Export to Excel
-              </Menu.Item>
-              <Menu.Item>
-                <Lucide icon='FileText' className='mr-2 h-4 w-4' /> Export to PDF
-              </Menu.Item>
-            </Menu.Items>
-          </Menu>
+          <CreateAgentModal open={isCreateModalOpen} onClose={() => setIsCreateModalOpen(false)} onSave={onSave} />
           <div className='mx-auto hidden text-slate-500 md:block'>Mes agents ({agents.length})</div>
           <div className='mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0'>
             <div className='relative w-56 text-slate-500'>
@@ -79,17 +62,15 @@ function AgentGridClient({ agents, createAgent }: { agents: Agents[]; createAgen
                 </div>
                 <div className='mt-5 text-slate-600 dark:text-slate-500'>
                   <div className='mt-2 flex items-center'>
-                    <Lucide icon='Layers' className='mr-2 h-4 w-4' /> Remaining Stock:
-                    {agent.prompt ? agent.prompt.slice(0, 100) : ''}
+                    <Lucide icon='Layers' className='mr-2 h-4 w-4' /> Instructions:
+                    {agent.first_sentence ? agent.first_sentence.slice(0, 100) : ''}
                   </div>
                 </div>
               </div>
               <div className='flex items-center justify-center border-t border-slate-200/60 p-5 dark:border-darkmode-400 lg:justify-end'>
-                <a className='mr-auto flex items-center text-primary' href='#'>
-                  <Lucide icon='Eye' className='mr-1 h-4 w-4' /> Preview
-                </a>
                 <Link className='mr-3 flex items-center' href={`/agents/${agent.id}`}>
-                  <Lucide icon='CheckSquare' className='mr-1 h-4 w-4' /> Modifiez
+                  <Lucide icon='CheckSquare' className='mr-1 h-4 w-4' />
+                  Modifiez
                 </Link>
                 <a
                   className='flex items-center text-danger'
@@ -137,38 +118,11 @@ function AgentGridClient({ agents, createAgent }: { agents: Agents[]; createAgen
         {/* END: Pagination */}
       </div>
       {/* BEGIN: Delete Confirmation Modal */}
-      <Dialog
+      <DeleteAgentModal
         open={deleteConfirmationModal}
-        onClose={() => {
-          setDeleteConfirmationModal(false);
-        }}
-        initialFocus={deleteButtonRef}
-      >
-        <Dialog.Panel>
-          <div className='p-5 text-center'>
-            <Lucide icon='XCircle' className='mx-auto mt-3 h-16 w-16 text-danger' />
-            <div className='mt-5 text-3xl'>Voulez vous supprimer cet agent?</div>
-            <div className='mt-2 text-slate-500'>
-              Cette action est irréversible, toutes les informations ainsi que les historiques d'appel seront effacé .
-            </div>
-          </div>
-          <div className='px-5 pb-8 text-center'>
-            <Button
-              variant='outline-secondary'
-              type='button'
-              onClick={() => {
-                setDeleteConfirmationModal(false);
-              }}
-              className='mr-1 w-24'
-            >
-              Annulez
-            </Button>
-            <Button variant='danger' type='button' className='w-24' ref={deleteButtonRef}>
-              Supprimez
-            </Button>
-          </div>
-        </Dialog.Panel>
-      </Dialog>
+        onClose={() => setDeleteConfirmationModal(false)}
+        onDelete={() => {}}
+      />
       {/* END: Delete Confirmation Modal */}
     </>
   );

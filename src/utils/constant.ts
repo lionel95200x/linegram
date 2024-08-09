@@ -1,1 +1,1 @@
-export const APP_NAME = 'Ai CALLER';
+export const APP_NAME = 'Linegram';

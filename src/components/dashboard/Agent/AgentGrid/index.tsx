@@ -12,7 +12,6 @@ const AgentGrid = async () => {
 
     const { data, error } = await createAgent({ name });
 
-    console.log({ data, error });
     return { data, error };
   }
 

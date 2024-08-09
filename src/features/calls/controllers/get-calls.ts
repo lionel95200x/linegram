@@ -25,7 +25,13 @@ export async function getCall(id: string): Promise<Calls> {
   return data ?? [];
 }
 
-export async function createCall({ agentId }: { agentId: string }): Promise<Calls> {
+export async function createCall({
+  agentId,
+  prospectId,
+}: {
+  agentId: string;
+  prospectId: string;
+}): Promise<Calls | { error: string }> {
   const supabase = createSupabaseServerClient();
 
   const { data, error } = await supabase
@@ -33,6 +39,7 @@ export async function createCall({ agentId }: { agentId: string }): Promise<Call
     .insert({
       user_id: '0c7dae01-2ab6-4f44-8da0-eb903a26069b',
       agent_id: agentId,
+      prospect_id: prospectId,
       conversation: 'Start conversation from front',
       metadata: [],
     })
@@ -41,6 +48,7 @@ export async function createCall({ agentId }: { agentId: string }): Promise<Call
 
   if (error) {
     console.error(error.message);
+    return { error: error.message };
   }
 
   return data ?? [];

@@ -12,10 +12,9 @@ const Header = async () => {
       <div className='px-4'>
         <div className='flex items-center justify-between'>
           <div className='flex shrink-0'>
-            <a className=' flex items-center gap-1'>
+            <Link className=' flex items-center gap-1' href='/'>
               <LogoSvg />
-              <div className='pt-0.5 text-xl font-bold text-[#000000] sm:text-2xl'>InfyGPT</div>
-            </a>
+            </Link>
           </div>
           <div className='hidden md:flex md:items-center md:justify-center md:gap-5' />
           <div className='flex items-center justify-end sm:gap-3'>

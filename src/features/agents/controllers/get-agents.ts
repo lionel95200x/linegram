@@ -58,7 +58,7 @@ export async function updateAgent(id: string, agent: { name?: string; prompt?: s
   const supabase = createSupabaseServerClient();
 
   try {
-    const { data } = await supabase
+    const item = await supabase
       .from('agents')
       .update({
         prompt: agent.prompt,
@@ -67,7 +67,7 @@ export async function updateAgent(id: string, agent: { name?: string; prompt?: s
       })
       .eq('id', id)
       .select();
-    return data ?? [];
+    return { data: item.data };
   } catch (error) {
     console.error(error);
   }

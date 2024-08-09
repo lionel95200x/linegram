@@ -5,9 +5,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
   return (
     <>
       <Header />
-      <main className='relative flex-1'>
-        <div className='relative h-full'>{children}</div>
-      </main>
+      <div className='relative h-full'>{children}</div>
       <Footer />
     </>
   );

@@ -1,5 +1,6 @@
-import { forwardRef, useState, Fragment } from 'react';
+import { forwardRef, Fragment, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
+
 import { Transition } from '@headlessui/react';
 
 type Variant =
@@ -49,7 +50,7 @@ const Alert: AlertComponent = forwardRef(
 
     // Main Colors
     const primary = [
-      'bg-primary border-primary text-white', // Default
+      'bg-theme-1 border-primary text-white', // Default
       'dark:border-primary', // Dark
     ];
     const secondary = [

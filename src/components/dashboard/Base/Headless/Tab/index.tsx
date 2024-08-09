@@ -1,3 +1,4 @@
+'use client';
 import { createContext, Fragment, useContext } from 'react';
 import { twMerge } from 'tailwind-merge';
 
@@ -19,7 +20,7 @@ const listContext = createContext<{
   variant: 'tabs',
 });
 
-function Tab({
+export function Tab({
   children,
   className,
   fullWidth = true,
@@ -57,7 +58,7 @@ function Tab({
   );
 }
 
-Tab.Button = <C extends React.ElementType = 'a'>({
+export const TabButton = <C extends React.ElementType = 'a'>({
   children,
   className,
   as,
@@ -106,7 +107,7 @@ Tab.Button = <C extends React.ElementType = 'a'>({
   );
 };
 
-Tab.Group = ({ children, ...props }: ExtractProps<typeof HeadlessTab.Group>) => {
+export const TabGroup = ({ children, ...props }: ExtractProps<typeof HeadlessTab.Group>) => {
   return (
     <HeadlessTab.Group as='div' {...props}>
       {children}
@@ -114,7 +115,7 @@ Tab.Group = ({ children, ...props }: ExtractProps<typeof HeadlessTab.Group>) => 
   );
 };
 
-Tab.List = ({
+export const TabList = ({
   children,
   className,
   variant = 'tabs',
@@ -143,7 +144,7 @@ Tab.List = ({
   );
 };
 
-Tab.Panels = ({ children, className, ...props }: ExtractProps<typeof HeadlessTab.Panels>) => {
+export const TabPanels = ({ children, className, ...props }: ExtractProps<typeof HeadlessTab.Panels>) => {
   return (
     <HeadlessTab.Panels as='div' className={className} {...props}>
       {children}
@@ -151,7 +152,7 @@ Tab.Panels = ({ children, className, ...props }: ExtractProps<typeof HeadlessTab
   );
 };
 
-Tab.Panel = ({ children, className, ...props }: ExtractProps<typeof HeadlessTab.Panel>) => {
+export const TabPanel = ({ children, className, ...props }: ExtractProps<typeof HeadlessTab.Panel>) => {
   return (
     <HeadlessTab.Panel as={Fragment}>
       {({ selected }) => (

@@ -8,18 +8,17 @@ import ThemeSwitcher from '@/components/dashboard/ThemeSwitcher';
 import { useAppDispatch, useAppSelector } from '@/stores/hooks';
 import { store } from '@/stores/store';
 import { getTheme, selectTheme, setTheme, Themes, themes } from '@/stores/themeSlice';
+import Providers from '@/utils/provider';
 
-import '@/assets/css/app.css';
-
-export default function Layout({ children, user }: { children: React.ReactNode; user: User }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <Provider store={store}>
-      <AccountLayout user={user}>{children}</AccountLayout>
+      <AccountLayout>{children}</AccountLayout>
     </Provider>
   );
 }
 
-function AccountLayout({ children, user }: { children: React.ReactNode; user: User }) {
+function AccountLayout({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();
   const theme = useAppSelector(selectTheme);
   const Component = getTheme(theme).component;
@@ -44,7 +43,9 @@ function AccountLayout({ children, user }: { children: React.ReactNode; user: Us
   return (
     <div>
       <ThemeSwitcher />
-      <Component user={user}>{children}</Component>
+      <Providers>
+        <Component>{children}</Component>
+      </Providers>
     </div>
   );
 }
