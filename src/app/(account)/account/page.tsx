@@ -25,8 +25,6 @@ export default async function AccountPage() {
     }
   }
 
-  console.log({ subscription, userProduct, userPrice });
-
   return (
     <section className='rounded-lg bg-black px-4 py-16'>
       <h1 className='mb-8 text-center'>Account</h1>

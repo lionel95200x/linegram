@@ -1,11 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { signOut } from '@/app/(auth)/auth-actions';
 import { Menu } from '@/components/dashboard/Base/Headless';
 import { toast } from '@/components/ui/use-toast';
 import fakerData from '@/utils/faker';
+import { routes } from '@/utils/route';
 
 import Lucide from '../Base/Lucide';
 
@@ -41,16 +43,16 @@ export default function AccountMenu() {
         </Menu.Header>
         <Menu.Divider className='bg-white/[0.08]' />
         <Menu.Item className='hover:bg-white/5'>
-          <Lucide icon='User' className='mr-2 h-4 w-4' /> Profile
+          <Link href={routes.profile} className='flex items-center'>
+            <Lucide icon='User' className='mr-2 h-4 w-4' /> Profile
+          </Link>
+        </Menu.Item>
+
+        <Menu.Item className='hover:bg-white/5'>
+          <Lucide icon='Lock' className='mr-2 h-4 w-4' /> Reinitialiser le mot de passe
         </Menu.Item>
         <Menu.Item className='hover:bg-white/5'>
-          <Lucide icon='FilePenLine' className='mr-2 h-4 w-4' /> Add Account
-        </Menu.Item>
-        <Menu.Item className='hover:bg-white/5'>
-          <Lucide icon='Lock' className='mr-2 h-4 w-4' /> Reset Password
-        </Menu.Item>
-        <Menu.Item className='hover:bg-white/5'>
-          <Lucide icon='HelpCircle' className='mr-2 h-4 w-4' /> Help
+          <Lucide icon='HelpCircle' className='mr-2 h-4 w-4' /> Aide
         </Menu.Item>
         <Menu.Divider className='bg-white/[0.08]' />
         <Menu.Item className='hover:bg-white/5' onClick={handleLogoutClick}>

@@ -87,34 +87,7 @@ function AgentGridClient({ agents, createAgent }: { agents: Agents[]; createAgen
           </div>
         ))}
         {/* END: Users Layout */}
-        {/* BEGIN: Pagination */}
-        <div className='intro-y col-span-12 flex flex-wrap items-center sm:flex-row sm:flex-nowrap'>
-          <Pagination className='w-full sm:mr-auto sm:w-auto'>
-            <PaginationLink>
-              <Lucide icon='ChevronsLeft' className='h-4 w-4' />
-            </PaginationLink>
-            <PaginationLink>
-              <Lucide icon='ChevronLeft' className='h-4 w-4' />
-            </PaginationLink>
-            <PaginationLink>...</PaginationLink>
-            <PaginationLink>1</PaginationLink>
-            <PaginationLink active>2</PaginationLink>
-            <PaginationLink>3</PaginationLink>
-            <PaginationLink>...</PaginationLink>
-            <PaginationLink>
-              <Lucide icon='ChevronRight' className='h-4 w-4' />
-            </PaginationLink>
-            <PaginationLink>
-              <Lucide icon='ChevronsRight' className='h-4 w-4' />
-            </PaginationLink>
-          </Pagination>
-          <FormSelect className='!box mt-3 w-20 sm:mt-0'>
-            <option>10</option>
-            <option>25</option>
-            <option>35</option>
-            <option>50</option>
-          </FormSelect>
-        </div>
+
         {/* END: Pagination */}
       </div>
       {/* BEGIN: Delete Confirmation Modal */}

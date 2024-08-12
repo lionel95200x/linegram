@@ -22,7 +22,7 @@ export async function PricingSection({ isPricingPage }: { isPricingPage?: boolea
           <p className='mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-gray-300'>
             Choisissez le modele de robot d'appel qui vous convient le mieux
           </p>
-          {products.map((product) => {
+          {products.map((product: any) => {
             return <PricingCard key={product.id} product={product} createCheckoutAction={createCheckoutAction} />;
           })}
           <div className='isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3'>

@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 import { User } from 'elevenlabs/api/resources/user/client/Client';
 import { Provider } from 'react-redux';
@@ -24,11 +24,14 @@ function AccountLayout({ children }: { children: React.ReactNode }) {
   const Component = getTheme(theme).component;
 
   const path = usePathname();
-  const queryParams = new URLSearchParams(path);
+  const queryParams = useMemo(() => new URLSearchParams(path), [path]);
 
-  const switchTheme = (theme: Themes['name']) => {
-    dispatch(setTheme(theme));
-  };
+  const switchTheme = useCallback(
+    (theme: Themes['name']) => {
+      dispatch(setTheme(theme));
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     if (queryParams.get('theme')) {
@@ -38,7 +41,7 @@ function AccountLayout({ children }: { children: React.ReactNode }) {
         switchTheme(selectedTheme.name);
       }
     }
-  }, [queryParams]);
+  }, [queryParams, switchTheme]);
 
   return (
     <div>

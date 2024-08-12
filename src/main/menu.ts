@@ -1,9 +1,11 @@
 import { type Menu } from '@/stores/menuSlice';
+import { routes } from '@/utils/route';
 
 const menu: Array<Menu | 'divider'> = [
   {
     icon: 'Home',
     title: 'Dashboard',
+    pathname: routes.dashboard,
     subMenu: [
       {
         icon: 'Activity',
@@ -11,9 +13,9 @@ const menu: Array<Menu | 'divider'> = [
         title: 'Dashboard',
       },
       {
-        icon: 'Activity',
-        pathname: '/dashboard-overview-2',
-        title: 'Overview 2',
+        icon: 'User',
+        pathname: routes.profile,
+        title: 'Profile',
       },
       {
         icon: 'Activity',
