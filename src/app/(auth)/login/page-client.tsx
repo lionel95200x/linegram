@@ -1,8 +1,8 @@
 'use client';
 
-import clsx from 'clsx';
+import { FormEvent, useState } from 'react';
 import Image from 'next/image';
-import { useState } from 'react';
+import clsx from 'clsx';
 import { IoLogoGoogle } from 'react-icons/io5';
 
 import illustrationUrl from '@/assets/images/illustration.svg';
@@ -21,6 +21,28 @@ function LoginClient({
 }) {
   const [pending, setPending] = useState(false);
 
+  async function handleEmailSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setPending(true);
+    const form = event.target as HTMLFormElement;
+    const email = form['email'].value;
+    const response = await signInWithEmail(email);
+
+    if (response?.error) {
+      toast({
+        variant: 'destructive',
+        description: 'Une erreur est survenue lors de la connexion. Veuillez réessayer.',
+      });
+    } else {
+      toast({
+        description: `Pour continuer, cliquez sur le lien dans l'email envoyé à: ${email}`,
+      });
+    }
+
+    form.reset();
+    setPending(false);
+  }
+
   async function handleOAuthClick(provider: 'google' | 'github') {
     setPending(true);
     const response = await signInWithOAuth(provider);
@@ -28,7 +50,7 @@ function LoginClient({
     if (response?.error) {
       toast({
         variant: 'destructive',
-        description: 'An error occurred while authenticating. Please try again.',
+        description: 'Une erreur est survenue lors de la connexion. Veuillez réessayer.',
       });
       setPending(false);
     }
@@ -65,54 +87,45 @@ function LoginClient({
             {/* BEGIN: Login Form */}
             <div className='my-10 flex h-screen py-5 xl:my-0 xl:h-auto xl:py-0'>
               <div className='mx-auto my-auto w-full rounded-md bg-white px-5 py-8 shadow-md dark:bg-darkmode-600 sm:w-3/4 sm:px-8 lg:w-2/4 xl:ml-20 xl:w-auto xl:bg-transparent xl:p-0 xl:shadow-none'>
-                <h2 className='intro-x text-center text-2xl font-bold xl:text-left xl:text-3xl'>Connexion</h2>
-                <div className='intro-x mt-2 text-center text-slate-400 xl:hidden'>
+                <h2 className='intro-x text-center text-2xl font-bold text-primary xl:text-left xl:text-3xl'>
+                  Connexion
+                </h2>
+                <div className='intro-x mt-2 text-center text-slate-800 xl:hidden'>
                   Créer rapidement et facilement votre Robot d'appel Intelligents
                 </div>
-                <div className='intro-x mt-8'>
-                  <FormInput
-                    type='text'
-                    className='intro-x block min-w-full px-4 py-3 xl:min-w-[350px]'
-                    placeholder='Email'
-                  />
-                  <FormInput
-                    type='password'
-                    className='intro-x mt-4 block min-w-full px-4 py-3 xl:min-w-[350px]'
-                    placeholder='Password'
-                  />
-                </div>
-                <div className='intro-x mt-4 flex text-xs text-slate-600 dark:text-slate-500 sm:text-sm'>
-                  <div className='mr-auto flex items-center'>
-                    <FormCheck.Input id='remember-me' type='checkbox' className='mr-2 border' />
-                    <label className='cursor-pointer select-none' htmlFor='remember-me'>
-                      Se souvenir de moi
-                    </label>
+                <form onSubmit={handleEmailSubmit}>
+                  <div className='intro-x mt-8'>
+                    <FormInput
+                      type='email'
+                      name='email'
+                      className='intro-x block min-w-full px-4 py-3 xl:min-w-[350px]'
+                      placeholder='Email'
+                    />
                   </div>
-                  <a href=''>Mot de passe oublié ?</a>
-                </div>
-                <div className='intro-x mt-5 text-center xl:mt-8 xl:text-left'>
-                  <Button variant='primary' className='w-full px-4 py-3 align-top xl:mr-3 xl:w-32'>
-                    Connexion
-                  </Button>
+                  <div className='intro-x mt-5 text-center xl:mt-8 xl:text-left'>
+                    <Button variant='primary' type='submit' className='w-full px-4 py-3 align-top xl:mr-3 xl:w-32'>
+                      Connexion
+                    </Button>
 
-                  <Button
-                    onClick={() => handleOAuthClick('google')}
-                    disabled={pending}
-                    variant='google'
-                    className='mt-3 w-full px-4 py-3 align-top xl:mt-0 xl:w-32'
-                  >
-                    <IoLogoGoogle size={20} />
-                    Google
-                  </Button>
-                </div>
+                    <Button
+                      onClick={() => handleOAuthClick('google')}
+                      disabled={pending}
+                      variant='google'
+                      className='mt-3 w-full px-4 py-3 align-top xl:mt-0 xl:w-32'
+                    >
+                      <IoLogoGoogle size={20} />
+                      Google
+                    </Button>
+                  </div>
+                </form>
                 <div className='intro-x mt-10 text-center text-slate-600 dark:text-slate-500 xl:mt-24 xl:text-left'>
-                  By signin up, you agree to our{' '}
+                  En vous inscrivant, vous acceptez nos{' '}
                   <a className='text-primary dark:text-slate-200' href=''>
-                    Terms and Conditions
+                    Conditions d'utilisation
                   </a>{' '}
                   &{' '}
                   <a className='text-primary dark:text-slate-200' href=''>
-                    Privacy Policy
+                    Politique de confidentialité
                   </a>
                 </div>
               </div>

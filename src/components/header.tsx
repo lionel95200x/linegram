@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import LogoSvg from '@/assets/svg/logo';
 import { getSession } from '@/features/account/controllers/get-session';
+import { routes } from '@/utils/route';
 
 const Header = async () => {
   const session = await getSession();
@@ -29,7 +30,7 @@ const Header = async () => {
               className='
 undefined inline-flex items-center justify-center gap-2 rounded-xl bg-[#20B2AA] px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-[#168b86] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
             >
-              <Link href={session ? '/dashboard' : '/signup'}>{session ? 'Dashboard' : "S'inscrire"}</Link>
+              <Link href={session ? routes.dashboard : routes.login}>{session ? 'Dashboard' : "S'inscrire"}</Link>
             </button>
           </div>
         </div>

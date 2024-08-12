@@ -28,6 +28,7 @@ export default function AccountMenu() {
       toast({
         description: 'Vous avez bien ete deconnecté.',
       });
+      router.push(routes.home);
     }
   }
 

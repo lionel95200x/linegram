@@ -1,4 +1,7 @@
+import { redirect } from 'next/navigation';
+
 import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
+import { routes } from '@/utils/route';
 
 export async function getUser() {
   const supabase = createSupabaseServerClient();
@@ -20,7 +23,7 @@ export async function getAuthUser() {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    throw new Error('User not found');
+    redirect(routes.home);
   }
 
   return user;

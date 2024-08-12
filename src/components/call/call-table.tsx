@@ -33,7 +33,7 @@ const CallLine = ({ call }: { call: Calls }) => {
       </TableTd>
       <TableTd className='box w-40 whitespace-nowrap rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600'>
         <a href={`${pathname}/call/${call.id}`} className='whitespace-nowrap underline decoration-dotted'>
-          {call.id}
+          {call.id.substring(0, 10)}
         </a>
       </TableTd>
       <TableTd className='box w-40 whitespace-nowrap rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600'>
@@ -99,22 +99,22 @@ export function CallTable({ calls }: { calls: Calls[] }) {
   return (
     <div>
       <h2 className='intro-y mt-10 text-lg font-medium'>Liste d'appel</h2>
+      <div className='flex w-full sm:w-auto'>
+        <div className='relative w-48 text-slate-500'>
+          <FormInput type='text' className='!box w-48 pr-10' placeholder="Recherche dans la liste d'appel..." />
+          <Lucide icon='Search' className='absolute inset-y-0 right-0 my-auto mr-3 h-4 w-4' />
+        </div>
+        <FormSelect className='!box ml-2 w-48'>
+          <option>Status</option>
+          <option>Waiting Payment</option>
+          <option>Confirmed</option>
+          <option>Packing</option>
+          <option>Delivered</option>
+          <option>Completed</option>
+        </FormSelect>
+      </div>
       <div className='mt-5 grid grid-cols-12 gap-6'>
         <div className='intro-y col-span-12 mt-2 flex flex-wrap items-center xl:flex-nowrap'>
-          <div className='flex w-full sm:w-auto'>
-            <div className='relative w-48 text-slate-500'>
-              <FormInput type='text' className='!box w-48 pr-10' placeholder='Search by invoice...' />
-              <Lucide icon='Search' className='absolute inset-y-0 right-0 my-auto mr-3 h-4 w-4' />
-            </div>
-            <FormSelect className='!box ml-2'>
-              <option>Status</option>
-              <option>Waiting Payment</option>
-              <option>Confirmed</option>
-              <option>Packing</option>
-              <option>Delivered</option>
-              <option>Completed</option>
-            </FormSelect>
-          </div>
           <div className='mx-auto hidden text-slate-500 xl:block'>Showing 1 to 10 of 150 entries</div>
           <div className='mt-3 flex w-full items-center xl:mt-0 xl:w-auto'>
             <Button variant='primary' className='mr-2 shadow-md'>
