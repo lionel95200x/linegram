@@ -1,6 +1,6 @@
 'use client';
-import clsx from 'clsx';
 import { useState } from 'react';
+import clsx from 'clsx';
 import Avatar, { genConfig } from 'react-nice-avatar';
 
 import Button from '@/components/dashboard/Base/Button';

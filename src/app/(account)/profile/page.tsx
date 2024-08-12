@@ -1,13 +1,10 @@
 import Image from 'next/image';
 import { LucidePen } from 'lucide-react';
+import Avatar, { genConfig } from 'react-nice-avatar';
 
-import { testCallAction } from '@/actions/agents/testCallAction';
-import { CallTable } from '@/components/call/call-table';
-import ConfigureAgentForm from '@/components/dashboard/Agent/ConfigureAgentForm/ConfigureAgentForm';
 import { Tab, TabButton, TabGroup, TabList, TabPanel, TabPanels } from '@/components/dashboard/Base/Headless';
 import Lucide from '@/components/dashboard/Base/Lucide';
-import Prospects from '@/components/dashboard/Prospects';
-import { Progress } from '@/components/ui/progress';
+import { getUser } from '@/features/account/controllers/get-user';
 import { getAgent, updateAgent } from '@/features/agents/controllers/get-agents';
 import { getCalls } from '@/features/calls/controllers/get-calls';
 import { getVoices } from '@/features/elevenlabs';
@@ -15,7 +12,7 @@ import { getProspect } from '@/features/prospects/prospects';
 import fakerData from '@/utils/faker';
 
 async function AgentPage({ params }: { params: { id: string } }) {
-  const [agent, voices, prospects] = await Promise.all([getAgent(params.id), getVoices(), getProspect(params.id)]);
+  const [agent, user] = await Promise.all([getAgent(params.id), getUser()]);
   const [calls] = await Promise.all([getCalls()]);
 
   async function updateAgentAction(p: { prompt: string; firstSentence: string; name: string }) {
@@ -33,6 +30,7 @@ async function AgentPage({ params }: { params: { id: string } }) {
     return { data: res?.data };
   }
 
+  console.log({ user });
   return (
     <>
       <div className='intro-y mt-8 flex items-center'>
@@ -47,14 +45,15 @@ async function AgentPage({ params }: { params: { id: string } }) {
               </div>
               <div className='ml-5'>
                 <div className='flex items-center'>
-                  <div className='w-24 truncate text-lg font-medium sm:w-40 sm:whitespace-normal'>{agent.name}</div>
+                  <div className='w-24 truncate text-lg font-medium sm:w-40 sm:whitespace-normal'>
+                    {user.full_name ?? 'No name'}
+                  </div>
                   <LucidePen />
                 </div>
-                <div className='text-slate-500'>{fakerData[0].jobs[0]}</div>
               </div>
             </div>
             <div className='mt-6 flex-1 border-l border-r border-t border-slate-200/60 px-5 pt-5 dark:border-darkmode-400 lg:mt-0 lg:border-t-0 lg:pt-0'>
-              <div className='text-center font-medium lg:mt-3 lg:text-left'>Etape de configuration</div>
+              <div className='text-center font-medium lg:mt-3 lg:text-left'>Informations principal</div>
               <div className='mt-4 flex flex-col items-center justify-center lg:items-start'>
                 <div className='mt-3 flex items-center truncate sm:whitespace-normal'>
                   <Lucide icon='Mail' className='mr-2 h-4 w-4' />

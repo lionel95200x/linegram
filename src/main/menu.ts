@@ -5,11 +5,10 @@ const menu: Array<Menu | 'divider'> = [
   {
     icon: 'Home',
     title: 'Dashboard',
-    pathname: routes.dashboard,
     subMenu: [
       {
-        icon: 'Activity',
-        pathname: '/dashboard',
+        icon: 'Home',
+        pathname: routes.dashboard,
         title: 'Dashboard',
       },
       {
