@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 import { testCallAction } from '@/actions/agents/testCallAction';
-import { toast } from '@/components/ui/use-toast';
 import { useMutation } from '@tanstack/react-query';
 
 export const useCreateCall = () => {
@@ -15,24 +15,13 @@ export const useCreateCall = () => {
     onSuccess: (payload) => {
       console.log({ payload });
       if (payload?.error) {
-        toast({
-          variant: 'destructive',
-          title: 'Erreur de mise à jour',
-          description: payload.error,
-        });
+        toast.error('Erreur de mise à jour');
       } else {
-        toast({
-          title: 'Appel declenché avec succes',
-          description: "Vous pourrez retrouvrez la retranscription ainsi que l'audio de l'appel",
-        });
+        toast.success('Appel declenché avec succes');
       }
     },
     onError: (error) => {
-      toast({
-        variant: 'destructive',
-        title: "Erreur lors du déclenchement de l'appel",
-        description: error.message,
-      });
+      toast.error("Erreur lors du déclenchement de l'appel");
     },
   });
 };

@@ -1,15 +1,12 @@
 'use client';
-import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import _ from 'lodash';
+import { useState } from 'react';
 
 import phoneAgent from '@/assets/images/dashboard/phone-agent.png';
 import Button from '@/components/dashboard/Base/Button';
-import { FormInput, FormSelect } from '@/components/dashboard/Base/Form';
-import { Menu } from '@/components/dashboard/Base/Headless';
+import { FormInput } from '@/components/dashboard/Base/Form';
 import Lucide from '@/components/dashboard/Base/Lucide';
-import Pagination, { PaginationLink } from '@/components/dashboard/Base/Pagination';
 import { Agents } from '@/features/pricing/types';
 
 import CreateAgentModal from '../CreateAgentModal';
@@ -19,10 +16,17 @@ function AgentGridClient({ agents, createAgent }: { agents: Agents[]; createAgen
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [deleteConfirmationModal, setDeleteConfirmationModal] = useState(false);
 
+  const [searchAgent, setSearchAgent] = useState('');
   const onSave = (name: string) => {
     createAgent(name);
     setIsCreateModalOpen(false);
   };
+
+  const filteredAgent = agents.filter(
+    (agent) =>
+      agent.name?.toLowerCase().includes(searchAgent.toLowerCase()) ||
+      agent.first_sentence?.toLowerCase().includes(searchAgent.toLowerCase())
+  );
 
   return (
     <>
@@ -33,16 +37,22 @@ function AgentGridClient({ agents, createAgent }: { agents: Agents[]; createAgen
             Créer un nouvel agent
           </Button>
           <CreateAgentModal open={isCreateModalOpen} onClose={() => setIsCreateModalOpen(false)} onSave={onSave} />
-          <div className='mx-auto hidden text-slate-500 md:block'>Mes agents ({agents.length})</div>
+          <div className='mx-auto hidden text-slate-500 md:block'>Mes agents ({filteredAgent.length})</div>
           <div className='mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0'>
             <div className='relative w-56 text-slate-500'>
-              <FormInput type='text' className='!box w-56 pr-10' placeholder='Recherche...' />
+              <FormInput
+                value={searchAgent}
+                type='text'
+                className='!box w-56 pr-10'
+                placeholder='Recherche...'
+                onChange={(e) => setSearchAgent(e.target.value)}
+              />
               <Lucide icon='Search' className='absolute inset-y-0 right-0 my-auto mr-3 h-4 w-4' />
             </div>
           </div>
         </div>
         {/* BEGIN: Users Layout */}
-        {agents.map((agent, fakerKey) => (
+        {filteredAgent.map((agent, fakerKey) => (
           <div key={fakerKey} className='intro-y col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3'>
             <div className='box'>
               <div className='p-5'>

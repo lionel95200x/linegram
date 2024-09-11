@@ -1,4 +1,5 @@
-import { toast } from '@/components/ui/use-toast';
+import { toast } from 'sonner';
+
 import { Prospects } from '@/features/pricing/types';
 import { createProspect, getProspect, updateProspect } from '@/features/prospects/prospects';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -20,16 +21,11 @@ export const useCreateProspect = ({ agentId }: { agentId: string }) => {
       createProspect(data, agentId),
     mutationKey: ['createProspect'],
     onSuccess: () => {
-      toast({
-        title: 'Prospect created',
-        description: 'Prospect has been created',
-      });
+      toast.success('Prospect créé avec succès');
       refetch();
     },
     onError: () => {
-      toast({
-        title: 'Erreur de création',
-      });
+      toast.error('Erreur de création');
     },
   });
 };
@@ -49,16 +45,9 @@ export const useUpdateProspect = ({ agentId }: { agentId: string }) => {
     mutationKey: ['updateProspect'],
     onSuccess: (payload) => {
       if (payload.error) {
-        toast({
-          variant: 'destructive',
-          title: 'Erreur de mise à jour',
-          description: payload.error,
-        });
+        toast.error('Erreur de mise à jour');
       } else {
-        toast({
-          title: 'Prospect mis à jour',
-          description: 'Votre prospect a été mis à jour correctement',
-        });
+        toast.success('Prospect mis à jour avec succès');
         refetch();
       }
     },

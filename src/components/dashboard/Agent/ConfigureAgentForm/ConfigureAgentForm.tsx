@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 import PromotionBanner from '@/components/dashboard/Agent/PromotionBanner/PromotionBanner';
@@ -10,10 +11,10 @@ import Button from '@/components/dashboard/Base/Button';
 import { FormCheck, FormHelp, FormInline, FormInput, FormLabel, FormSwitch } from '@/components/dashboard/Base/Form';
 import Lucide from '@/components/dashboard/Base/Lucide';
 import { Textarea } from '@/components/ui/textarea';
-import { toast } from '@/components/ui/use-toast';
 import { Agents } from '@/features/pricing/types';
 import { DEFAULT_TEMPLATE } from '@/utils/defaultPrompt';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 
 const schema = z.object({
   name: z.string().min(1, { message: 'Requis' }),
@@ -24,29 +25,20 @@ const schema = z.object({
 const ConfigureAgentForm = ({ agent, onSave, onTestCall }: { agent: Agents; onSave: any; onTestCall: any }) => {
   const [selectedTemplate, setSelectedTemplate] = useState(DEFAULT_TEMPLATE[0]);
 
-  const handleSave = async (p: any) => {
-    const { data, error } = await onSave(p);
-
-    if (data) {
-      toast({
-        title: 'Agent updated successfully!',
-        description: 'Your agent has been updated successfully!',
-      });
-    } else if (error) {
-      toast({
-        title: 'Failed to update agent.',
-        description: 'Failed to update agent.',
-      });
-    }
-  };
+  const { mutate: updateAgent } = useMutation({
+    mutationFn: (p: any) => onSave(p),
+    onSuccess: () => {
+      toast.success('Agent updated successfully!');
+    },
+    onError: () => {
+      toast.error('Failed to update agent.');
+    },
+  });
 
   const handleTestCall = async () => {
     await onTestCall(agent.id);
 
-    toast({
-      title: 'Apple lancé avec succes!',
-      description: 'Vous allez recevoir un appel prochainement !',
-    });
+    toast.success('Apple lancé avec succes!');
   };
 
   const defaultValues = {
@@ -68,7 +60,7 @@ const ConfigureAgentForm = ({ agent, onSave, onTestCall }: { agent: Agents; onSa
     <div className='mt-5 grid grid-cols-11 gap-x-6 pb-20'>
       <PromotionBanner />
 
-      <form className='intro-y col-span-11 2xl:col-span-9' onSubmit={handleSubmit(handleSave)}>
+      <form className='intro-y col-span-11 2xl:col-span-9' onSubmit={handleSubmit(updateAgent)}>
         <div className='intro-y col-span-12 mt-2 flex flex-wrap items-center justify-end sm:flex-nowrap'>
           <Button disabled={!isDirty} variant='primary' className='mr-2 shadow-md' type='submit'>
             Sauvegarder

@@ -3,8 +3,14 @@ import Link from 'next/link';
 
 import errorIllustration from '@/assets/images/error-illustration.svg';
 import Button from '@/components/dashboard/Base/Button';
+import { getSession } from '@/features/account/controllers/get-session';
+import { routes } from '@/utils/route';
 
-function Main() {
+async function Main() {
+  const [session] = await Promise.all([getSession()]);
+
+  const redirect = session ? routes.dashboard : routes.home;
+
   return (
     <>
       <div className='bg-gradient-to-b from-theme-1 to-theme-2 py-2 dark:from-darkmode-800 dark:to-darkmode-800'>
@@ -21,7 +27,7 @@ function Main() {
                 Vous avez peut-être tapé l'adresse ou la page a peut-être été déplacée.
               </div>
               <Button className='intro-x mt-10 border-white px-4 py-3 text-white dark:border-darkmode-400 dark:text-slate-200'>
-                <Link href='/'>Retour à l'accueil</Link>
+                <Link href={redirect}>Retour à l'accueil</Link>
               </Button>
             </div>
           </div>

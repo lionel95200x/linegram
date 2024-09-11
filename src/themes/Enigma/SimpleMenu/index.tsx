@@ -13,7 +13,7 @@ import { enter, FormattedMenu, leave, linkTo, nestedMenu } from './simple-menu';
 
 import '@/assets/css/themes/enigma/side-nav.css';
 
-function Main({ children }: { children: React.ReactNode }) {
+function Main({ children, params }: { children: React.ReactNode; params: { id: string } }) {
   const pathname = usePathname();
   const [formattedMenu, setFormattedMenu] = useState<Array<FormattedMenu | 'divider'>>([]);
   const menuStore = () => nestedMenu(menu, { pathname });

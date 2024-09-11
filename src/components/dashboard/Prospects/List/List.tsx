@@ -2,13 +2,13 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 import Avatar, { genConfig } from 'react-nice-avatar';
+import { toast } from 'sonner';
 
 import Button from '@/components/dashboard/Base/Button';
 import { FormSelect } from '@/components/dashboard/Base/Form';
 import Lucide from '@/components/dashboard/Base/Lucide';
 import Pagination, { PaginationLink } from '@/components/dashboard/Base/Pagination';
 import Table, { TableBody, TableTd, TableTh, TableThead, TableTr } from '@/components/dashboard/Base/Table';
-import { toast } from '@/components/ui/use-toast';
 import { Prospects } from '@/features/pricing/types';
 import { useCreateCall } from '@/hooks/calls/useCalls';
 import { useCreateProspect, useUpdateProspect } from '@/hooks/prospects/useProspects';
@@ -38,10 +38,7 @@ export const List = ({ prospects, agentId }: { prospects: Prospects[]; agentId: 
 
   const onCall = (prospect: Prospects) => {
     createCall({ agentId, prospectId: prospect.id });
-    toast({
-      title: 'Appel declenché avec succes',
-      description: "Vous pourrez retrouvrez la retranscription ainsi que l'audio de l'appel",
-    });
+    toast.success('Appel declenché avec succes');
   };
 
   const onClickModify = (prospect: Prospects) => {
@@ -83,11 +80,11 @@ export const List = ({ prospects, agentId }: { prospects: Prospects[]; agentId: 
         <div className='mt-3 flex items-center sm:ml-auto sm:mt-0'>
           <Button className='!box flex items-center text-slate-600 dark:text-slate-300'>
             <Lucide icon='FileText' className='mr-2 hidden h-4 w-4 sm:block' />
-            Import Excel
+            Import CSV
           </Button>
           <Button className='!box ml-3 flex items-center text-slate-600 dark:text-slate-300'>
             <Lucide icon='FileText' className='mr-2 hidden h-4 w-4 sm:block' />
-            Export Excel
+            Export CSV
           </Button>
           <Button
             variant='primary'

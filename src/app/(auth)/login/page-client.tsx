@@ -4,12 +4,12 @@ import { FormEvent, useState } from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { IoLogoGoogle } from 'react-icons/io5';
+import { toast } from 'sonner';
 
 import illustrationUrl from '@/assets/images/illustration.svg';
 import logoUrl from '@/assets/images/logo.svg';
 import Button from '@/components/dashboard/Base/Button';
-import { FormCheck, FormInput } from '@/components/dashboard/Base/Form';
-import { toast } from '@/components/ui/use-toast';
+import { FormInput } from '@/components/dashboard/Base/Form';
 import { ActionResponse } from '@/types/action-response';
 
 function LoginClient({
@@ -29,14 +29,9 @@ function LoginClient({
     const response = await signInWithEmail(email);
 
     if (response?.error) {
-      toast({
-        variant: 'destructive',
-        description: 'Une erreur est survenue lors de la connexion. Veuillez réessayer.',
-      });
+      toast.error('Une erreur est survenue lors de la connexion. Veuillez réessayer.');
     } else {
-      toast({
-        description: `Pour continuer, cliquez sur le lien dans l'email envoyé à: ${email}`,
-      });
+      toast.success(`Pour continuer, cliquez sur le lien dans l'email envoyé à: ${email}`);
     }
 
     form.reset();
@@ -48,10 +43,7 @@ function LoginClient({
     const response = await signInWithOAuth(provider);
 
     if (response?.error) {
-      toast({
-        variant: 'destructive',
-        description: 'Une erreur est survenue lors de la connexion. Veuillez réessayer.',
-      });
+      toast.error('Une erreur est survenue lors de la connexion. Veuillez réessayer.');
       setPending(false);
     }
   }

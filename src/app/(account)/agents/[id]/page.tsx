@@ -14,6 +14,8 @@ import { getVoices } from '@/features/elevenlabs';
 import { getProspect } from '@/features/prospects/prospects';
 import fakerData from '@/utils/faker';
 
+const DEFAULT_TAB = 2;
+
 async function AgentPage({ params }: { params: { id: string } }) {
   const [agent, voices, prospects] = await Promise.all([getAgent(params.id), getVoices(), getProspect(params.id)]);
   const [calls] = await Promise.all([getCalls()]);
@@ -30,6 +32,8 @@ async function AgentPage({ params }: { params: { id: string } }) {
       firstSentence,
       name,
     });
+
+    console.log({ res });
     return { data: res?.data };
   }
 
@@ -38,7 +42,7 @@ async function AgentPage({ params }: { params: { id: string } }) {
       <div className='intro-y mt-8 flex items-center'>
         <h2 className='mr-auto text-lg font-medium'>Configuration de mon agent</h2>
       </div>
-      <TabGroup defaultIndex={1}>
+      <TabGroup defaultIndex={DEFAULT_TAB}>
         <div className='intro-y box mt-5 px-5 pt-5'>
           <div className='-mx-5 flex flex-col border-b border-slate-200/60 pb-5 dark:border-darkmode-400 lg:flex-row'>
             <div className='flex flex-1 items-center justify-center px-5 lg:justify-start'>
