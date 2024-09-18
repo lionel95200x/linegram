@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const SvgComponent = (props: any) => (
+const LogoTsx = (props: any) => (
   <svg xmlns='http://www.w3.org/2000/svg' id='Calque_2' width={180} height={50} viewBox='0 0 1514.65 341.47' {...props}>
     <defs>
       <style>{'.cls-1{fill:#54c4f0}.cls-2{fill:#272f65}'}</style>
@@ -31,4 +31,4 @@ const SvgComponent = (props: any) => (
     </g>
   </svg>
 );
-export default SvgComponent;
+export default LogoTsx;

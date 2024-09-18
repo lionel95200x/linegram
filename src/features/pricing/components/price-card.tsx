@@ -44,6 +44,7 @@ export function PricingCard({
   const monthPrice = product.prices.find((price) => price.interval === 'month')?.unit_amount;
   const yearPrice = product.prices.find((price) => price.interval === 'year')?.unit_amount;
   const isBillingIntervalYearly = billingInterval === 'year';
+  console.log({ product });
   const metadata = productMetadataSchema.parse(product.metadata);
   const buttonVariantMap = {
     basic: 'default',
@@ -57,10 +58,10 @@ export function PricingCard({
 
   return (
     <WithSexyBorder variant={metadata.priceCardVariant} className='w-full flex-1'>
-      <div className='flex w-full flex-col rounded-md border border-zinc-800 bg-black p-4 lg:p-8'>
+      <div className='flex w-full flex-col rounded-md border border-zinc-800 p-4 text-black lg:p-8'>
         <div className='p-4'>
-          <div className='mb-1 text-center font-alt text-xl font-bold'>{product.name}</div>
-          <div className='flex justify-center gap-0.5 text-zinc-400'>
+          <div className='font-alt mb-1 text-center text-xl font-bold'>{product.name}</div>
+          <div className='flex justify-center gap-0.5 text-red-400'>
             <span className='font-semibold'>
               {yearPrice && isBillingIntervalYearly
                 ? '$' + yearPrice / 100
@@ -91,7 +92,7 @@ export function PricingCard({
                 className='w-full'
                 onClick={() => createCheckoutAction({ price: currentPrice })}
               >
-                Get Started
+                Commandez
               </Button>
             )}
             {!currentPrice && (

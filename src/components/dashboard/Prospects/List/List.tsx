@@ -16,6 +16,9 @@ import { useCreateProspect, useUpdateProspect } from '@/hooks/prospects/useProsp
 import { Menu } from '../../Base/Headless';
 import CreateEditProspectModal from '../Modal/CreateEditProspectModal';
 import { ProspectFormValues } from '../ProspectForm/ProspectForm.utils';
+import Link from 'next/link';
+import { routes } from '@/utils/route';
+import { usePathname } from 'next/navigation';
 
 export const List = ({ prospects, agentId }: { prospects: Prospects[]; agentId: string }) => {
   const [showCreateProspectModal, setShowCreateProspectModal] = useState(false);
@@ -24,6 +27,7 @@ export const List = ({ prospects, agentId }: { prospects: Prospects[]; agentId: 
   const { mutate: updateProspectClient } = useUpdateProspect({ agentId });
   const { mutate: createCall } = useCreateCall();
   const [selectedProspect, setSelectedProspect] = useState<Prospects>();
+  const pathname = usePathname();
 
   const onSubmit = (data: ProspectFormValues) => {
     createProspectClient(data);
@@ -114,9 +118,12 @@ export const List = ({ prospects, agentId }: { prospects: Prospects[]; agentId: 
                   <Avatar className='h-16 w-16' {...genConfig(`${p.firstName || p.lastName || p.phone}`)} />
                 </TableTd>
                 <TableTd className='box rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600'>
-                  <a href='' className='whitespace-nowrap font-medium'>
+                  <Link
+                    href={`${pathname}${routes.prospect_detail.replace(':id', p.id)}`}
+                    className='whitespace-nowrap font-medium'
+                  >
                     {p.firstName} {p.lastName}
-                  </a>
+                  </Link>
                   <div className='mt-0.5 whitespace-nowrap text-xs text-slate-500'>{p.lastName}</div>
                 </TableTd>
                 <TableTd className='box rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600'>

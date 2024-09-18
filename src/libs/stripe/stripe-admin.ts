@@ -1,14 +1,16 @@
 import Stripe from 'stripe';
 
-import { getEnvVar } from '@/utils/get-env-var';
+const KEY =
+  'sk_test_51Niwg4DEnDdPYtpAi2aDy5luTxnMGEVInPTs3fFzrHV1QPM6YgHmllL7VOS9Kr8Wn4zf62UpWE5f6B8aURzWshP100OrVpiNhz'; // getEnvVar(process.env.STRIPE_SECRET_KEY, 'STRIPE_SECRET_KEY');
+console.log({ KEY });
 
-export const stripeAdmin = new Stripe(getEnvVar(process.env.STRIPE_SECRET_KEY, 'STRIPE_SECRET_KEY'), {
+export const stripeAdmin = new Stripe(KEY, {
   // https://github.com/stripe/stripe-node#configuration
   apiVersion: '2023-10-16',
   // Register this as an official Stripe plugin.
   // https://stripe.com/docs/building-plugins#setappinfo
   appInfo: {
-    name: 'UPDATE_THIS_WITH_YOUR_STRIPE_APP_NAME',
+    name: 'Orion AI',
     version: '0.1.0',
   },
 });

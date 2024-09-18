@@ -47,7 +47,7 @@ function Main() {
               <FormInput
                 type='text'
                 className='w-56 rounded-full border-transparent bg-slate-200 pr-8 shadow-none transition-[width] duration-300 ease-in-out focus:w-72 focus:border-transparent dark:bg-darkmode-400/70'
-                placeholder='Search...'
+                placeholder='Recherche...'
                 onFocus={showSearchDropdown}
                 onBlur={hideSearchDropdown}
               />

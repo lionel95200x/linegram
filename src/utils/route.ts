@@ -5,4 +5,5 @@ export const routes = {
   dashboard: '/dashboard',
   agents: '/agents',
   profile: '/profile',
+  prospect_detail: '/prospect/:id',
 };

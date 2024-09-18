@@ -58,6 +58,7 @@ export type Database = {
           created: string
           id: string
           metadata: Json | null
+          prospect_id: string | null
           user_id: string
         }
         Insert: {
@@ -67,6 +68,7 @@ export type Database = {
           created?: string
           id?: string
           metadata?: Json | null
+          prospect_id?: string | null
           user_id: string
         }
         Update: {
@@ -76,6 +78,7 @@ export type Database = {
           created?: string
           id?: string
           metadata?: Json | null
+          prospect_id?: string | null
           user_id?: string
         }
         Relationships: [
@@ -84,6 +87,13 @@ export type Database = {
             columns: ["agent_id"]
             isOneToOne: false
             referencedRelation: "agents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "calls_prospect_id_fkey"
+            columns: ["prospect_id"]
+            isOneToOne: false
+            referencedRelation: "prospects"
             referencedColumns: ["id"]
           },
           {
@@ -200,31 +210,34 @@ export type Database = {
           agent_id: string | null
           call_id: string | null
           created_at: string
+          email: string | null
           extraInfo: string | null
           firstName: string | null
           id: string
           lastName: string | null
-          phone: string | null
+          phone: string
         }
         Insert: {
           agent_id?: string | null
           call_id?: string | null
           created_at?: string
+          email?: string | null
           extraInfo?: string | null
           firstName?: string | null
           id?: string
           lastName?: string | null
-          phone?: string | null
+          phone: string
         }
         Update: {
           agent_id?: string | null
           call_id?: string | null
           created_at?: string
+          email?: string | null
           extraInfo?: string | null
           firstName?: string | null
           id?: string
           lastName?: string | null
-          phone?: string | null
+          phone?: string
         }
         Relationships: [
           {

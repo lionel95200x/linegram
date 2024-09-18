@@ -10,15 +10,17 @@ const InfoCard = ({
   value,
   percentage,
   percentageText,
+  isBox = true,
 }: {
   icon: keyof typeof icons;
   title: string;
   value: number;
   percentage?: number;
   percentageText?: string;
+  isBox?: boolean;
 }) => {
   return (
-    <div className='box p-5'>
+    <div className={`${isBox && 'box'} p-5`}>
       <div className='flex'>
         <Lucide icon={icon} className='h-[28px] w-[28px] text-primary' />
         <div className='ml-auto'>

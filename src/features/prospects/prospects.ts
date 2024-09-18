@@ -1,7 +1,9 @@
 'use server';
-import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 
+import { getBaseQuery } from '../common';
 import { Prospects } from '../pricing/types';
+
+const getBaseProspectQuery = () => getBaseQuery().from('prospects');
 
 export async function createProspect(
   prospect: {
@@ -13,11 +15,8 @@ export async function createProspect(
   },
   agent_id: string
 ) {
-  const supabase = createSupabaseServerClient();
-
   try {
-    const { data, error } = await supabase
-      .from('prospects')
+    const { data, error } = await getBaseProspectQuery()
       .upsert({
         ...prospect,
         agent_id,
@@ -45,11 +44,8 @@ export async function updateProspect(
   agent_id: string,
   prospect_id: string
 ) {
-  const supabase = createSupabaseServerClient();
-
   try {
-    const { data, error } = await supabase
-      .from('prospects')
+    const { data, error } = await getBaseProspectQuery()
       .update({
         firstName: prospect.firstName,
         lastName: prospect.lastName,
@@ -71,10 +67,18 @@ export async function updateProspect(
   }
 }
 
-export async function getProspect(agent_id: string): Promise<Prospects[]> {
-  const supabase = createSupabaseServerClient();
+export async function getProspectByAgentId(agent_id: string): Promise<Prospects[]> {
+  const { data, error } = await getBaseProspectQuery().select('*').eq('agent_id', agent_id);
 
-  const { data, error } = await supabase.from('prospects').select('*').eq('agent_id', agent_id);
+  if (error) {
+    console.error(error.message);
+  }
+
+  return data ?? [];
+}
+
+export async function getProspect(id: string): Promise<Prospects> {
+  const { data, error } = await getBaseProspectQuery().select('*').eq('id', id).single();
 
   if (error) {
     console.error(error.message);

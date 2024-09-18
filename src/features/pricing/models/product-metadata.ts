@@ -6,8 +6,8 @@ export const productMetadataSchema = z
   .object({
     price_card_variant: priceCardVariantSchema,
     generated_images: z.string().optional(),
-    image_editor: z.enum(['basic', 'pro']),
-    support_level: z.enum(['email', 'live']),
+    image_editor: z.enum(['basic', 'pro']).optional(),
+    support_level: z.enum(['email', 'live']).optional(),
   })
   .transform((data) => ({
     priceCardVariant: data.price_card_variant,

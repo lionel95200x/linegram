@@ -19,12 +19,16 @@ import { FormCheck, FormInput, FormSelect } from '../dashboard/Base/Form';
 import { Menu } from '../dashboard/Base/Headless';
 import Lucide from '../dashboard/Base/Lucide';
 import { TableTd, TableTh, TableThead, TableTr } from '../dashboard/Base/Table';
+import Link from 'next/link';
+import { routes } from '@/utils/route';
+import { getFirstSentence, Metadata } from '@/utils/call/call';
+import EmptyTable from '../dashboard/Table/EmptyTable';
 
 const CallLine = ({ call }: { call: Calls }) => {
   const pathname = usePathname();
 
-  const metadata = call.metadata as { type: string; text: string; createdAt: string }[];
-  const findFirstSentenceOfUser = metadata.find((m) => m.type === 'Interaction 0 – STT -> GPT');
+  const metadata = call.metadata as Metadata[];
+  const findFirstSentenceOfUser = getFirstSentence(metadata);
 
   return (
     <TableTr key={call.id} className='intro-x'>
@@ -32,9 +36,12 @@ const CallLine = ({ call }: { call: Calls }) => {
         <FormCheck.Input type='checkbox' />
       </TableTd>
       <TableTd className='box w-40 whitespace-nowrap rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600'>
-        <a href={`${pathname}/call/${call.id}`} className='whitespace-nowrap underline decoration-dotted'>
+        <Link
+          href={`${pathname}${routes.prospect_detail.replace(':id', call.prospect_id)}`}
+          className='whitespace-nowrap underline decoration-dotted'
+        >
           {call.id.substring(0, 10)}
-        </a>
+        </Link>
       </TableTd>
       <TableTd className='box w-40 whitespace-nowrap rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600'>
         <a href='' className='whitespace-nowrap font-medium'>
@@ -115,7 +122,7 @@ export function CallTable({ calls }: { calls: Calls[] }) {
       </div>
       <div className='mt-5 grid grid-cols-12 gap-6'>
         <div className='intro-y col-span-12 mt-2 flex flex-wrap items-center xl:flex-nowrap'>
-          <div className='mx-auto hidden text-slate-500 xl:block'>Showing 1 to 10 of 150 entries</div>
+          <div className='mx-auto hidden text-slate-500 xl:block'>Affichage de {calls.length} appel</div>
           <div className='mt-3 flex w-full items-center xl:mt-0 xl:w-auto'>
             <Button variant='primary' className='mr-2 shadow-md'>
               <Lucide icon='FileText' className='mr-2 h-4 w-4' /> Export to PDF
@@ -148,20 +155,22 @@ export function CallTable({ calls }: { calls: Calls[] }) {
                 <TableTh className='whitespace-nowrap border-b-0'>
                   <FormCheck.Input type='checkbox' />
                 </TableTh>
-                <TableTh className='whitespace-nowrap border-b-0'>INVOICE</TableTh>
+                <TableTh className='whitespace-nowrap border-b-0'>Identifiant</TableTh>
                 <TableTh className='whitespace-nowrap border-b-0'>BUYER NAME</TableTh>
                 <TableTh className='whitespace-nowrap border-b-0 text-center'>STATUS</TableTh>
-                <TableTh className='whitespace-nowrap border-b-0'>PAYMENT</TableTh>
+                <TableTh className='whitespace-nowrap border-b-0'>Phrase du prospect</TableTh>
                 <TableTh className='whitespace-nowrap border-b-0 text-right'>
-                  <div className='pr-16'>TOTAL TRANSACTION</div>
+                  <div className='pr-16'>Date d'appel</div>
                 </TableTh>
                 <TableTh className='whitespace-nowrap border-b-0 text-center'>ACTIONS</TableTh>
               </TableTr>
             </TableThead>
             <TableBody>
-              {calls.map((call) => (
-                <CallLine key={call.id} call={call} />
-              ))}
+              {calls.length ? (
+                calls.map((call) => <CallLine key={call.id} call={call} />)
+              ) : (
+                <EmptyTable text="Cet agent n'as pas encore passé d'appel" />
+              )}
             </TableBody>
           </Table>
         </div>

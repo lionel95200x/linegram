@@ -19,7 +19,7 @@ const menu: Array<Menu | 'divider'> = [
       {
         icon: 'Activity',
         pathname: '/dashboard-overview-3',
-        title: 'Overview 3',
+        title: 'Mes prospects',
       },
       {
         icon: 'Activity',
@@ -93,12 +93,12 @@ const menu: Array<Menu | 'divider'> = [
           },
         ],
       },
-      {
-        icon: 'Activity',
-        pathname: '/reviews',
-        title: 'Reviews',
-      },
     ],
+  },
+  {
+    icon: 'User',
+    title: 'Mon profil',
+    pathname: routes.profile,
   },
 ];
 

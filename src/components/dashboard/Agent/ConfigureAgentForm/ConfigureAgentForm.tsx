@@ -51,10 +51,13 @@ const ConfigureAgentForm = ({ agent, onSave, onTestCall }: { agent: Agents; onSa
     register,
     handleSubmit,
     formState: { errors, isDirty },
+    getValues,
   } = useForm({
     defaultValues,
     resolver: zodResolver(schema),
   });
+
+  const prompt = getValues('prompt');
 
   return (
     <div className='mt-5 grid grid-cols-11 gap-x-6 pb-20'>
@@ -131,43 +134,41 @@ const ConfigureAgentForm = ({ agent, onSave, onTestCall }: { agent: Agents; onSa
                 </div>
                 {errors.firstSentence && <div className='mt-2 text-danger'>Veuillez renseignez la premiere phrase</div>}
               </FormInline>
-              <FormInline className='mt-5 flex-col items-start pt-5 first:mt-0 first:pt-0 xl:flex-row'>
-                <FormLabel className='xl:!mr-10 xl:w-64'>
-                  <div className='text-left'>
-                    <div className='flex items-center'>
-                      <div className='font-medium'>Instructions de l'agent</div>
-                      <div className='ml-2 rounded-md bg-slate-200 px-2 py-0.5 text-xs text-slate-600 dark:bg-darkmode-300 dark:text-slate-400'>
-                        Requis
-                      </div>
-                    </div>
-                    <div className='mt-3 text-xs leading-relaxed text-slate-500'>
-                      <div>
-                        Essayez d'etre le plus descriptif possible dans le détail de votre agent, de quel facon il doit
-                        répondre au question
-                      </div>
+              <FormLabel className='xl:!mr-10 xl:w-64'>
+                <div className='text-left'>
+                  <div className='flex items-center'>
+                    <div className='font-medium'>Instructions de l'agent</div>
+                    <div className='ml-2 rounded-md bg-slate-200 px-2 py-0.5 text-xs text-slate-600 dark:bg-darkmode-300 dark:text-slate-400'>
+                      Requis
                     </div>
                   </div>
-                </FormLabel>
-                <div className='mt-5 grid grid-cols-12 gap-5'>
-                  {DEFAULT_TEMPLATE.map((template) => (
-                    <div
-                      key={template}
-                      className={`box zoom-in col-span-12 cursor-pointer p-3 text-center sm:col-span-4 2xl:col-span-3 ${
-                        selectedTemplate === template ? 'bg-primary' : ''
-                      }`}
-                      onClick={() => setSelectedTemplate(template)}
-                    >
-                      <div className={selectedTemplate === template ? 'text-white' : 'text-slate-500'}>{template}</div>
+                  <div className='mt-3 text-xs leading-relaxed text-slate-500'>
+                    <div>
+                      Essayez d'etre le plus descriptif possible dans le détail de votre agent, de quel facon il doit
+                      répondre au question
                     </div>
-                  ))}
+                  </div>
                 </div>
+              </FormLabel>
+              <div className='mt-5 grid grid-cols-12 gap-5'>
+                {DEFAULT_TEMPLATE.map((template) => (
+                  <div
+                    key={template}
+                    className={`box zoom-in col-span-12 my-3 cursor-pointer p-3 text-center sm:col-span-4 2xl:col-span-3 ${
+                      selectedTemplate === template ? 'bg-primary' : ''
+                    }`}
+                    onClick={() => setSelectedTemplate(template)}
+                  >
+                    <div className={selectedTemplate === template ? 'text-white' : 'text-slate-500'}>{template}</div>
+                  </div>
+                ))}
+              </div>
 
-                <div className='mt-3 w-full flex-1 xl:mt-0'>
-                  <Textarea {...register('prompt')} />
-                  <FormHelp className='text-right'>Nombre max de caracteres 0/2000</FormHelp>
-                </div>
-                {errors.prompt && <div className='mt-2 text-danger'>Veuillez renseignez les instructions</div>}
-              </FormInline>
+              <div className='my-3 w-full flex-1 xl:mt-0'>
+                <Textarea {...register('prompt')} />
+                <FormHelp className='text-right'>Nombre max de caracteres {prompt?.length || 0}/2000</FormHelp>
+              </div>
+              {errors.prompt && <div className='mt-2 text-danger'>Veuillez renseignez les instructions</div>}
             </div>
           </div>
         </div>
@@ -277,39 +278,26 @@ const ConfigureAgentForm = ({ agent, onSave, onTestCall }: { agent: Agents; onSa
         <div className='sticky top-0 pt-10'>
           <ul className="relative text-slate-500 before:absolute before:left-0 before:z-[-1] before:h-full before:w-[2px] before:bg-slate-200 before:content-[''] before:dark:bg-darkmode-600">
             <li className='mb-4 border-l-2 border-primary pl-5 font-medium text-primary dark:border-primary'>
-              <a href=''>Upload Product</a>
+              <a href=''>Informations de base</a>
             </li>
             <li className='mb-4 border-l-2 border-transparent pl-5 dark:border-transparent'>
-              <a href=''>Product Information</a>
+              <a href=''>Comportement de l'agent</a>
             </li>
             <li className='mb-4 border-l-2 border-transparent pl-5 dark:border-transparent'>
-              <a href=''>Product Detail</a>
-            </li>
-            <li className='mb-4 border-l-2 border-transparent pl-5 dark:border-transparent'>
-              <a href=''>Product Variant</a>
-            </li>
-            <li className='mb-4 border-l-2 border-transparent pl-5 dark:border-transparent'>
-              <a href=''>Product Variant (Details)</a>
-            </li>
-            <li className='mb-4 border-l-2 border-transparent pl-5 dark:border-transparent'>
-              <a href=''>Product Management</a>
-            </li>
-            <li className='mb-4 border-l-2 border-transparent pl-5 dark:border-transparent'>
-              <a href=''>Weight & Shipping</a>
+              <a href=''>Gestion de la voix</a>
             </li>
           </ul>
           <div className='relative mt-10 rounded-md border border-warning bg-warning/20 p-5 dark:border-0 dark:bg-darkmode-600'>
             <Lucide icon='Lightbulb' className='absolute right-0 top-0 mr-3 mt-5 h-12 w-12 text-warning/80' />
             <h2 className='text-lg font-medium'>Tips</h2>
-            <div className='mt-5 font-medium'>Price</div>
+            <div className='mt-5 font-medium'>Informations</div>
             <div className='mt-2 text-xs leading-relaxed text-slate-600 dark:text-slate-500'>
               <div>
-                The image format is .jpg .jpeg .png and a minimum size of 300 x 300 pixels (For optimal images use a
-                minimum size of 700 x 700 pixels).
+                Essayez d'être le plus descriptif possible dans le détail de votre agent, plus vous lui fournissez des
+                informations plus les conversations seront fluides avec votre prospects
               </div>
               <div className='mt-2'>
-                Select product photos or drag and drop up to 5 photos at once here. Include min. 3 attractive photos to
-                make the product more attractive to buyers.
+                N'hésitez pas a vous ajoutez en tant que prospect pour faires des tests d'appels
               </div>
             </div>
           </div>

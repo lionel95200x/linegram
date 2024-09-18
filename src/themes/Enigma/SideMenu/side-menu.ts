@@ -1,5 +1,4 @@
 import { Menu } from '@/stores/menuSlice';
-import { slideDown,slideUp } from '@/utils/helper';
 
 interface Location {
   pathname: string;
@@ -75,11 +74,11 @@ const linkTo = (menu: FormattedMenu, navigate: any) => {
 };
 
 const enter = (el: HTMLElement) => {
-  slideDown(el, 300);
+  //  slideDown(el, 300);
 };
 
 const leave = (el: HTMLElement) => {
-  slideUp(el, 300);
+  // slideUp(el, 300);
 };
 
-export { enter, leave,linkTo, nestedMenu };
+export { enter, leave, linkTo, nestedMenu };

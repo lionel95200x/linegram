@@ -9,7 +9,6 @@ import SimpleBar from 'simplebar';
 import logoUrl from '@/assets/images/logo.svg';
 import Lucide from '@/components/dashboard/Base/Lucide';
 import menu2 from '@/main/menu';
-import { toRaw } from '@/utils/helper';
 
 import { enter, FormattedMenu, leave, linkTo, nestedMenu } from './mobile-menu';
 
@@ -21,7 +20,7 @@ function Main() {
   const [formattedMenu, setFormattedMenu] = useState<Array<FormattedMenu | 'divider'>>([]);
   const menuStore = menu2;
 
-  const menu = () => nestedMenu(toRaw(menuStore), { pathname });
+  const menu = () => nestedMenu(menuStore, { pathname });
   const [activeMobileMenu, setActiveMobileMenu] = useState(false);
   const scrollableRef = createRef<HTMLDivElement>();
 

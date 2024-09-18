@@ -11,13 +11,17 @@ import { Progress } from '@/components/ui/progress';
 import { getAgent, updateAgent } from '@/features/agents/controllers/get-agents';
 import { getCalls } from '@/features/calls/controllers/get-calls';
 import { getVoices } from '@/features/elevenlabs';
-import { getProspect } from '@/features/prospects/prospects';
+import { getProspectByAgentId } from '@/features/prospects/prospects';
 import fakerData from '@/utils/faker';
 
 const DEFAULT_TAB = 2;
 
 async function AgentPage({ params }: { params: { id: string } }) {
-  const [agent, voices, prospects] = await Promise.all([getAgent(params.id), getVoices(), getProspect(params.id)]);
+  const [agent, voices, prospects] = await Promise.all([
+    getAgent(params.id),
+    getVoices(),
+    getProspectByAgentId(params.id),
+  ]);
   const [calls] = await Promise.all([getCalls()]);
 
   async function updateAgentAction(p: { prompt: string; firstSentence: string; name: string }) {
@@ -52,7 +56,6 @@ async function AgentPage({ params }: { params: { id: string } }) {
               <div className='ml-5'>
                 <div className='flex items-center'>
                   <div className='w-24 truncate text-lg font-medium sm:w-40 sm:whitespace-normal'>{agent.name}</div>
-                  <LucidePen />
                 </div>
                 <div className='text-slate-500'>{fakerData[0].jobs[0]}</div>
               </div>

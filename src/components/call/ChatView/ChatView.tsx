@@ -1,27 +1,40 @@
 'use client';
 import Image from 'next/image';
 
-import Button from '@/components/dashboard/Base/Button';
-import { Menu } from '@/components/dashboard/Base/Headless';
+import { Menu, Tab, TabButton, TabGroup, TabList } from '@/components/dashboard/Base/Headless';
 import Lucide from '@/components/dashboard/Base/Lucide';
 import fakerData from '@/utils/faker';
+import { Calls } from '@/features/pricing/types';
+import { formatDate } from '@/utils/to-date-time';
+import { icons } from 'lucide-react';
+import { useState } from 'react';
+import { getMetadataAsConversation } from '@/utils/call/call';
+import { TabPanel, TabPanels } from '@headlessui/react';
+import TableView from './TableView';
 
-const LeftText = () => (
+const LeftText = ({ text, isTyping }: { text: string; isTyping?: boolean }) => (
   <div className='float-left mb-4 flex max-w-[90%] items-end sm:max-w-[49%]'>
     <div className='image-fit relative mr-5 hidden h-10 w-10 flex-none sm:block'>
       <Image alt='Midone Tailwind HTML Admin Template' className='rounded-full' src={fakerData[0].photos[0]} />
     </div>
     <div className='rounded-r-md rounded-t-md bg-slate-100 px-4 py-3 text-slate-500 dark:bg-darkmode-400'>
-      Lorem ipsum sit amen dolor, lorem ipsum sit amen dolor
+      {text}
+      {isTyping && (
+        <span className='typing-dots ml-1'>
+          <span>.</span>
+          <span>.</span>
+          <span>.</span>
+        </span>
+      )}
       <div className='mt-1 text-xs text-slate-500'>10 secs ago</div>
     </div>
   </div>
 );
 
-const RightText = () => (
+const RightText = ({ text }: { text: string }) => (
   <div className='float-right mb-4 flex max-w-[90%] items-end sm:max-w-[49%]'>
     <div className='rounded-l-md rounded-t-md bg-primary px-4 py-3 text-white'>
-      Lorem ipsum
+      {text}
       <div className='mt-1 text-xs text-white text-opacity-80'>1 secs ago</div>
     </div>
     <div className='image-fit relative ml-5 hidden h-10 w-10 flex-none sm:block'>
@@ -30,237 +43,153 @@ const RightText = () => (
   </div>
 );
 
-const ChatView = () => {
+const CallBlock = ({
+  call,
+  index,
+  onClick,
+  isActive,
+}: {
+  call: Calls;
+  index: number;
+  onClick: () => void;
+  isActive?: boolean;
+}) => (
+  <div
+    className={`intro-x box relative my-2 flex cursor-pointer items-center p-5 ${isActive && 'border-primary'}`}
+    onClick={onClick}
+  >
+    <div className='image-fit mr-1 h-12 w-12 flex-none'>
+      <div className='absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white bg-success dark:border-darkmode-600'></div>
+    </div>
+    <div className='ml-2 overflow-hidden'>
+      <div className='flex items-center'>
+        <a href='#' className='font-medium'>
+          Appel {index}
+        </a>
+        <div className='ml-auto text-xs text-slate-400'>{formatDate(call.created)}</div>
+      </div>
+      <div className='mt-0.5 w-full truncate text-slate-500'>Nombre d'échange {call.metadata?.length}</div>
+    </div>
+  </div>
+);
+
+const ChatView = ({ calls, agentName }: { calls: Calls[]; agentName: string }) => {
+  const [selectedCall, setselectedCall] = useState(calls[0]);
+
+  const conversation = getMetadataAsConversation(selectedCall.metadata);
+
+  console.log({ conversation, calls, selectedCall });
   const chatBox = true;
   return (
-    <div className='scrollbar-hidden flex-1 overflow-y-scroll px-5 pt-5'>
-      <Button variant='primary' className='mr-2 shadow-md'>
-        Lancez un nouvel appel
-      </Button>
-      <div className='intro-y mt-5 flex  gap-5'>
-        {/* BEGIN: Chat Side Menu */}
+    <div className='mt-5 flex gap-2'>
+      {/* BEGIN: Chat Side Menu */}
 
-        <div className='pr-1'>
-          <div className='box  px-5 py-10'>
-            <div className='image-fit mx-auto h-20 w-20 flex-none overflow-hidden rounded-full'>
-              <Image alt='Midone Tailwind HTML Admin Template' src={fakerData[0].photos[0]} />
-            </div>
-            <div className='mt-3 text-center'>
-              <div className='text-lg font-medium'>{fakerData[0]['users'][0]['name']}</div>
-              <div className='mt-1 text-slate-500'>Tailwind HTML Admin Template</div>
-            </div>
-          </div>
-          <div className='box  p-5'>
-            <div className='flex items-center border-b border-slate-200/60 pb-5 dark:border-darkmode-400'>
-              <div>
-                <div className='text-slate-500'>Country</div>
-                <div className='mt-1'>New York City, USA</div>
-              </div>
-              <Lucide icon='Globe' className='ml-auto h-4 w-4 text-slate-500' />
-            </div>
-            <div className='flex items-center border-b border-slate-200/60 py-5 dark:border-darkmode-400'>
-              <div>
-                <div className='text-slate-500'>Phone</div>
-                <div className='mt-1'>+32 19 23 62 24 34</div>
-              </div>
-              <Lucide icon='Mic' className='ml-auto h-4 w-4 text-slate-500' />
-            </div>
-            <div className='flex items-center border-b border-slate-200/60 py-5 dark:border-darkmode-400'>
-              <div>
-                <div className='text-slate-500'>Email</div>
-                <div className='mt-1'>{fakerData[0]['users'][0]['email']}</div>
-              </div>
-              <Lucide icon='Mail' className='ml-auto h-4 w-4 text-slate-500' />
-            </div>
-            <div className='flex items-center pt-5'>
-              <div>
-                <div className='text-slate-500'>Joined Date</div>
-                <div className='mt-1'>{fakerData[0]['dates'][0]}</div>
-              </div>
-              <Lucide icon='Clock' className='ml-auto h-4 w-4 text-slate-500' />
-            </div>
-          </div>
+      <div className='flex basis-1/4 flex-col gap-2'>
+        <div className=''>
+          {calls
+            .sort((a, b) => b.created - a.created)
+            .map((call, idx) => (
+              <CallBlock
+                key={call.id}
+                call={call}
+                index={idx}
+                onClick={() => setselectedCall(call)}
+                isActive={call.id === selectedCall.id}
+              />
+            ))}
         </div>
+      </div>
 
-        {/* END: Chat Side Menu */}
-        {/* BEGIN: Chat Content */}
-        <div className='intro-y col-span-12 lg:col-span-8 2xl:col-span-9'>
-          <div className='box h-[782px]'>
-            {/* BEGIN: Chat Active */}
-            {chatBox && (
-              <div className='flex h-full flex-col'>
-                <div className='flex flex-col border-b border-slate-200/60 px-5 py-4 dark:border-darkmode-400 sm:flex-row'>
-                  <div className='flex items-center'>
-                    <div className='image-fit relative h-10 w-10 flex-none sm:h-12 sm:w-12'>
-                      <Image
-                        alt='Midone Tailwind HTML Admin Template'
-                        className='rounded-full'
-                        src={fakerData[0].photos[0]}
-                      />
-                    </div>
-                    <div className='ml-3 mr-auto'>
-                      <div className='text-base font-medium'>{fakerData[0]['users'][0]['name']}</div>
-                      <div className='text-xs text-slate-500 sm:text-sm'>
-                        Conversation avec l'agent <span className='mx-1'>•</span>
+      <div className='intro-y basis-3/4'>
+        <div className='box h-[782px]'>
+          <TabGroup className='col-span-12 lg:col-span-4 2xl:col-span-3'>
+            <div className='intro-y box p-2 pr-1'>
+              <TabList variant='pills'>
+                <Tab>
+                  <TabButton className='w-full py-2' as='button'>
+                    Chat
+                  </TabButton>
+                </Tab>
+                <Tab>
+                  <TabButton className='w-full py-2' as='button'>
+                    Tableau
+                  </TabButton>
+                </Tab>
+              </TabList>
+            </div>
+            <TabPanels>
+              <TabPanel>
+                {/* BEGIN: Chat Active */}
+                {chatBox && (
+                  <div className='flex h-full flex-col'>
+                    <div className='flex flex-col border-b border-slate-200/60 px-5 py-4 dark:border-darkmode-400 sm:flex-row'>
+                      <div className='flex items-center'>
+                        <div className='image-fit relative h-10 w-10 flex-none sm:h-12 sm:w-12'>
+                          <Image
+                            alt='Midone Tailwind HTML Admin Template'
+                            className='rounded-full'
+                            src={fakerData[0].photos[0]}
+                          />
+                        </div>
+                        <div className='ml-3 mr-auto'>
+                          <div className='text-base font-medium'>{agentName}</div>
+                          <div className='text-xs text-slate-500 sm:text-sm'>
+                            Conversation avec l'agent <span className='mx-1'>•</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className='-mx-5 mt-5 flex items-center border-t border-slate-200/60 px-5 pt-3 sm:mx-0 sm:ml-auto sm:mt-0 sm:border-0 sm:px-0 sm:pt-0'>
+                        <a href='#' className='h-5 w-5 text-slate-500'>
+                          <Lucide icon='Search' className='h-5 w-5' />
+                        </a>
+                        <a href='#' className='ml-5 h-5 w-5 text-slate-500'>
+                          <Lucide icon='UserPlus' className='h-5 w-5' />
+                        </a>
+                        <Menu className='ml-auto sm:ml-3'>
+                          <Menu.Button as='a' href='#' className='h-5 w-5 text-slate-500'>
+                            <Lucide icon='MoreVertical' className='h-5 w-5' />
+                          </Menu.Button>
+                          <Menu.Items className='w-40'>
+                            <Menu.Item>
+                              <Lucide icon='Settings' className='mr-2 h-4 w-4' />
+                              Settings
+                            </Menu.Item>
+                          </Menu.Items>
+                        </Menu>
                       </div>
                     </div>
-                  </div>
-                  <div className='-mx-5 mt-5 flex items-center border-t border-slate-200/60 px-5 pt-3 sm:mx-0 sm:ml-auto sm:mt-0 sm:border-0 sm:px-0 sm:pt-0'>
-                    <a href='#' className='h-5 w-5 text-slate-500'>
-                      <Lucide icon='Search' className='h-5 w-5' />
-                    </a>
-                    <a href='#' className='ml-5 h-5 w-5 text-slate-500'>
-                      <Lucide icon='UserPlus' className='h-5 w-5' />
-                    </a>
-                    <Menu className='ml-auto sm:ml-3'>
-                      <Menu.Button as='a' href='#' className='h-5 w-5 text-slate-500'>
-                        <Lucide icon='MoreVertical' className='h-5 w-5' />
-                      </Menu.Button>
-                      <Menu.Items className='w-40'>
-                        <Menu.Item>
-                          <Lucide icon='Share2' className='mr-2 h-4 w-4' />
-                          Share Contact
-                        </Menu.Item>
-                        <Menu.Item>
-                          <Lucide icon='Settings' className='mr-2 h-4 w-4' />
-                          Settings
-                        </Menu.Item>
-                      </Menu.Items>
-                    </Menu>
-                  </div>
-                </div>
-                <div className='scrollbar-hidden flex-1 overflow-y-scroll px-5 pt-5'>
-                  <div className='mb-10 mt-5 text-center text-xs text-slate-400 dark:text-slate-500'>12 June 2020</div>
-
-                  <div className='float-left mb-4 flex max-w-[90%] items-end sm:max-w-[49%]'>
-                    <div className='image-fit relative mr-5 hidden h-10 w-10 flex-none sm:block'>
-                      <Image
-                        alt='Midone Tailwind HTML Admin Template'
-                        className='rounded-full'
-                        src={fakerData[0].photos[0]}
-                      />
-                    </div>
-                    <div className='rounded-r-md rounded-t-md bg-slate-100 px-4 py-3 text-slate-500 dark:bg-darkmode-400'>
-                      Lorem ipsum sit amen dolor, lorem ipsum sit amen dolor
-                      <div className='mt-1 text-xs text-slate-500'>2 mins ago</div>
-                    </div>
-                    <Menu className='my-auto ml-3 hidden sm:block'>
-                      <Menu.Button as='a' href='#' className='h-4 w-4 text-slate-500'>
-                        <Lucide icon='MoreVertical' className='h-4 w-4' />
-                      </Menu.Button>
-                      <Menu.Items className='w-40'>
-                        <Menu.Item>
-                          <Lucide icon='CornerUpLeft' className='mr-2 h-4 w-4' />
-                          Reply
-                        </Menu.Item>
-                        <Menu.Item>
-                          <Lucide icon='Trash' className='mr-2 h-4 w-4' /> Delete
-                        </Menu.Item>
-                      </Menu.Items>
-                    </Menu>
-                  </div>
-                  <div className='clear-both'></div>
-                  <div className='float-right mb-4 flex max-w-[90%] items-end sm:max-w-[49%]'>
-                    <Menu className='my-auto mr-3 hidden sm:block'>
-                      <Menu.Button as='a' href='#' className='h-4 w-4 text-slate-500'>
-                        <Lucide icon='MoreVertical' className='h-4 w-4' />
-                      </Menu.Button>
-                      <Menu.Items className='w-40'>
-                        <Menu.Item>
-                          <Lucide icon='CornerUpLeft' className='mr-2 h-4 w-4' />
-                          Reply
-                        </Menu.Item>
-                        <Menu.Item>
-                          <Lucide icon='Trash' className='mr-2 h-4 w-4' /> Delete
-                        </Menu.Item>
-                      </Menu.Items>
-                    </Menu>
-                    <div className='rounded-l-md rounded-t-md bg-primary px-4 py-3 text-white'>
-                      Lorem ipsum sit amen dolor, lorem ipsum sit amen dolor
-                      <div className='mt-1 text-xs text-white text-opacity-80'>1 mins ago</div>
-                    </div>
-                    <div className='image-fit relative ml-5 hidden h-10 w-10 flex-none sm:block'>
-                      <Image
-                        alt='Midone Tailwind HTML Admin Template'
-                        className='rounded-full'
-                        src={fakerData[1].photos[0]}
-                      />
+                    <div className='scrollbar-hidden flex-1 overflow-y-scroll px-5 pt-5'>
+                      <div className='mb-10 mt-5 text-center text-xs text-slate-400 dark:text-slate-500'>
+                        {formatDate(new Date(selectedCall.created))}
+                      </div>
+                      {conversation.length > 0 ? (
+                        conversation.map((c, idx) => {
+                          return (
+                            <>
+                              {c.type === 'prospect' ? (
+                                <LeftText text={c.text} isTyping={idx === 0} />
+                              ) : (
+                                <RightText text={c.text} />
+                              )}
+                              <div className='clear-both' />
+                            </>
+                          );
+                        })
+                      ) : (
+                        <div className='text-center'>Cet appel ne contiens aucun échange</div>
+                      )}
                     </div>
                   </div>
-                  <div className='clear-both'></div>
-                  <div className='float-right mb-4 flex max-w-[90%] items-end sm:max-w-[49%]'>
-                    <Menu className='my-auto mr-3 hidden sm:block'>
-                      <Menu.Button as='a' href='#' className='h-4 w-4 text-slate-500'>
-                        <Lucide icon='MoreVertical' className='h-4 w-4' />
-                      </Menu.Button>
-                      <Menu.Items className='w-40'>
-                        <Menu.Item>
-                          <Lucide icon='CornerUpLeft' className='mr-2 h-4 w-4' />
-                          Reply
-                        </Menu.Item>
-                        <Menu.Item>
-                          <Lucide icon='Trash' className='mr-2 h-4 w-4' /> Delete
-                        </Menu.Item>
-                      </Menu.Items>
-                    </Menu>
-                    <div className='rounded-l-md rounded-t-md bg-primary px-4 py-3 text-white'>
-                      Lorem ipsum sit amen dolor, lorem ipsum sit amen dolor
-                      <div className='mt-1 text-xs text-white text-opacity-80'>59 secs ago</div>
-                    </div>
-                    <div className='image-fit relative ml-5 hidden h-10 w-10 flex-none sm:block'>
-                      <Image
-                        alt='Midone Tailwind HTML Admin Template'
-                        className='rounded-full'
-                        src={fakerData[1].photos[0]}
-                      />
-                    </div>
-                  </div>
-                  <div className='clear-both'></div>
-
-                  <LeftText />
-                  <div className='clear-both'></div>
-                  <RightText />
-                  <div className='clear-both'></div>
-                  <div className='float-left mb-4 flex max-w-[90%] items-end sm:max-w-[49%]'>
-                    <div className='image-fit relative mr-5 hidden h-10 w-10 flex-none sm:block'>
-                      <Image
-                        alt='Midone Tailwind HTML Admin Template'
-                        className='rounded-full'
-                        src={fakerData[0].photos[0]}
-                      />
-                    </div>
-                    <div className='rounded-r-md rounded-t-md bg-slate-100 px-4 py-3 text-slate-500 dark:bg-darkmode-400'>
-                      {fakerData[0]['users'][0]['name']} is typing
-                      <span className='typing-dots ml-1'>
-                        <span>.</span>
-                        <span>.</span>
-                        <span>.</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-            {/* END: Chat Active */}
-            {/* BEGIN: Chat Default */}
-            {!true && (
-              <div className='flex h-full items-center'>
-                <div className='mx-auto text-center'>
-                  <div className='image-fit mx-auto h-16 w-16 flex-none overflow-hidden rounded-full'>
-                    <Image alt='Midone Tailwind HTML Admin Template' src={fakerData[0].photos[0]} />
-                  </div>
-                  <div className='mt-3'>
-                    <div className='font-medium'>Hey, {fakerData[0]['users'][0]['name']}!</div>
-                    <div className='mt-1 text-slate-500'>Please select a chat to start messaging.</div>
-                  </div>
-                </div>
-              </div>
-            )}
-            {/* END: Chat Default */}
-          </div>
+                )}
+              </TabPanel>
+              <TabPanel>
+                <TableView metadata={selectedCall.metadata} />
+              </TabPanel>
+            </TabPanels>
+          </TabGroup>
         </div>
-        {/* END: Chat Content */}
       </div>
+      {/* END: Chat Content */}
     </div>
   );
 };

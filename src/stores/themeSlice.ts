@@ -100,10 +100,12 @@ export const getTheme = (search?: { name: Themes['name']; layout: Themes['layout
   })[0];
 };
 
+const THEME = themes[0].name;
+const LAYOUT = themes[0].layout;
 const initialState: ThemeState = {
   value: {
-    name: getItem('theme') === null ? themes[0].name : getTheme().name,
-    layout: getItem('layout') === null ? themes[0].layout : getTheme().layout,
+    name: THEME,
+    layout: LAYOUT,
   },
 };
 

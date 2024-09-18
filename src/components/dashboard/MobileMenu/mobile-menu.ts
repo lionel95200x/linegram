@@ -1,7 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react';
 
-import { Menu } from "@/stores/menuSlice";
-import { slideDown,slideUp } from "@/utils/helper";
+import { Menu } from '@/stores/menuSlice';
 
 interface Location {
   pathname: string;
@@ -19,10 +18,8 @@ const findActiveMenu = (subMenu: Menu[], location: Location): boolean => {
   let match = false;
   subMenu.forEach((item) => {
     if (
-      ((location.forceActiveMenu !== undefined &&
-        item.pathname === location.forceActiveMenu) ||
-        (location.forceActiveMenu === undefined &&
-          item.pathname === location.pathname)) &&
+      ((location.forceActiveMenu !== undefined && item.pathname === location.forceActiveMenu) ||
+        (location.forceActiveMenu === undefined && item.pathname === location.pathname)) &&
       !item.ignore
     ) {
       match = true;
@@ -33,10 +30,10 @@ const findActiveMenu = (subMenu: Menu[], location: Location): boolean => {
   return match;
 };
 
-const nestedMenu = (menu: Array<Menu | "divider">, location: Location) => {
-  const formattedMenu: Array<FormattedMenu | "divider"> = [];
+const nestedMenu = (menu: Array<Menu | 'divider'>, location: Location) => {
+  const formattedMenu: Array<FormattedMenu | 'divider'> = [];
   menu.forEach((item) => {
-    if (typeof item !== "string") {
+    if (typeof item !== 'string') {
       const menuItem: FormattedMenu = {
         icon: item.icon,
         title: item.title,
@@ -45,10 +42,8 @@ const nestedMenu = (menu: Array<Menu | "divider">, location: Location) => {
         ignore: item.ignore,
       };
       menuItem.active =
-        ((location.forceActiveMenu !== undefined &&
-          menuItem.pathname === location.forceActiveMenu) ||
-          (location.forceActiveMenu === undefined &&
-            menuItem.pathname === location.pathname) ||
+        ((location.forceActiveMenu !== undefined && menuItem.pathname === location.forceActiveMenu) ||
+          (location.forceActiveMenu === undefined && menuItem.pathname === location.pathname) ||
           (menuItem.subMenu && findActiveMenu(menuItem.subMenu, location))) &&
         !menuItem.ignore;
 
@@ -57,9 +52,7 @@ const nestedMenu = (menu: Array<Menu | "divider">, location: Location) => {
 
         // Nested menu
         const subMenu: Array<FormattedMenu> = [];
-        nestedMenu(menuItem.subMenu, location).map(
-          (menu) => typeof menu !== "string" && subMenu.push(menu)
-        );
+        nestedMenu(menuItem.subMenu, location).map((menu) => typeof menu !== 'string' && subMenu.push(menu));
         menuItem.subMenu = subMenu;
       }
 
@@ -72,11 +65,7 @@ const nestedMenu = (menu: Array<Menu | "divider">, location: Location) => {
   return formattedMenu;
 };
 
-const linkTo = (
-  menu: FormattedMenu,
-  navigate: any,
-  setActiveMobileMenu: Dispatch<SetStateAction<boolean>>
-) => {
+const linkTo = (menu: FormattedMenu, navigate: any, setActiveMobileMenu: Dispatch<SetStateAction<boolean>>) => {
   if (menu.subMenu) {
     menu.activeDropdown = !menu.activeDropdown;
   } else {
@@ -88,11 +77,11 @@ const linkTo = (
 };
 
 const enter = (el: HTMLElement) => {
-  slideDown(el, 300);
+  // slideDown(el, 300);
 };
 
 const leave = (el: HTMLElement) => {
-  slideUp(el, 300);
+  //  slideUp(el, 300);
 };
 
-export { enter, leave,linkTo, nestedMenu };
+export { enter, leave, linkTo, nestedMenu };

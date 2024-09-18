@@ -1,20 +1,43 @@
-import Image from 'next/image';
-import { LucidePen } from 'lucide-react';
-import Avatar, { genConfig } from 'react-nice-avatar';
-
 import { Tab, TabButton, TabGroup, TabList, TabPanel, TabPanels } from '@/components/dashboard/Base/Headless';
 import Lucide from '@/components/dashboard/Base/Lucide';
+import HeaderInformation from '@/components/dashboard/HeaderInformation/HeaderInformation';
+import SubscriptionView from '@/components/dashboard/SubscriptionView/SubscriptionView';
+import { getSubscription } from '@/features/account/controllers/get-subscription';
 import { getUser } from '@/features/account/controllers/get-user';
 import { getAgent, updateAgent } from '@/features/agents/controllers/get-agents';
 import { getCalls } from '@/features/calls/controllers/get-calls';
-import { getVoices } from '@/features/elevenlabs';
-import { getProspect } from '@/features/prospects/prospects';
-import fakerData from '@/utils/faker';
+import { getProducts } from '@/features/pricing/controllers/get-products';
+import { Price, ProductWithPrices } from '@/features/pricing/types';
 
+async function getSubscriptionInfo() {
+  const [subscription, products] = await Promise.all([getSubscription(), getProducts()]);
+
+  let userProduct: ProductWithPrices | undefined;
+  let userPrice: Price | undefined;
+
+  if (subscription) {
+    for (const product of products) {
+      for (const price of product.prices) {
+        if (price.id === subscription.price_id) {
+          userProduct = product;
+          userPrice = price;
+        }
+      }
+    }
+  }
+
+  return {
+    subscription,
+    products,
+    userProduct,
+    userPrice,
+  };
+}
 async function AgentPage({ params }: { params: { id: string } }) {
   const [agent, user] = await Promise.all([getAgent(params.id), getUser()]);
   const [calls] = await Promise.all([getCalls()]);
 
+  const subscriptionInfo = await getSubscriptionInfo();
   async function updateAgentAction(p: { prompt: string; firstSentence: string; name: string }) {
     'use server';
 
@@ -30,46 +53,19 @@ async function AgentPage({ params }: { params: { id: string } }) {
     return { data: res?.data };
   }
 
-  console.log({ user });
+  const infosIcon = [
+    { icon: 'Mail', text: 'toto@mail.com' },
+    { icon: 'Instagram', text: 'Abonnement Gratuit' },
+    { icon: 'Check', text: 'Inscrit depuis le 12/06/2024' },
+  ];
   return (
     <>
       <div className='intro-y mt-8 flex items-center'>
-        <h2 className='mr-auto text-lg font-medium'>Configuration de mon agent</h2>
+        <h2 className='mr-auto text-lg font-medium'>Gestion du compte</h2>
       </div>
       <TabGroup defaultIndex={1}>
         <div className='intro-y box mt-5 px-5 pt-5'>
-          <div className='-mx-5 flex flex-col border-b border-slate-200/60 pb-5 dark:border-darkmode-400 lg:flex-row'>
-            <div className='flex flex-1 items-center justify-center px-5 lg:justify-start'>
-              <div className='image-fit relative h-20 w-20 flex-none sm:h-24 sm:w-24 lg:h-32 lg:w-32'>
-                <Image alt='Linegram agent' className='rounded-full' src={fakerData[0].photos[0]} />
-              </div>
-              <div className='ml-5'>
-                <div className='flex items-center'>
-                  <div className='w-24 truncate text-lg font-medium sm:w-40 sm:whitespace-normal'>
-                    {user.full_name ?? 'No name'}
-                  </div>
-                  <LucidePen />
-                </div>
-              </div>
-            </div>
-            <div className='mt-6 flex-1 border-l border-r border-t border-slate-200/60 px-5 pt-5 dark:border-darkmode-400 lg:mt-0 lg:border-t-0 lg:pt-0'>
-              <div className='text-center font-medium lg:mt-3 lg:text-left'>Informations principal</div>
-              <div className='mt-4 flex flex-col items-center justify-center lg:items-start'>
-                <div className='mt-3 flex items-center truncate sm:whitespace-normal'>
-                  <Lucide icon='Mail' className='mr-2 h-4 w-4' />
-                  toto@mail.com
-                </div>
-                <div className='mt-3 flex items-center truncate sm:whitespace-normal'>
-                  <Lucide icon='Instagram' className='mr-2 h-4 w-4' />
-                  Abonnement Gratuit
-                </div>
-                <div className='mt-3 flex items-center truncate sm:whitespace-normal'>
-                  <Lucide icon='Check' className='mr-2 h-4 w-4' />
-                  Inscrit depuis le 12/06/2024
-                </div>
-              </div>
-            </div>
-          </div>
+          <HeaderInformation infos={infosIcon} />
           <TabList variant='link-tabs' className='flex-col justify-center text-center sm:flex-row lg:justify-start'>
             <Tab fullWidth={false}>
               <TabButton className='flex cursor-pointer items-center py-4'>
@@ -96,7 +92,7 @@ async function AgentPage({ params }: { params: { id: string } }) {
             <div>Mon profil</div>
           </TabPanel>
           <TabPanel>
-            <div>Abonnement</div>
+            <SubscriptionView {...subscriptionInfo} />
           </TabPanel>
           <TabPanel>
             <div>Facture</div>
