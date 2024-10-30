@@ -47,7 +47,7 @@ export async function createCall({
       user_id: '0c7dae01-2ab6-4f44-8da0-eb903a26069b',
       agent_id: agentId,
       prospect_id: prospectId,
-      conversation: 'Start conversation from front',
+      conversation: "Début de la conversation avec l'agent",
       metadata: [],
     })
     .select()

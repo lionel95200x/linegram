@@ -1,13 +1,13 @@
 'use server';
 
 import { createCall } from '@/features/calls/controllers/get-calls';
+import { updateProspect } from '@/features/prospects/prospects';
 
 export async function testCallAction(agentId: string, prospectId: string) {
   const call = await createCall({ agentId, prospectId });
-
   try {
     if (call && 'id' in call) {
-      console.log({ agentId, prospectId, call: call.id });
+      await updateProspect({ call_id: call.id }, agentId, prospectId);
 
       const response = await fetch(
         `https://call-gpt-thrumming-shadow-9480.fly.dev/outcoming?callId=${call.id}&agentId=${agentId}&prospectId=${prospectId}`,

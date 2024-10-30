@@ -33,31 +33,23 @@ export async function createProspect(
   }
 }
 
-export async function updateProspect(
-  prospect: {
-    firstName?: string;
-    lastName?: string;
-    phone?: string;
-    email?: string;
-    extraInfo?: string;
-  },
-  agent_id: string,
-  prospect_id: string
-) {
+export async function updateProspect(prospect: Partial<Prospects>, agent_id: string, prospect_id: string) {
   try {
+    const prospectData = {
+      ...(prospect.firstName && { firstName: prospect.firstName }),
+      ...(prospect.lastName && { lastName: prospect.lastName }),
+      ...(prospect.phone && { phone: prospect.phone }),
+      ...(prospect.email && { email: prospect.email }),
+      ...(prospect.extraInfo && { extraInfo: prospect.extraInfo }),
+      ...(prospect.call_id && { call_id: prospect.call_id }),
+    };
+
     const { data, error } = await getBaseProspectQuery()
-      .update({
-        firstName: prospect.firstName,
-        lastName: prospect.lastName,
-        phone: prospect.phone,
-        email: prospect.email,
-        extraInfo: prospect.extraInfo,
-      })
+      .update(prospectData)
       .eq('id', prospect_id)
       .eq('agent_id', agent_id)
       .select();
 
-    console.log({ data, error });
     if (error) {
       return { error: error.message };
     }

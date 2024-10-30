@@ -16,7 +16,7 @@ async function Main() {
           {/* BEGIN: General Report */}
           <div className='col-span-12 mt-8'>
             <div className='intro-y flex h-10 items-center'>
-              <h2 className='mr-5 truncate text-lg font-medium'>Mes agents</h2>
+              <h2 className='mr-5 truncate text-lg font-medium'>Résumé</h2>
               <a href='' className='ml-auto flex items-center text-primary'>
                 <Lucide icon='RefreshCcw' className='mr-3 h-4 w-4' /> Rechargez les données
               </a>
@@ -47,7 +47,7 @@ async function Main() {
                 >
                   <InfoCard
                     icon='PhoneCall'
-                    title='Calls'
+                    title='Appels'
                     value={0}
                     percentage={50}
                     percentageText='33% Higher than last month'

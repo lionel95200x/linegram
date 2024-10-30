@@ -44,7 +44,6 @@ function Main({ children }: { children: React.ReactNode }) {
         <nav className='side-nav hidden w-[80px] overflow-x-hidden pb-16 pr-5 md:block xl:w-[230px]'>
           <Link href='/' className='intro-x flex items-center pl-5 pt-4'>
             <LogoTsx />
-            <span className='ml-3 hidden text-lg text-white xl:block'>Linegram</span>
           </Link>
           <div className='side-nav__divider my-6'></div>
           <ul>
@@ -91,40 +90,41 @@ function Main({ children }: { children: React.ReactNode }) {
                       >
                         {menu.subMenu.map((subMenu, subMenuKey) => (
                           <li key={subMenuKey}>
-                            <Tippy
-                              as='a'
-                              content={subMenu.title}
-                              options={{
-                                placement: 'right',
-                              }}
-                              disable={windowWidth > 1260}
-                              href={subMenu.subMenu ? '#' : subMenu.pathname}
-                              onClick={(event: React.MouseEvent) => {
-                                event.preventDefault();
-                                linkTo(subMenu, redirect);
-                                setFormattedMenu([...formattedMenu]);
-                              }}
-                              className={clsx([subMenu.active ? 'side-menu side-menu--active' : 'side-menu'])}
-                            >
-                              <div className='side-menu__icon'>
-                                <Lucide icon={subMenu.icon} />
-                              </div>
-                              <div className='side-menu__title'>
-                                {subMenu.title}
-                                {subMenu.subMenu && (
-                                  <div
-                                    className={clsx([
-                                      'side-menu__sub-icon',
-                                      {
-                                        'rotate-180 transform': subMenu.activeDropdown,
-                                      },
-                                    ])}
-                                  >
-                                    <Lucide icon='ChevronDown' />
-                                  </div>
-                                )}
-                              </div>
-                            </Tippy>
+                            <Link href={subMenu.subMenu ? '#' : (subMenu.pathname as string)}>
+                              <Tippy
+                                as='a'
+                                content={subMenu.title}
+                                options={{
+                                  placement: 'right',
+                                }}
+                                disable={windowWidth > 1260}
+                                href={subMenu.subMenu ? '#' : subMenu.pathname}
+                                onClick={(event: React.MouseEvent) => {
+                                  linkTo(subMenu, redirect);
+                                  setFormattedMenu([...formattedMenu]);
+                                }}
+                                className={clsx([subMenu.active ? 'side-menu side-menu--active' : 'side-menu'])}
+                              >
+                                <div className='side-menu__icon'>
+                                  <Lucide icon={subMenu.icon} />
+                                </div>
+                                <div className='side-menu__title'>
+                                  {subMenu.title}
+                                  {subMenu.subMenu && (
+                                    <div
+                                      className={clsx([
+                                        'side-menu__sub-icon',
+                                        {
+                                          'rotate-180 transform': subMenu.activeDropdown,
+                                        },
+                                      ])}
+                                    >
+                                      <Lucide icon='ChevronDown' />
+                                    </div>
+                                  )}
+                                </div>
+                              </Tippy>
+                            </Link>
                             {/* BEGIN: Third Child */}
                             {subMenu.subMenu && (
                               <Transition in={subMenu.activeDropdown} onEnter={enter} onExit={leave} timeout={300}>

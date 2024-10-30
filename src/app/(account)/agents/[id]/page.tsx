@@ -1,11 +1,11 @@
 import Image from 'next/image';
-import { LucidePen } from 'lucide-react';
+import phoneAgent from '@/assets/images/dashboard/phone-agent.png';
 
 import { testCallAction } from '@/actions/agents/testCallAction';
 import { CallTable } from '@/components/call/call-table';
 import ConfigureAgentForm from '@/components/dashboard/Agent/ConfigureAgentForm/ConfigureAgentForm';
 import { Tab, TabButton, TabGroup, TabList, TabPanel, TabPanels } from '@/components/dashboard/Base/Headless';
-import Lucide from '@/components/dashboard/Base/Lucide';
+import Lucide, { Icon } from '@/components/dashboard/Base/Lucide';
 import Prospects from '@/components/dashboard/Prospects';
 import { Progress } from '@/components/ui/progress';
 import { getAgent, updateAgent } from '@/features/agents/controllers/get-agents';
@@ -16,6 +16,31 @@ import fakerData from '@/utils/faker';
 
 const DEFAULT_TAB = 2;
 
+interface Task {
+  name: string;
+  icon: Icon;
+  isValid: boolean;
+}
+
+const Task = ({ task }: { task: Task }) => {
+  return (
+    <div className={`mt-3 flex items-center truncate sm:whitespace-normal ${task.isValid ? 'text-green-500' : ''}`}>
+      <Lucide icon={task.icon} className='mr-2 h-4 w-4' />
+      {task.name}
+    </div>
+  );
+};
+
+const TaskList = ({ tasks }: { tasks: Task[] }) => {
+  return (
+    <div className='mt-4 flex flex-col items-center justify-center lg:items-start'>
+      {tasks.map((task, taskKey) => (
+        <Task key={taskKey} task={task} />
+      ))}
+    </div>
+  );
+};
+
 async function AgentPage({ params }: { params: { id: string } }) {
   const [agent, voices, prospects] = await Promise.all([
     getAgent(params.id),
@@ -24,6 +49,7 @@ async function AgentPage({ params }: { params: { id: string } }) {
   ]);
   const [calls] = await Promise.all([getCalls()]);
 
+  console.log({ calls, agent });
   async function updateAgentAction(p: { prompt: string; firstSentence: string; name: string }) {
     'use server';
 
@@ -37,9 +63,31 @@ async function AgentPage({ params }: { params: { id: string } }) {
       name,
     });
 
-    console.log({ res });
     return { data: res?.data };
   }
+
+  const tasks: Task[] = [
+    {
+      name: 'Donnez un nom a mon agent',
+      icon: 'Mail',
+      isValid: !!agent.name,
+    },
+    {
+      name: "Description detaillé sur l'objectif de mon agent",
+      icon: 'UserCheck',
+      isValid: !!agent.name,
+    },
+    {
+      name: 'Ajouter un prospect',
+      icon: 'UserCheck',
+      isValid: prospects.length > 0,
+    },
+    {
+      name: "Test d'appel effectué",
+      icon: 'PhoneCall',
+      isValid: calls.length > 0,
+    },
+  ];
 
   return (
     <>
@@ -51,7 +99,7 @@ async function AgentPage({ params }: { params: { id: string } }) {
           <div className='-mx-5 flex flex-col border-b border-slate-200/60 pb-5 dark:border-darkmode-400 lg:flex-row'>
             <div className='flex flex-1 items-center justify-center px-5 lg:justify-start'>
               <div className='image-fit relative h-20 w-20 flex-none sm:h-24 sm:w-24 lg:h-32 lg:w-32'>
-                <Image alt='Linegram agent' className='rounded-full' src={fakerData[0].photos[0]} />
+                <Image alt='Linegram agent' className='rounded-full' src={phoneAgent} />
               </div>
               <div className='ml-5'>
                 <div className='flex items-center'>
@@ -63,19 +111,8 @@ async function AgentPage({ params }: { params: { id: string } }) {
             <div className='mt-6 flex-1 border-l border-r border-t border-slate-200/60 px-5 pt-5 dark:border-darkmode-400 lg:mt-0 lg:border-t-0 lg:pt-0'>
               <div className='text-center font-medium lg:mt-3 lg:text-left'>Etape de configuration</div>
               <div className='mt-4 flex flex-col items-center justify-center lg:items-start'>
-                <Progress value={33} />
-                <div className='mt-3 flex items-center truncate sm:whitespace-normal'>
-                  <Lucide icon='Mail' className='mr-2 h-4 w-4' />
-                  Ajout des informations de bases
-                </div>
-                <div className='mt-3 flex items-center truncate sm:whitespace-normal'>
-                  <Lucide icon='Instagram' className='mr-2 h-4 w-4' />
-                  Test d'appel effectué
-                </div>
-                <div className='mt-3 flex items-center truncate sm:whitespace-normal'>
-                  <Lucide icon='Check' className='mr-2 h-4 w-4' />
-                  Ajouter un prospect
-                </div>
+                <Progress value={(tasks.filter((task) => task.isValid).length * 100) / tasks.length} />
+                <TaskList tasks={tasks} />
               </div>
             </div>
             <div className='mt-6 flex flex-1 items-center justify-center border-t border-slate-200/60 px-5 pt-5 dark:border-darkmode-400 lg:mt-0 lg:border-0 lg:pt-0'>

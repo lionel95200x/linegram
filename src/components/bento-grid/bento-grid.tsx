@@ -1068,7 +1068,7 @@ export function Features() {
           </div>
           <h3 className='py-2 text-lg font-semibold text-white'>Suivis de vos appel</h3>
           <p className='max-w-sm text-sm font-normal text-neutral-400'>
-            Check analytics, track your posts, and get insights into your audience.
+            Consultez rapidement les échange de vos clients avec nos agents IA
           </p>
         </div>
         <div className='group rounded-xl border border-[rgba(255,255,255,0.10)] bg-[rgba(40,40,40,0.30)] p-8 shadow-[2px_4px_16px_0px_rgba(248,248,248,0.06)_inset]'>
@@ -1232,9 +1232,10 @@ export function Features() {
               </div>
             </div>
           </div>
-          <h3 className='py-2 text-lg font-semibold text-white'>Integrated AI</h3>
+          <h3 className='py-2 text-lg font-semibold text-white'>IA integré</h3>
           <p className='max-w-sm text-sm font-normal text-neutral-400'>
-            Proactiv uses AI to help you create engaging content.
+            Nos agents boosté a l'IA utilise toutes les connaissances pour répondre a vos prospect d'une facon
+            naturelle.
           </p>
         </div>
         <div className='group rounded-xl border border-[rgba(255,255,255,0.10)] bg-[rgba(40,40,40,0.30)] p-8 shadow-[2px_4px_16px_0px_rgba(248,248,248,0.06)_inset]'>
@@ -1478,17 +1479,17 @@ export function Features() {
               </div>
               <div className='ml-4 mt-10 w-fit rounded-lg border border-neutral-600 p-0.5'>
                 <div className='flex h-10 items-center justify-center rounded-[5px] bg-[rgba(248,248,248,0.01)] px-2 text-xs text-neutral-400 shadow-[0px_0px_8px_0px_rgba(248,248,248,0.25)_inset,0px_32px_24px_-16px_rgba(0,0,0,0.40)]'>
-                  Twitter post
+                  Ne réponds pas
                 </div>
               </div>
               <div className='ml-10 mt-4 w-fit rounded-lg border border-neutral-600 p-0.5 transition duration-200 group-hover:scale-[1.02] group-hover:border-secondary'>
                 <div className='flex h-10 items-center justify-center rounded-[5px] bg-[rgba(248,248,248,0.01)] px-2 text-xs text-neutral-400 shadow-[0px_0px_8px_0px_rgba(248,248,248,0.25)_inset,0px_32px_24px_-16px_rgba(0,0,0,0.40)]'>
-                  Email Campaign
+                  A rappeler cet semaine
                 </div>
               </div>
               <div className='ml-4 mt-4 w-fit rounded-lg border border-neutral-600 p-0.5'>
                 <div className='flex h-10 items-center justify-center rounded-[5px] bg-[rgba(248,248,248,0.01)] px-2 text-xs text-neutral-400 shadow-[0px_0px_8px_0px_rgba(248,248,248,0.25)_inset,0px_32px_24px_-16px_rgba(0,0,0,0.40)]'>
-                  Newsletter Campaign
+                  Prospect interessé
                 </div>
               </div>
               <div className='absolute left-40 top-20 h-4 w-4 transition-all duration-200 group-hover:left-32'>
@@ -1510,7 +1511,7 @@ export function Features() {
                   />
                 </svg>
                 <div className='absolute left-3 top-3 whitespace-pre rounded-md p-1 text-[10px] text-neutral-500 transition duration-200 group-hover:text-secondary'>
-                  Manu Arora
+                  Laurent Berger
                 </div>
               </div>
               <div className='absolute left-12 top-60 h-4 w-4 transition-all duration-200 group-hover:left-32 group-hover:top-44'>
@@ -1537,7 +1538,7 @@ export function Features() {
               </div>
             </div>
           </div>
-          <h3 className='py-2 text-lg font-semibold text-white'>Easy Collaboration</h3>
+          <h3 className='py-2 text-lg font-semibold text-white'>Suivis de vos prospects</h3>
           <p className='max-w-sm text-sm font-normal text-neutral-400'>
             Proactive can integrate with Zapier, Slack and every other popular integration tools.
           </p>

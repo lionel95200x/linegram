@@ -6,7 +6,6 @@ import Lucide from '@/components/dashboard/Base/Lucide';
 import fakerData from '@/utils/faker';
 import { Calls } from '@/features/pricing/types';
 import { formatDate } from '@/utils/to-date-time';
-import { icons } from 'lucide-react';
 import { useState } from 'react';
 import { getMetadataAsConversation } from '@/utils/call/call';
 import { TabPanel, TabPanels } from '@headlessui/react';
@@ -121,7 +120,7 @@ const ChatView = ({ calls, agentName }: { calls: Calls[]; agentName: string }) =
               <TabPanel>
                 {/* BEGIN: Chat Active */}
                 {chatBox && (
-                  <div className='flex h-full flex-col'>
+                  <div className='flex h-full max-h-screen	 flex-col'>
                     <div className='flex flex-col border-b border-slate-200/60 px-5 py-4 dark:border-darkmode-400 sm:flex-row'>
                       <div className='flex items-center'>
                         <div className='image-fit relative h-10 w-10 flex-none sm:h-12 sm:w-12'>

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import imgBackgroundDashboard from '@/assets/img/banner-dashboard.webp';
+import imgBackgroundDashboard from '@/assets/img/banner-dashboard.png';
 import { Features } from '@/components/bento-grid/bento-grid';
 import TopBadge from '@/components/home/topBadge';
 import PublicLayout from '@/components/layout/publicLayout';
@@ -13,7 +13,6 @@ export default async function HomePage() {
       <div className='flex flex-col gap-8 '>
         <HeroSection />
         <Features />
-        <PricingSection />
       </div>
     </PublicLayout>
   );

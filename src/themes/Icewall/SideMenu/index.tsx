@@ -12,6 +12,7 @@ import menu from '@/main/menu';
 import { enter, FormattedMenu, leave, linkTo, nestedMenu } from './side-menu';
 
 import '@/assets/css/themes/icewall/side-nav.css';
+import Link from 'next/link';
 
 function Main({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -57,35 +58,37 @@ function Main({ children }: { children: React.ReactNode }) {
                   <li className='side-nav__divider my-6' key={menuKey}></li>
                 ) : (
                   <li key={menuKey}>
-                    <Tippy
-                      as='a'
-                      content={menu.title}
-                      options={{
-                        placement: 'right',
-                      }}
-                      disable={windowWidth > 1260}
-                      href={menu.subMenu ? '#' : menu.pathname}
-                      onClick={(event: React.MouseEvent) => {
-                        event.preventDefault();
-                        linkTo(menu, redirect);
-                        setFormattedMenu([...formattedMenu]);
-                      }}
-                      className={clsx([menu.active ? 'side-menu side-menu--active' : 'side-menu'])}
-                    >
-                      <div className='side-menu__icon'>
-                        <Lucide icon={menu.icon} />
-                      </div>
-                      <div className='side-menu__title'>
-                        {menu.title}
-                        {menu.subMenu && (
-                          <div
-                            className={clsx(['side-menu__sub-icon', { 'rotate-180 transform': menu.activeDropdown }])}
-                          >
-                            <Lucide icon='ChevronDown' />
-                          </div>
-                        )}
-                      </div>
-                    </Tippy>
+                    <Link href={menu.subMenu ? '#' : menu.pathname}>
+                      <Tippy
+                        as='a'
+                        content={menu.title}
+                        options={{
+                          placement: 'right',
+                        }}
+                        disable={windowWidth > 1260}
+                        href={menu.subMenu ? '#' : menu.pathname}
+                        onClick={(event: React.MouseEvent) => {
+                          event.preventDefault();
+                          linkTo(menu, redirect);
+                          setFormattedMenu([...formattedMenu]);
+                        }}
+                        className={clsx([menu.active ? 'side-menu side-menu--active' : 'side-menu'])}
+                      >
+                        <div className='side-menu__icon'>
+                          <Lucide icon={menu.icon} />
+                        </div>
+                        <div className='side-menu__title'>
+                          {menu.title}
+                          {menu.subMenu && (
+                            <div
+                              className={clsx(['side-menu__sub-icon', { 'rotate-180 transform': menu.activeDropdown }])}
+                            >
+                              <Lucide icon='ChevronDown' />
+                            </div>
+                          )}
+                        </div>
+                      </Tippy>
+                    </Link>
                     {/* BEGIN: Second Child */}
                     {menu.subMenu && (
                       <Transition in={menu.activeDropdown} onEnter={enter} onExit={leave} timeout={300}>

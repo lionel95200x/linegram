@@ -13,7 +13,6 @@ export const useCreateCall = () => {
     },
     mutationKey: dynamicMutationKey,
     onSuccess: (payload) => {
-      console.log({ payload });
       if (payload?.error) {
         toast.error('Erreur de mise à jour');
       } else {

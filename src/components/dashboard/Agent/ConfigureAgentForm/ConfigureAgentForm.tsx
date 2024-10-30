@@ -28,7 +28,7 @@ const ConfigureAgentForm = ({ agent, onSave, onTestCall }: { agent: Agents; onSa
   const { mutate: updateAgent } = useMutation({
     mutationFn: (p: any) => onSave(p),
     onSuccess: () => {
-      toast.success('Agent updated successfully!');
+      toast.success('Votre agent a été mis à jour avec succès!');
     },
     onError: () => {
       toast.error('Failed to update agent.');
@@ -187,7 +187,7 @@ const ConfigureAgentForm = ({ agent, onSave, onTestCall }: { agent: Agents; onSa
                 <FormLabel className='xl:!mr-10 xl:w-64'>
                   <div className='text-left'>
                     <div className='flex items-center'>
-                      <div className='font-medium'>Condition</div>
+                      <div className='font-medium'>Sexe</div>
                       <div className='ml-2 rounded-md bg-slate-200 px-2 py-0.5 text-xs text-slate-600 dark:bg-darkmode-300 dark:text-slate-400'>
                         Requis
                       </div>
@@ -203,7 +203,7 @@ const ConfigureAgentForm = ({ agent, onSave, onTestCall }: { agent: Agents; onSa
                         name='horizontal_radio_button'
                         value='horizontal-radio-chris-evans'
                       />
-                      <FormCheck.Label htmlFor='condition-new'>New</FormCheck.Label>
+                      <FormCheck.Label htmlFor='condition-new'>Homme</FormCheck.Label>
                     </FormCheck>
                     <FormCheck className='mr-4 mt-2 sm:mt-0'>
                       <FormCheck.Input
@@ -212,7 +212,7 @@ const ConfigureAgentForm = ({ agent, onSave, onTestCall }: { agent: Agents; onSa
                         name='horizontal_radio_button'
                         value='horizontal-radio-liam-neeson'
                       />
-                      <FormCheck.Label htmlFor='condition-second'>Second</FormCheck.Label>
+                      <FormCheck.Label htmlFor='condition-second'>Femme</FormCheck.Label>
                     </FormCheck>
                   </div>
                 </div>
@@ -221,13 +221,14 @@ const ConfigureAgentForm = ({ agent, onSave, onTestCall }: { agent: Agents; onSa
                 <FormLabel className='xl:!mr-10 xl:w-64'>
                   <div className='text-left'>
                     <div className='flex items-center'>
-                      <div className='font-medium'>Product Status</div>
+                      <div className='font-medium'>Phrase intermittente</div>
                       <div className='ml-2 rounded-md bg-slate-200 px-2 py-0.5 text-xs text-slate-600 dark:bg-darkmode-300 dark:text-slate-400'>
                         Requis
                       </div>
                     </div>
                     <div className='mt-3 text-xs leading-relaxed text-slate-500'>
-                      If the status is active, your product can be searched for by potential buyers.
+                      Dans le cas ou la réponse de l'agent est lente, nous pouvons jouez des petites phrases d'accorche
+                      permettant de répondre plus rapidement.
                     </div>
                   </div>
                 </FormLabel>
@@ -242,7 +243,7 @@ const ConfigureAgentForm = ({ agent, onSave, onTestCall }: { agent: Agents; onSa
                 <FormLabel className='xl:!mr-10 xl:w-64'>
                   <div className='text-left'>
                     <div className='flex items-center'>
-                      <div className='font-medium'>SKU (Stock Keeping Unit)</div>
+                      <div className='font-medium'>Choisissez une voix pour votre agent</div>
                       <div className='ml-2 rounded-md bg-slate-200 px-2 py-0.5 text-xs text-slate-600 dark:bg-darkmode-300 dark:text-slate-400'>
                         Requis
                       </div>

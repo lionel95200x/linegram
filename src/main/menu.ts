@@ -12,19 +12,9 @@ const menu: Array<Menu | 'divider'> = [
         title: 'Dashboard',
       },
       {
-        icon: 'User',
-        pathname: routes.profile,
-        title: 'Profile',
-      },
-      {
         icon: 'Activity',
         pathname: '/dashboard-overview-3',
         title: 'Mes prospects',
-      },
-      {
-        icon: 'Activity',
-        pathname: '/dashboard-overview-4',
-        title: 'Overview 4',
       },
     ],
   },

@@ -1,6 +1,7 @@
 import { Tab, TabButton, TabGroup, TabList, TabPanel, TabPanels } from '@/components/dashboard/Base/Headless';
 import Lucide from '@/components/dashboard/Base/Lucide';
 import HeaderInformation from '@/components/dashboard/HeaderInformation/HeaderInformation';
+import ProfileView from '@/components/dashboard/ProfileView/ProfileView';
 import SubscriptionView from '@/components/dashboard/SubscriptionView/SubscriptionView';
 import { getSubscription } from '@/features/account/controllers/get-subscription';
 import { getUser } from '@/features/account/controllers/get-user';
@@ -89,13 +90,16 @@ async function AgentPage({ params }: { params: { id: string } }) {
 
         <TabPanels className='mt-5'>
           <TabPanel>
-            <div>Mon profil</div>
+            <ProfileView />
           </TabPanel>
           <TabPanel>
             <SubscriptionView {...subscriptionInfo} />
           </TabPanel>
           <TabPanel>
-            <div>Facture</div>
+            <div>
+              Facture
+              <div>Vous n'avez pas encore de facture enregistré</div>
+            </div>
           </TabPanel>
         </TabPanels>
       </TabGroup>

@@ -43,18 +43,6 @@ const CallLine = ({ call }: { call: Calls }) => {
           {call.id.substring(0, 10)}
         </Link>
       </TableTd>
-      <TableTd className='box w-40 whitespace-nowrap rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600'>
-        <a href='' className='whitespace-nowrap font-medium'>
-          {call.conversation}
-        </a>
-        {call.user_id ? (
-          <div v-if='faker.trueFalse[0]' className='mt-0.5 whitespace-nowrap text-xs text-slate-500'>
-            Ohio, Ohio
-          </div>
-        ) : (
-          <div className='mt-0.5 whitespace-nowrap text-xs text-slate-500'>California, LA</div>
-        )}
-      </TableTd>
       <TableTd className='box whitespace-nowrap rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600'>
         <div
           className={clsx({
@@ -156,7 +144,6 @@ export function CallTable({ calls }: { calls: Calls[] }) {
                   <FormCheck.Input type='checkbox' />
                 </TableTh>
                 <TableTh className='whitespace-nowrap border-b-0'>Identifiant</TableTh>
-                <TableTh className='whitespace-nowrap border-b-0'>BUYER NAME</TableTh>
                 <TableTh className='whitespace-nowrap border-b-0 text-center'>STATUS</TableTh>
                 <TableTh className='whitespace-nowrap border-b-0'>Phrase du prospect</TableTh>
                 <TableTh className='whitespace-nowrap border-b-0 text-right'>

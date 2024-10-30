@@ -104,7 +104,7 @@ export const List = ({ prospects, agentId }: { prospects: Prospects[]; agentId: 
         <Table className='border-separate border-spacing-y-[10px] sm:mt-2'>
           <TableThead>
             <TableTr>
-              <TableTh className='whitespace-nowrap border-b-0'>IMAGES</TableTh>
+              <TableTh className='whitespace-nowrap border-b-0'>Logo</TableTh>
               <TableTh className='whitespace-nowrap border-b-0'>Nom du Prospect</TableTh>
               <TableTh className='whitespace-nowrap border-b-0 text-center'>Telephone</TableTh>
               <TableTh className='whitespace-nowrap border-b-0 text-center'>STATUS</TableTh>
