@@ -4,15 +4,18 @@ import imgBackgroundDashboard from '@/assets/img/banner-dashboard.png';
 import { Features } from '@/components/bento-grid/bento-grid';
 import TopBadge from '@/components/home/topBadge';
 import PublicLayout from '@/components/layout/publicLayout';
-import { PricingSection } from '@/features/pricing/components/pricing-section';
 import { routes } from '@/utils/route';
+import Faq from '@/components/home/Faq/Faq';
+import KeyPointContentExtended from '@/components/home/KeyPointContentExtended/KeyPointContentExtended';
 
 export default async function HomePage() {
   return (
     <PublicLayout>
-      <div className='flex flex-col gap-8 '>
+      <div className='flex flex-col gap-2 '>
         <HeroSection />
         <Features />
+        <KeyPointContentExtended />
+        <Faq />
       </div>
     </PublicLayout>
   );

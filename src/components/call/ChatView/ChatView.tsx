@@ -67,7 +67,7 @@ const CallBlock = ({
         </a>
         <div className='ml-auto text-xs text-slate-400'>{formatDate(call.created)}</div>
       </div>
-      <div className='mt-0.5 w-full truncate text-slate-500'>Nombre d'échange {call.metadata?.length}</div>
+      <div className='mt-0.5 w-full truncate text-slate-500'>Nombre d'échange {(call.metadata as any)?.length}</div>
     </div>
   </div>
 );
@@ -75,7 +75,7 @@ const CallBlock = ({
 const ChatView = ({ calls, agentName }: { calls: Calls[]; agentName: string }) => {
   const [selectedCall, setselectedCall] = useState(calls[0]);
 
-  const conversation = getMetadataAsConversation(selectedCall.metadata);
+  const conversation = getMetadataAsConversation(selectedCall.metadata as any);
 
   console.log({ conversation, calls, selectedCall });
   const chatBox = true;
@@ -86,7 +86,7 @@ const ChatView = ({ calls, agentName }: { calls: Calls[]; agentName: string }) =
       <div className='flex basis-1/4 flex-col gap-2'>
         <div className=''>
           {calls
-            .sort((a, b) => b.created - a.created)
+            .sort((a, b) => Number(b.created) - Number(a.created))
             .map((call, idx) => (
               <CallBlock
                 key={call.id}
@@ -148,12 +148,6 @@ const ChatView = ({ calls, agentName }: { calls: Calls[]; agentName: string }) =
                           <Menu.Button as='a' href='#' className='h-5 w-5 text-slate-500'>
                             <Lucide icon='MoreVertical' className='h-5 w-5' />
                           </Menu.Button>
-                          <Menu.Items className='w-40'>
-                            <Menu.Item>
-                              <Lucide icon='Settings' className='mr-2 h-4 w-4' />
-                              Settings
-                            </Menu.Item>
-                          </Menu.Items>
                         </Menu>
                       </div>
                     </div>
@@ -182,7 +176,7 @@ const ChatView = ({ calls, agentName }: { calls: Calls[]; agentName: string }) =
                 )}
               </TabPanel>
               <TabPanel>
-                <TableView metadata={selectedCall.metadata} />
+                <TableView metadata={selectedCall.metadata as any} />
               </TabPanel>
             </TabPanels>
           </TabGroup>

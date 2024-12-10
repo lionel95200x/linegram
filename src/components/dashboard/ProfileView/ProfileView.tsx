@@ -9,10 +9,9 @@ import Lucide from '../Base/Lucide';
 const ProfileView = () => {
   return (
     <div className='col-span-12 lg:col-span-8 2xl:col-span-9'>
-      {/* BEGIN: Display Information */}
       <div className='intro-y box lg:mt-5'>
         <div className='flex items-center border-b border-slate-200/60 p-5 dark:border-darkmode-400'>
-          <h2 className='mr-auto text-base font-medium'>Display Information</h2>
+          <h2 className='mr-auto text-base font-medium'>Informations Principal</h2>
         </div>
         <div className='p-5'>
           <div className='flex flex-col xl:flex-row'>
@@ -20,7 +19,7 @@ const ProfileView = () => {
               <div className='grid grid-cols-12 gap-x-5'>
                 <div className='col-span-12 2xl:col-span-6'>
                   <div>
-                    <FormLabel htmlFor='update-profile-form-1'>Display Name</FormLabel>
+                    <FormLabel htmlFor='update-profile-form-1'>Nom et prénom</FormLabel>
                     <FormInput
                       id='update-profile-form-1'
                       type='text'
@@ -39,19 +38,19 @@ const ProfileView = () => {
                     <FormLabel htmlFor='update-profile-form-3'>Postal Code</FormLabel>
                   </div>
                   <div className='mt-3'>
-                    <FormLabel htmlFor='update-profile-form-4'>Phone Number</FormLabel>
+                    <FormLabel htmlFor='update-profile-form-4'>Numéro de téléphone</FormLabel>
                     <FormInput
                       id='update-profile-form-4'
                       type='text'
                       placeholder='Input text'
-                      value='65570828'
+                      value='+33623881514'
                       onChange={() => {}}
                     />
                   </div>
                 </div>
                 <div className='col-span-12'>
                   <div className='mt-3'>
-                    <FormLabel htmlFor='update-profile-form-5'>Address</FormLabel>
+                    <FormLabel htmlFor='update-profile-form-5'>Adresse postale</FormLabel>
                     <FormTextarea
                       id='update-profile-form-5'
                       placeholder='Adress'

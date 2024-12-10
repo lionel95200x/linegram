@@ -58,7 +58,7 @@ function Main({ children }: { children: React.ReactNode }) {
                   <li className='side-nav__divider my-6' key={menuKey}></li>
                 ) : (
                   <li key={menuKey}>
-                    <Link href={menu.subMenu ? '#' : menu.pathname}>
+                    <Link href={menu.subMenu ? '#' : (menu.pathname as any)}>
                       <Tippy
                         as='a'
                         content={menu.title}

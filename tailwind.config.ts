@@ -1,12 +1,7 @@
+import { toRGB } from './src/utils/helper';
 import type { Config } from 'tailwindcss';
 import colors from 'tailwindcss/colors';
 import plugin from 'tailwindcss/plugin';
-const { parseColor } = require('tailwindcss/lib/util/color');
-
-/** Converts HEX color to RGB */
-const toRGB = (value: string) => {
-  return parseColor(value).color.join(' ');
-};
 
 /** @type {import('tailwindcss').Config} */
 const config: Config = {

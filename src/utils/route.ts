@@ -1,6 +1,8 @@
 export const routes = {
   home: '/',
   login: '/login',
+  contact: '/contact',
+  policy: '/policy',
   // Dashboard route
   dashboard: '/dashboard',
   agents: '/agents',

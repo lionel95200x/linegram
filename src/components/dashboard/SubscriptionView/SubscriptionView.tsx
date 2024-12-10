@@ -45,10 +45,14 @@ export default function SubscriptionView({
             </CardContent>
           </Card>
         </div>
-        <Card
-          title='Votre plan actif'
-          footer={
-            subscription ? (
+        <Card title='Votre plan actif'>
+          {userProduct && userPrice ? (
+            <PricingCard product={userProduct} price={userPrice} />
+          ) : (
+            <p>Vous n'avez pas d'abonnement actif</p>
+          )}
+          <CardFooter>
+            {subscription ? (
               <Button size='sm' variant='secondary' asChild>
                 <Link href='/manage-subscription'>Gerez mon abonnement</Link>
               </Button>
@@ -56,14 +60,8 @@ export default function SubscriptionView({
               <Button size='sm' variant='secondary' asChild>
                 <Link href='/pricing'>S'abonnez</Link>
               </Button>
-            )
-          }
-        >
-          {userProduct && userPrice ? (
-            <PricingCard product={userProduct} price={userPrice} />
-          ) : (
-            <p>Vous n'avez pas d'abonnement actif</p>
-          )}
+            )}
+          </CardFooter>
         </Card>
       </div>
     </section>

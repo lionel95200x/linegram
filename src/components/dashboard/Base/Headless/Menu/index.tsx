@@ -104,6 +104,7 @@ Menu.Item = ({ children, className, href, ...props }: ExtractProps<typeof Link>)
       {children}
     </Link>
   ) : (
+    // @ts-ignore
     <div
       className={twMerge([
         'flex cursor-pointer items-center rounded-md p-2 transition duration-300 ease-in-out hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400',

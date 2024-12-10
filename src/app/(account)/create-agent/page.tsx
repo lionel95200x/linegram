@@ -1,8 +1,8 @@
 'use client';
-import { useState } from 'react';
-import Image from 'next/image';
 import clsx from 'clsx';
 import _ from 'lodash';
+import Image from 'next/image';
+import { useState } from 'react';
 
 import Button from '@/components/dashboard/Base/Button';
 import { FormInput, FormLabel, FormSwitch, FormTextarea } from '@/components/dashboard/Base/Form';
@@ -27,16 +27,6 @@ function Main() {
             <Menu.Button as={Button} className='!box flex items-center'>
               English <Lucide icon='ChevronDown' className='ml-2 h-4 w-4' />
             </Menu.Button>
-            <Menu.Items className='w-40'>
-              <Menu.Item>
-                <Lucide icon='Activity' className='mr-2 h-4 w-4' />
-                <span className='truncate'>English</span>
-              </Menu.Item>
-              <Menu.Item>
-                <Lucide icon='Activity' className='mr-2 h-4 w-4' />
-                <span className='truncate'>Indonesian</span>
-              </Menu.Item>
-            </Menu.Items>
           </Menu>
           <Button type='button' className='!box ml-auto mr-2 flex items-center sm:ml-0'>
             <Lucide icon='Eye' className='mr-2 h-4 w-4' /> Preview
@@ -45,20 +35,6 @@ function Main() {
             <Menu.Button as={Button} variant='primary' className='flex items-center shadow-md'>
               Save <Lucide icon='ChevronDown' className='ml-2 h-4 w-4' />
             </Menu.Button>
-            <Menu.Items className='w-40'>
-              <Menu.Item>
-                <Lucide icon='FileText' className='mr-2 h-4 w-4' /> As New Post
-              </Menu.Item>
-              <Menu.Item>
-                <Lucide icon='FileText' className='mr-2 h-4 w-4' /> As Draft
-              </Menu.Item>
-              <Menu.Item>
-                <Lucide icon='FileText' className='mr-2 h-4 w-4' /> Export to PDF
-              </Menu.Item>
-              <Menu.Item>
-                <Lucide icon='FileText' className='mr-2 h-4 w-4' /> Export to Word
-              </Menu.Item>
-            </Menu.Items>
           </Menu>
         </div>
       </div>
@@ -207,16 +183,6 @@ function Main() {
                   <div className='truncate'>{fakerData[0].users[0].name}</div>
                   <Lucide icon='ChevronDown' className='ml-auto h-4 w-4' />
                 </Menu.Button>
-                <Menu.Items>
-                  {_.take(fakerData, 5).map((faker, fakerKey) => (
-                    <Menu.Item key={fakerKey}>
-                      <div className='image-fit absolute mr-3 h-6 w-6'>
-                        <Image className='rounded' alt='Linegram - Agent appel IA' src={faker.photos[0]} />
-                      </div>
-                      <div className='ml-8 pl-1'>{faker.users[0].name}</div>
-                    </Menu.Item>
-                  ))}
-                </Menu.Items>
               </Menu>
             </div>
             <div className='mt-3'>

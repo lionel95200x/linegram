@@ -27,7 +27,7 @@ const InfoCard = ({
           <Tippy
             as='div'
             className='flex cursor-pointer items-center rounded-full bg-success py-[3px] pl-2 pr-1 text-xs font-medium text-white'
-            content={percentageText}
+            content={percentageText as string}
           >
             {percentage}%
             <Lucide icon='ChevronUp' className='ml-0.5 h-4 w-4' />

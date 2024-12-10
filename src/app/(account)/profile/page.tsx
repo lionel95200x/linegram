@@ -9,6 +9,7 @@ import { getAgent, updateAgent } from '@/features/agents/controllers/get-agents'
 import { getCalls } from '@/features/calls/controllers/get-calls';
 import { getProducts } from '@/features/pricing/controllers/get-products';
 import { Price, ProductWithPrices } from '@/features/pricing/types';
+import { icons } from 'lucide-react';
 
 async function getSubscriptionInfo() {
   const [subscription, products] = await Promise.all([getSubscription(), getProducts()]);
@@ -54,7 +55,7 @@ async function AgentPage({ params }: { params: { id: string } }) {
     return { data: res?.data };
   }
 
-  const infosIcon = [
+  const infosIcon: { text?: string | null; icon: keyof typeof icons }[] = [
     { icon: 'Mail', text: 'toto@mail.com' },
     { icon: 'Instagram', text: 'Abonnement Gratuit' },
     { icon: 'Check', text: 'Inscrit depuis le 12/06/2024' },
@@ -66,7 +67,7 @@ async function AgentPage({ params }: { params: { id: string } }) {
       </div>
       <TabGroup defaultIndex={1}>
         <div className='intro-y box mt-5 px-5 pt-5'>
-          <HeaderInformation infos={infosIcon} />
+          <HeaderInformation infos={infosIcon} name='Update' />
           <TabList variant='link-tabs' className='flex-col justify-center text-center sm:flex-row lg:justify-start'>
             <Tab fullWidth={false}>
               <TabButton className='flex cursor-pointer items-center py-4'>
@@ -96,10 +97,10 @@ async function AgentPage({ params }: { params: { id: string } }) {
             <SubscriptionView {...subscriptionInfo} />
           </TabPanel>
           <TabPanel>
-            <div>
+            <section className='rounded-lg bg-white px-4 py-16'>
               Facture
               <div>Vous n'avez pas encore de facture enregistré</div>
-            </div>
+            </section>
           </TabPanel>
         </TabPanels>
       </TabGroup>

@@ -27,6 +27,7 @@ import EmptyTable from '../dashboard/Table/EmptyTable';
 const CallLine = ({ call }: { call: Calls }) => {
   const pathname = usePathname();
 
+  // @ts-ignore
   const metadata = call.metadata as Metadata[];
   const findFirstSentenceOfUser = getFirstSentence(metadata);
 
@@ -37,7 +38,7 @@ const CallLine = ({ call }: { call: Calls }) => {
       </TableTd>
       <TableTd className='box w-40 whitespace-nowrap rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600'>
         <Link
-          href={`${pathname}${routes.prospect_detail.replace(':id', call.prospect_id)}`}
+          href={`${pathname}${routes.prospect_detail.replace(':id', call.prospect_id as string)}`}
           className='whitespace-nowrap underline decoration-dotted'
         >
           {call.id.substring(0, 10)}
@@ -121,17 +122,31 @@ export function CallTable({ calls }: { calls: Calls[] }) {
                   <Lucide icon='Plus' className='h-4 w-4' />
                 </span>
               </Menu.Button>
-              <Menu.Items className='w-40'>
-                <Menu.Item>
-                  <Lucide icon='Printer' className='mr-2 h-4 w-4' /> Print
-                </Menu.Item>
-                <Menu.Item>
-                  <Lucide icon='FileText' className='mr-2 h-4 w-4' /> Export to Excel
-                </Menu.Item>
-                <Menu.Item>
-                  <Lucide icon='FileText' className='mr-2 h-4 w-4' /> Export to PDF
-                </Menu.Item>
-              </Menu.Items>
+              <ul className='w-40 rounded-lg bg-white shadow-lg'>
+                <li className='flex cursor-pointer items-center px-4 py-2 hover:bg-gray-100'>
+                  <svg className='mr-2 h-4 w-4 text-gray-600' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M6 9V2h12v7M6 18h12v-6H6v6zM6 14h12M6 10h12'
+                    />
+                  </svg>
+                  Print
+                </li>
+                <li className='flex cursor-pointer items-center px-4 py-2 hover:bg-gray-100'>
+                  <svg className='mr-2 h-4 w-4 text-gray-600' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 4v16m8-8H4' />
+                  </svg>
+                  Export to Excel
+                </li>
+                <li className='flex cursor-pointer items-center px-4 py-2 hover:bg-gray-100'>
+                  <svg className='mr-2 h-4 w-4 text-gray-600' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 4v16m8-8H4' />
+                  </svg>
+                  Export to PDF
+                </li>
+              </ul>
             </Menu>
           </div>
         </div>

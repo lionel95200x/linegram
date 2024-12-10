@@ -1,3 +1,5 @@
+import { parseColor } from "tailwindcss/lib/util/color"
+
 const slideUp = (el: HTMLElement, duration = 300, callback = (el: HTMLElement) => {}) => {
   el.style.transitionProperty = 'height, margin, padding';
   el.style.transitionDuration = duration + 'ms';
@@ -50,6 +52,11 @@ const slideDown = (el: HTMLElement, duration = 300, callback = (el: HTMLElement)
     el.style.removeProperty('transition-property');
     callback(el);
   }, duration);
+};
+
+/** Converts HEX color to RGB */
+export const toRGB = (value: string) => {
+  return parseColor(value).color.join(' ');
 };
 
 export { slideDown, slideUp };

@@ -56,7 +56,7 @@ const HeaderInformation = ({
         <div className='text-center font-medium lg:mt-3 lg:text-left'>Informations principal</div>
         <div className='mt-4 flex flex-col items-center justify-center lg:items-start'>
           {infos?.map((i) => (
-            <InfoIcon text={i.text} icon={i.icon} />
+            <InfoIcon key={i.text} text={i.text as string} icon={i.icon} />
           ))}
         </div>
       </div>

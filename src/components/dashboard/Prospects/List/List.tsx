@@ -73,6 +73,7 @@ export const List = ({ prospects, agentId }: { prospects: Prospects[]; agentId: 
             onSave={onUpdate}
             defaultValues={{
               ...selectedProspect,
+              email: selectedProspect?.email ?? undefined,
               phone: selectedProspect?.phone ?? undefined,
               firstName: selectedProspect?.firstName ?? undefined,
               lastName: selectedProspect?.lastName ?? undefined,
@@ -153,19 +154,26 @@ export const List = ({ prospects, agentId }: { prospects: Prospects[]; agentId: 
                         <span className='flex  items-center justify-center'>Gérer</span>
                       </Menu.Button>
                       <Menu.Items className='w-40'>
-                        <Menu.Item onClick={() => onClickModify(p)}>
+                        <div
+                          className='flex cursor-pointer items-center rounded-md p-2 transition duration-300 ease-in-out hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400'
+                          onClick={() => onClickModify(p)}
+                        >
                           <Lucide icon='CheckSquare' className='mr-1 h-4 w-4' />
                           Modifier
-                        </Menu.Item>
-                        <Menu.Item>
-                          <a className='flex items-center text-danger' href=''>
-                            <Lucide icon='Trash2' className='mr-1 h-4 w-4' />
-                            Supprimer
-                          </a>
-                        </Menu.Item>
-                        <Menu.Item onClick={() => onCall(p)}>
+                        </div>
+                        <a
+                          className='flex items-center rounded-md p-2 text-danger transition duration-300 ease-in-out hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400'
+                          href=''
+                        >
+                          <Lucide icon='Trash2' className='mr-1 h-4 w-4' />
+                          Supprimer
+                        </a>
+                        <div
+                          className='flex cursor-pointer items-center rounded-md p-2 transition duration-300 ease-in-out hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400'
+                          onClick={() => onCall(p)}
+                        >
                           <Lucide icon='Phone' className='mr-2 h-4 w-4' /> Test appel
-                        </Menu.Item>
+                        </div>
                       </Menu.Items>
                     </Menu>
                   </div>

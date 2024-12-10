@@ -63,7 +63,7 @@ const ConfigureAgentForm = ({ agent, onSave, onTestCall }: { agent: Agents; onSa
     <div className='mt-5 grid grid-cols-11 gap-x-6 pb-20'>
       <PromotionBanner />
 
-      <form className='intro-y col-span-11 2xl:col-span-9' onSubmit={handleSubmit(updateAgent)}>
+      <form className='intro-y col-span-11 2xl:col-span-9' onSubmit={handleSubmit(updateAgent as any)}>
         <div className='intro-y col-span-12 mt-2 flex flex-wrap items-center justify-end sm:flex-nowrap'>
           <Button disabled={!isDirty} variant='primary' className='mr-2 shadow-md' type='submit'>
             Sauvegarder

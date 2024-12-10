@@ -66,7 +66,7 @@ export default async function CallDetailPage({ params }: { params: { id: string;
           : "Le robot n'a pas encore passé d'appel a ce prospect"}
       </h3>
 
-      {calls.length ? (
+      {calls.length && agent.name ? (
         <ChatView calls={calls} agentName={agent.name} />
       ) : (
         <EmptyTable text='Aucun détail sur cet appel' />

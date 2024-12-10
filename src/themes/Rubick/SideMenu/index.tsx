@@ -14,6 +14,8 @@ import { enter, FormattedMenu, leave, linkTo, nestedMenu } from './side-menu';
 
 import '@/assets/css/themes/rubick/side-nav.css';
 import LogoTsx from '@/assets/svg/logo';
+import { Progress } from '@/components/ui/progress';
+import { Button } from '@/components/ui/button';
 
 function Main({ children }: { children: React.ReactNode }) {
   const location = usePathname();
@@ -174,7 +176,16 @@ function Main({ children }: { children: React.ReactNode }) {
             )}
             {/* END: First Child */}
           </ul>
+          <div className='flex flex-col items-center justify-center rounded bg-slate-200 p-4'>
+            Abonnement PRO
+            <Progress value={20} />
+            <div className='mt-2 text-xs text-slate-500'>200/1000 minutes d'appel</div>
+            <Button className='mt-4' color='primary' size='sm'>
+              Mettre a jour
+            </Button>
+          </div>
         </nav>
+
         {/* END: Side Menu */}
         {/* BEGIN: Content */}
         <div className="md:max-w-auto min-h-screen min-w-0 max-w-full flex-1 rounded-[30px] bg-slate-100 px-4 pb-10 before:block before:h-px before:w-full before:content-[''] dark:bg-darkmode-700 md:px-[22px]">
