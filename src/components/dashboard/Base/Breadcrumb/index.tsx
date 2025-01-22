@@ -16,6 +16,7 @@ const breadcrumbContext = createContext<{
 });
 
 function Breadcrumb({ className, light, children }: BreadcrumbProps) {
+  console.log({ light, children });
   return (
     <breadcrumbContext.Provider
       value={{

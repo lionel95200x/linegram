@@ -1,7 +1,12 @@
 import { toast } from 'sonner';
 
 import { Prospects } from '@/features/pricing/types';
-import { createProspect, getProspectByAgentId, updateProspect } from '@/features/prospects/prospects';
+import {
+  createBulkProspect,
+  createProspect,
+  getProspectByAgentId,
+  updateProspect,
+} from '@/features/prospects/prospects';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 export const useProspects = ({ agentId, prospects = [] }: { agentId: string; prospects?: Prospects[] }) => {
@@ -26,6 +31,21 @@ export const useCreateProspect = ({ agentId }: { agentId: string }) => {
     },
     onError: () => {
       toast.error('Erreur de création');
+    },
+  });
+};
+
+export const useCreateBulkProspect = ({ agentId }: { agentId: string }) => {
+  const { refetch } = useProspects({ agentId });
+
+  return useMutation({
+    mutationFn: (prospects: Prospects[]) => createBulkProspect(prospects, agentId),
+    onSuccess: () => {
+      toast.success('Prospects importés avec succès');
+      refetch();
+    },
+    onError: () => {
+      toast.error("Erreur d'importation");
     },
   });
 };

@@ -4,7 +4,7 @@ import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-clie
 import { routes } from '@/utils/route';
 
 export async function getUser() {
-  const supabase = createSupabaseServerClient();
+  const supabase = await createSupabaseServerClient();
 
   const { data, error } = await supabase.from('users').select('*').single();
 
@@ -16,15 +16,18 @@ export async function getUser() {
 }
 
 export async function getAuthUser() {
-  const supabase = createSupabaseServerClient();
+  const supabase = await createSupabaseServerClient();
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
+  console.log({ user });
+
+  /*
   if (!user) {
     redirect(routes.home);
-  }
+  } */
 
   return user;
 }

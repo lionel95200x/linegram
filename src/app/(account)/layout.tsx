@@ -10,9 +10,7 @@ import '@/assets/css/app.css';
 export default async function AccountLayout({ children }: { children: React.ReactNode }) {
   const [session, user] = await Promise.all([getSession(), getAuthUser()]);
 
-  if (!session) {
-    redirect('/login');
-  }
+  console.log({ session, user });
 
   return <Layout>{children}</Layout>;
 }

@@ -41,11 +41,13 @@ const TaskList = ({ tasks }: { tasks: Task[] }) => {
   );
 };
 
-async function AgentPage({ params }: { params: { id: string } }) {
+async function AgentPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params;
+
   const [agent, voices, prospects] = await Promise.all([
-    getAgent(params.id),
+    getAgent(resolvedParams.id),
     getVoices(),
-    getProspectByAgentId(params.id),
+    getProspectByAgentId(resolvedParams.id),
   ]);
   const [calls] = await Promise.all([getCalls()]);
 
@@ -57,7 +59,7 @@ async function AgentPage({ params }: { params: { id: string } }) {
     const firstSentence = p.firstSentence;
     const name = p.name;
 
-    const res = await updateAgent(params.id, {
+    const res = await updateAgent(resolvedParams.id, {
       prompt,
       firstSentence,
       name,
@@ -159,7 +161,7 @@ async function AgentPage({ params }: { params: { id: string } }) {
             <CallTable calls={calls} />
           </TabPanel>
           <TabPanel>
-            <Prospects agentId={params.id} prospects={prospects} />
+            <Prospects agentId={resolvedParams.id} prospects={prospects} />
           </TabPanel>
         </TabPanels>
       </TabGroup>

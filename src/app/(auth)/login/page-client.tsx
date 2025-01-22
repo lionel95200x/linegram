@@ -21,6 +21,7 @@ function LoginClient({
 }) {
   const [pending, setPending] = useState(false);
 
+  console.log({ pending });
   async function handleEmailSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setPending(true);
@@ -90,7 +91,7 @@ function LoginClient({
                     <FormInput
                       type='email'
                       name='email'
-                      className='intro-x block min-w-full px-4 py-3 xl:min-w-[350px]'
+                      className='intro-x block min-w-full px-4 py-3 text-black xl:min-w-[350px]'
                       placeholder='Email'
                     />
                   </div>

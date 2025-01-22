@@ -74,6 +74,7 @@ function Main(props: { layout?: 'side-menu' | 'simple-menu' | 'top-menu' }) {
             <Breadcrumb.Link to={routes.dashboard} active={true}>
               Dashboard
             </Breadcrumb.Link>
+
             {pathname.includes('/agents') ? <Breadcrumb.Link to={routes.agents}>Agents</Breadcrumb.Link> : <></>}
           </Breadcrumb>
           {/* END: Breadcrumb */}

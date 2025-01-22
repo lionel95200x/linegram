@@ -11,7 +11,7 @@ import Pagination, { PaginationLink } from '@/components/dashboard/Base/Paginati
 import Table, { TableBody, TableTd, TableTh, TableThead, TableTr } from '@/components/dashboard/Base/Table';
 import { Prospects } from '@/features/pricing/types';
 import { useCreateCall } from '@/hooks/calls/useCalls';
-import { useCreateProspect, useUpdateProspect } from '@/hooks/prospects/useProspects';
+import { useCreateBulkProspect, useCreateProspect, useUpdateProspect } from '@/hooks/prospects/useProspects';
 
 import { Menu } from '../../Base/Headless';
 import CreateEditProspectModal from '../Modal/CreateEditProspectModal';
@@ -19,12 +19,16 @@ import { ProspectFormValues } from '../ProspectForm/ProspectForm.utils';
 import Link from 'next/link';
 import { routes } from '@/utils/route';
 import { usePathname } from 'next/navigation';
+import ImportProspectModal from './ImportProspectModal';
 
 export const List = ({ prospects, agentId }: { prospects: Prospects[]; agentId: string }) => {
   const [showCreateProspectModal, setShowCreateProspectModal] = useState(false);
   const [showEditProspectModal, setShowEditProspectModal] = useState(false);
+  const [showImportModal, setShowImportModal] = useState(false);
+
   const { mutate: createProspectClient } = useCreateProspect({ agentId });
   const { mutate: updateProspectClient } = useUpdateProspect({ agentId });
+  const { mutate: createBulkProspect } = useCreateBulkProspect({ agentId });
   const { mutate: createCall } = useCreateCall();
   const [selectedProspect, setSelectedProspect] = useState<Prospects>();
   const pathname = usePathname();
@@ -50,9 +54,15 @@ export const List = ({ prospects, agentId }: { prospects: Prospects[]; agentId: 
     setShowEditProspectModal(true);
   };
 
+  const onImport = (prospects: any[]) => {
+    createBulkProspect(prospects);
+    toast.success('Prospects imported successfully!');
+  };
+
   return (
     <div className='col-span-12 mt-6'>
       <div className='intro-y block h-10 items-center sm:flex'>
+        <ImportProspectModal open={showImportModal} onClose={() => setShowImportModal(false)} onImport={onImport} />
         <CreateEditProspectModal
           texts={{
             title: 'Créer un prospect',
@@ -83,13 +93,16 @@ export const List = ({ prospects, agentId }: { prospects: Prospects[]; agentId: 
         )}
         <h2 className='mr-5 truncate text-lg font-medium'>Mes prospects</h2>
         <div className='mt-3 flex items-center sm:ml-auto sm:mt-0'>
-          <Button className='!box flex items-center text-slate-600 dark:text-slate-300'>
+          <Button
+            className='!box flex items-center text-slate-600 dark:text-slate-300'
+            onClick={() => setShowImportModal(true)}
+          >
             <Lucide icon='FileText' className='mr-2 hidden h-4 w-4 sm:block' />
-            Import CSV
+            Importer Prospect
           </Button>
           <Button className='!box ml-3 flex items-center text-slate-600 dark:text-slate-300'>
             <Lucide icon='FileText' className='mr-2 hidden h-4 w-4 sm:block' />
-            Export CSV
+            Exporter Prospect
           </Button>
           <Button
             variant='primary'

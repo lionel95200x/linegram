@@ -249,7 +249,8 @@ const ConfigureAgentForm = ({ agent, onSave, onTestCall }: { agent: Agents; onSa
                       </div>
                     </div>
                     <div className='mt-3 text-xs leading-relaxed text-slate-500'>
-                      Use a unique SKU code if you want to mark your product.
+                      Une voix féminine pourrait simplifier certain processus de prospection, tandis qu'une voix
+                      masculine importera plus de confiance.
                     </div>
                   </div>
                 </FormLabel>

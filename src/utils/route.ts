@@ -3,6 +3,7 @@ export const routes = {
   login: '/login',
   contact: '/contact',
   policy: '/policy',
+  faq: '/faq',
   // Dashboard route
   dashboard: '/dashboard',
   agents: '/agents',

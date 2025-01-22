@@ -12,6 +12,8 @@ import { Popover } from '@/components/dashboard/Base/Headless';
 import Lucide from '@/components/dashboard/Base/Lucide';
 import fakerData from '@/utils/faker';
 import { Transition } from '@headlessui/react';
+import { routes } from '@/utils/route';
+import { usePathname } from 'next/navigation';
 
 function Main() {
   const [searchDropdown, setSearchDropdown] = useState(false);
@@ -21,6 +23,7 @@ function Main() {
   const hideSearchDropdown = () => {
     setSearchDropdown(false);
   };
+  const pathname = usePathname();
 
   return (
     <>
@@ -36,9 +39,10 @@ function Main() {
           {/* BEGIN: Breadcrumb */}
           <Breadcrumb light className='-intro-x mr-auto h-full border-white/[0.08] md:ml-10 md:border-l md:pl-10'>
             <Breadcrumb.Link to='/'>Application</Breadcrumb.Link>
-            <Breadcrumb.Link to='/' active={true}>
+            <Breadcrumb.Link to={routes.dashboard} active={true}>
               Dashboard
             </Breadcrumb.Link>
+            {pathname.includes('/agents') ? <Breadcrumb.Link to={routes.agents}>Agents</Breadcrumb.Link> : <></>}
           </Breadcrumb>
           {/* END: Breadcrumb */}
           {/* BEGIN: Search */}

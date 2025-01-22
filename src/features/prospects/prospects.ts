@@ -3,7 +3,17 @@
 import { getBaseQuery } from '../common';
 import { Prospects } from '../pricing/types';
 
-const getBaseProspectQuery = () => getBaseQuery().from('prospects');
+const getBaseProspectQuery = async () => (await getBaseQuery()).from('prospects');
+
+export async function createBulkProspect(prospects: Prospects[], agent_id: string) {
+  const baseQuery = await getBaseProspectQuery();
+  const { data, error } = await baseQuery.upsert(prospects.map((prospect) => ({ ...prospect, agent_id })));
+
+  if (error) {
+    throw new Error(error.message);
+  }
+  return data ?? [];
+}
 
 export async function createProspect(
   prospect: {
@@ -16,7 +26,8 @@ export async function createProspect(
   agent_id: string
 ) {
   try {
-    const { data, error } = await getBaseProspectQuery()
+    const baseQuery = await getBaseProspectQuery();
+    const { data, error } = await baseQuery
       .upsert({
         ...prospect,
         agent_id,
@@ -44,7 +55,8 @@ export async function updateProspect(prospect: Partial<Prospects>, agent_id: str
       ...(prospect.call_id && { call_id: prospect.call_id }),
     };
 
-    const { data, error } = await getBaseProspectQuery()
+    const baseQuery = await getBaseProspectQuery();
+    const { data, error } = await baseQuery
       .update(prospectData)
       .eq('id', prospect_id)
       .eq('agent_id', agent_id)
@@ -60,7 +72,8 @@ export async function updateProspect(prospect: Partial<Prospects>, agent_id: str
 }
 
 export async function getProspectByAgentId(agent_id: string): Promise<Prospects[]> {
-  const { data, error } = await getBaseProspectQuery().select('*').eq('agent_id', agent_id);
+  const baseQuery = await getBaseProspectQuery();
+  const { data, error } = await baseQuery.select('*').eq('agent_id', agent_id);
 
   if (error) {
     console.error(error.message);
@@ -70,7 +83,8 @@ export async function getProspectByAgentId(agent_id: string): Promise<Prospects[
 }
 
 export async function getProspect(id: string): Promise<Prospects> {
-  const { data, error } = await getBaseProspectQuery().select('*').eq('id', id).single();
+  const baseQuery = await getBaseProspectQuery();
+  const { data, error } = await baseQuery.select('*').eq('id', id).single();
 
   if (error) {
     console.error(error.message);

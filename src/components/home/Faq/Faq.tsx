@@ -1,5 +1,7 @@
 import React from 'react';
 import FaqItem from './FaqItem';
+import chatPhone from '@/assets/img/chatbot-phone-ia.webp';
+import Image from 'next/image';
 
 const faqData = [
   {
@@ -35,8 +37,8 @@ const Faq = () => {
           <div className='w-full lg:w-1/2'>
             <div className='relative'>
               <div className='absolute -inset-4 rounded-xl bg-gradient-to-r from-indigo-100 to-indigo-50 opacity-50 blur-lg'></div>
-              <img
-                src='https://pagedone.io/asset/uploads/1696230182.png'
+              <Image
+                src={chatPhone}
                 alt='FAQ section'
                 className='relative w-full rounded-xl object-cover shadow-lg transition-all duration-300 hover:shadow-xl'
               />

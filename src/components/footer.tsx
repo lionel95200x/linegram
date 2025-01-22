@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import LogoSvg from '@/assets/svg/logo';
-import { APP_NAME, HREF_PHONE } from '@/utils/constant';
+import { HREF_PHONE } from '@/utils/constant';
 import { routes } from '@/utils/route';
 
 const Footer = () => {
@@ -80,14 +80,14 @@ const Footer = () => {
             <h4 className='mb-7 text-lg font-medium text-gray-900'>Resources</h4>
             <ul className='text-sm  transition-all duration-500'>
               <li className='mb-6'>
-                <a href='javascript:;' className='text-gray-600 hover:text-gray-900'>
+                <Link href={routes.faq} className='text-gray-600 hover:text-gray-900'>
                   FAQs
-                </a>
+                </Link>
               </li>
               <li className='mb-6'>
-                <a href='javascript:;' className=' text-gray-600 hover:text-gray-900'>
+                <Link href={routes.faq} className=' text-gray-600 hover:text-gray-900'>
                   Quick Start
-                </a>
+                </Link>
               </li>
               <li className='mb-6'>
                 <a href='javascript:;' className=' text-gray-600 hover:text-gray-900'>

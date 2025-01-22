@@ -3,8 +3,9 @@ import type { NextRequest } from 'next/server';
 import { supabaseMiddlewareClient } from './libs/supabase/supabase-middleware-client';
 
 export async function middleware(req: NextRequest) {
-  const { supabase, user, res } = await supabaseMiddlewareClient(req);
+  const { user, res } = await supabaseMiddlewareClient(req);
 
+  console.log({ user });
   /**
    * You can perform route guarding here like:
    *

@@ -47,13 +47,12 @@ function Main({ children }: { children: React.ReactNode }) {
               ) : (
                 <li key={menuKey}>
                   <Tippy
-                    as='a'
+                    as='div'
                     content={menu.title}
                     options={{
                       placement: 'right',
                     }}
                     disable={windowWidth > 1260}
-                    href={menu.subMenu ? '#' : menu.pathname}
                     onClick={(event: React.MouseEvent) => {
                       event.preventDefault();
                       linkTo(menu, redirect);
@@ -84,7 +83,7 @@ function Main({ children }: { children: React.ReactNode }) {
                         {menu.subMenu.map((subMenu, subMenuKey) => (
                           <li key={subMenuKey}>
                             <Tippy
-                              as='a'
+                              as='div'
                               content={subMenu.title}
                               options={{
                                 placement: 'right',

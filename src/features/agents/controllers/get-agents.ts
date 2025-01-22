@@ -3,7 +3,7 @@ import { Agents } from '@/features/pricing/types';
 import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 
 export async function getAgent(id: string): Promise<Agents> {
-  const supabase = createSupabaseServerClient();
+  const supabase = await createSupabaseServerClient();
 
   const { data, error } = await supabase.from('agents').select('*').eq('id', id).single();
 
@@ -15,7 +15,7 @@ export async function getAgent(id: string): Promise<Agents> {
 }
 
 export async function getAgents(): Promise<Agents[]> {
-  const supabase = createSupabaseServerClient();
+  const supabase = await createSupabaseServerClient();
 
   const { data, error } = await supabase.from('agents').select('*');
 
@@ -27,7 +27,7 @@ export async function getAgents(): Promise<Agents[]> {
 }
 
 export async function createAgent(agent: { name: string; prompt?: string; first_sentence?: string }) {
-  const supabase = createSupabaseServerClient();
+  const supabase = await createSupabaseServerClient();
 
   const user = await getAuthUser();
 
@@ -55,7 +55,7 @@ export async function createAgent(agent: { name: string; prompt?: string; first_
 }
 
 export async function updateAgent(id: string, agent: { name?: string; prompt?: string; firstSentence?: string }) {
-  const supabase = createSupabaseServerClient();
+  const supabase = await createSupabaseServerClient();
 
   try {
     const item = await supabase

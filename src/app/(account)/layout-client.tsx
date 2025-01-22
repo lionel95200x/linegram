@@ -1,7 +1,6 @@
 'use client';
-import { useCallback, useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
-import { User } from 'elevenlabs/api/resources/user/client/Client';
+import { useCallback, useEffect, useMemo } from 'react';
 import { Provider } from 'react-redux';
 
 import ThemeSwitcher from '@/components/dashboard/ThemeSwitcher';
@@ -11,6 +10,7 @@ import { getTheme, selectTheme, setTheme, Themes, themes } from '@/stores/themeS
 import Providers from '@/utils/provider';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  console.log('Layout');
   return (
     <Provider store={store}>
       <AccountLayout>{children}</AccountLayout>

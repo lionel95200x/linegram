@@ -48,7 +48,7 @@ const Header = () => {
                               d='M13 10V3L4 14h7v7l9-11h-7z'
                             />
                           </svg>
-                          Service 1
+                          Chat bot entreprise
                         </Link>
                       </li>
                       <li>
